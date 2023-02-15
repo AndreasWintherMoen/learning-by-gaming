@@ -1,4 +1,4 @@
-import GameRenderer from './GameRenderer';
+import Game from './Game';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
           Et masterprosjekt av Andreas Winther Moen & Haakon Reithaug Jacobsen
         </h2>
       </div>
-      <GameRenderer />
+      <Game />
     </div>
   );
 }
