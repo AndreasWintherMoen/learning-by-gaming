@@ -19,7 +19,7 @@ export default function Game() {
           <Provider store={store}>
             <SineWave />
             <SineText />
-            <Axes />
+            <Axes showHorizontalLines={false} showVerticalLines={false} />
           </Provider>
         </Stage>
         <SineController />
