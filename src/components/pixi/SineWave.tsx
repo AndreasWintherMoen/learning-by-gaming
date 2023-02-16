@@ -1,6 +1,6 @@
 import { Graphics } from '@pixi/react';
 import { useCallback } from 'react';
-import { useData } from '../../DataContext';
+import useData from '../../hooks/useData';
 import { Draw } from '../../types';
 
 const pixelsPerUnit = 100;

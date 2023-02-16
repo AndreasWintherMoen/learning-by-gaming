@@ -1,4 +1,4 @@
-import { useData } from '../DataContext';
+import useData from '../hooks/useData';
 
 export default function SineController() {
   const {
