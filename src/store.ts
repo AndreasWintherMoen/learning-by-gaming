@@ -5,6 +5,8 @@ const defaultState: Data = {
   amplitude: 1,
   angularFrequency: 1,
   phaseShift: 0,
+  fireSubscribers: [],
+  isFiring: false,
 };
 
 function reducer(state = defaultState, action: SetDataAction) {
@@ -15,6 +17,20 @@ function reducer(state = defaultState, action: SetDataAction) {
       return { ...state, angularFrequency: action.payload };
     case 'SET_PHASE':
       return { ...state, phaseShift: action.payload };
+    case 'ADD_FIRE_SUBSCRIBER':
+      return {
+        ...state,
+        fireSubscribers: [...state.fireSubscribers, action.payload],
+      };
+    case 'REMOVE_FIRE_SUBSCRIBER':
+      return {
+        ...state,
+        fireSubscribers: state.fireSubscribers.filter(
+          (subscriber) => subscriber !== action.payload
+        ),
+      };
+    case 'SET_IS_FIRING':
+      return { ...state, isFiring: action.payload };
     default:
       return state;
   }
@@ -33,6 +49,21 @@ export const setAngularFrequency = (frequency: number) => ({
 export const setPhaseShift = (phase: number) => ({
   type: 'SET_PHASE',
   payload: phase,
+});
+
+export const addFireSubscriber = (subscriber: () => void) => ({
+  type: 'ADD_FIRE_SUBSCRIBER',
+  payload: subscriber,
+});
+
+export const removeFireSubscriber = (subscriber: () => void) => ({
+  type: 'REMOVE_FIRE_SUBSCRIBER',
+  payload: subscriber,
+});
+
+export const setIsFiring = (isFiring: boolean) => ({
+  type: 'SET_IS_FIRING',
+  payload: isFiring,
 });
 
 export type RootState = ReturnType<typeof reducer>;

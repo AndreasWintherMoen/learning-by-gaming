@@ -7,6 +7,8 @@ export type Data = {
   amplitude: number;
   angularFrequency: number;
   phaseShift: number;
+  fireSubscribers: (() => void)[];
+  isFiring: boolean;
 };
 
 export type SetAmplitudeAction = {
@@ -24,7 +26,25 @@ export type SetPhaseAction = {
   payload: number;
 };
 
+export type AddFireSubscriberAction = {
+  type: 'ADD_FIRE_SUBSCRIBER';
+  payload: () => void;
+};
+
+export type RemoveFireSubscriberAction = {
+  type: 'REMOVE_FIRE_SUBSCRIBER';
+  payload: () => void;
+};
+
+export type SetIsFiringAction = {
+  type: 'SET_IS_FIRING';
+  payload: boolean;
+};
+
 export type SetDataAction =
   | SetAmplitudeAction
   | SetFrequencyAction
-  | SetPhaseAction;
+  | SetPhaseAction
+  | AddFireSubscriberAction
+  | RemoveFireSubscriberAction
+  | SetIsFiringAction;

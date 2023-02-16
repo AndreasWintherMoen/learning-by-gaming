@@ -10,7 +10,12 @@ export default function Game() {
   return (
     <div>
       <Provider store={store}>
-        <Stage>
+        <Stage
+          options={{
+            height: 600,
+            width: 800,
+          }}
+        >
           <Provider store={store}>
             <SineWave />
             <SineText />

@@ -5,9 +5,11 @@ export default function SineController() {
     amplitude,
     angularFrequency,
     phaseShift,
+    isFiring,
     setAmplitude,
     setAngularFrequency,
     setPhaseShift,
+    fire,
   } = useData();
 
   return (
@@ -16,6 +18,7 @@ export default function SineController() {
         <div>
           <h3>Amplitude</h3>
           <input
+            disabled={isFiring}
             type='range'
             min='0'
             max='2'
@@ -29,6 +32,7 @@ export default function SineController() {
         <div>
           <h3>Angular Frequency</h3>
           <input
+            disabled={isFiring}
             type='range'
             min='0'
             max='4'
@@ -42,6 +46,7 @@ export default function SineController() {
         <div>
           <h3>Phase Shift</h3>
           <input
+            disabled={isFiring}
             type='range'
             min='-2'
             max='2'
@@ -55,8 +60,11 @@ export default function SineController() {
       </div>
       <div className='flex flex-col'>
         <button
-          className='text-5xl font-bold py-4 px-12 rounded-lg bg-red-500 text-white'
-          onClick={() => console.log('FIRING')}
+          className={`text-5xl font-bold py-4 px-12 rounded-lg bg-red-500 text-white ${
+            isFiring && 'disabled focus:outline-none bg-red-300'
+          } `}
+          onClick={fire}
+          disabled={isFiring}
         >
           Fire!
         </button>
