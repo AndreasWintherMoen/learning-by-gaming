@@ -1,20 +1,14 @@
 import { Graphics } from '@pixi/react';
 import { useCallback } from 'react';
+import { useData } from '../../DataContext';
 import { Draw } from '../../types';
 
 const pixelsPerUnit = 100;
 const startX = 0;
 const startY = 300;
 
-export default function SineWave({
-  amplitude,
-  angularFrequency,
-  phaseShift,
-}: {
-  amplitude: number;
-  angularFrequency: number;
-  phaseShift: number;
-}) {
+export default function SineWave() {
+  const { amplitude, angularFrequency, phaseShift } = useData();
   const drawSineWave = useCallback<Draw>(
     (g) => {
       function drawPoint(x: number, y: number) {
@@ -35,7 +29,7 @@ export default function SineWave({
         drawPoint(x, y);
       }
     },
-    [amplitude, angularFrequency, phaseShift]
+    [amplitude, angularFrequency, phaseShift, startX]
   );
 
   return <Graphics draw={drawSineWave} />;

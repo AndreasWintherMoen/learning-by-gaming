@@ -1,13 +1,11 @@
 import { Text } from '@pixi/react';
 import { TextStyle } from 'pixi.js';
 import { useMemo } from 'react';
-import { SineProps } from '../../types';
+import { useData } from '../../DataContext';
 
-export default function SineText({
-  amplitude,
-  angularFrequency,
-  phaseShift,
-}: SineProps) {
+export default function SineText() {
+  const { amplitude, angularFrequency, phaseShift } = useData();
+
   const text = useMemo(() => {
     const amplitudeText = amplitude !== 1 ? amplitude : '';
     const angularFrequencyText = angularFrequency !== 1 ? angularFrequency : '';
