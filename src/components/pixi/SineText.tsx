@@ -9,15 +9,15 @@ export default function SineText() {
   const text = useMemo(() => {
     const amplitudeText = amplitude !== 1 ? amplitude : '';
     const angularFrequencyText = angularFrequency !== 1 ? angularFrequency : '';
-    const phaseShiftText = phaseShift !== 0 ? ` + ${phaseShift}` : '';
+    const phaseShiftText = phaseShift !== 0 ? ` + ${phaseShift.toFixed(1)}` : '';
     return `y = ${amplitudeText}sin(${angularFrequencyText}x${phaseShiftText})`;
   }, [amplitude, angularFrequency, phaseShift]);
 
   return (
     <Text
       text={text}
-      x={20}
-      y={530}
+      x={0}
+      y={0}
       style={
         new TextStyle({
           fontFamily: '"Source Sans Pro", Helvetica, sans-serif',

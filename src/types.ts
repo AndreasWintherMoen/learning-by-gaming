@@ -7,6 +7,7 @@ export type Data = {
   amplitude: number;
   angularFrequency: number;
   phaseShift: number;
+  verticalShift: number;
   fireSubscribers: (() => void)[];
   isFiring: boolean;
 };
@@ -25,6 +26,11 @@ export type SetPhaseAction = {
   type: 'SET_PHASE';
   payload: number;
 };
+
+export type SetVerticalAction = {
+  type: 'SET_VERTICAL';
+  payload: number;
+}
 
 export type AddFireSubscriberAction = {
   type: 'ADD_FIRE_SUBSCRIBER';
@@ -45,6 +51,7 @@ export type SetDataAction =
   | SetAmplitudeAction
   | SetFrequencyAction
   | SetPhaseAction
+  | SetVerticalAction
   | AddFireSubscriberAction
   | RemoveFireSubscriberAction
   | SetIsFiringAction;

@@ -5,6 +5,8 @@ import SineText from './components/pixi/SineText';
 import Axes from './components/pixi/Axes';
 import { Provider } from 'react-redux';
 import store from './store';
+import React from "react";
+import Player from "./components/pixi/Player";
 
 export default function Game() {
   return (
@@ -19,7 +21,8 @@ export default function Game() {
           <Provider store={store}>
             <SineWave />
             <SineText />
-            <Axes showHorizontalLines={false} showVerticalLines={false} />
+            <Axes showHorizontalLines={true} showVerticalLines={true} />
+            <Player />
           </Provider>
         </Stage>
         <SineController />

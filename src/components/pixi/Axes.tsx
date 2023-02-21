@@ -1,16 +1,18 @@
 import { Graphics } from '@pixi/react';
 import { useCallback } from 'react';
 import { Draw } from '../../types';
+import useConstants from "../../hooks/useConstants";
 
 export default function Axes({
   showHorizontalLines = false,
   showVerticalLines = false,
 }) {
+  const { LEFT_OFFSET } = useConstants();
   const draw = useCallback<Draw>((g) => {
     g.clear();
     g.beginFill(0xffffff, 0.8);
-    g.drawRect(1, 1, 2, 598);
-    g.drawRect(1, 598, 798, 2);
+    g.drawRect(LEFT_OFFSET, 1, 2, 598);
+    g.drawRect(0, 598, 798, 2);
     if (showHorizontalLines) {
       g.beginFill(0xffffff, 0.1);
       g.drawRect(0, 99, 800, 2);
@@ -21,8 +23,8 @@ export default function Axes({
     }
     if (showVerticalLines) {
       g.beginFill(0xffffff, 0.1);
-      g.drawRect(314, 0, 2, 600);
-      g.drawRect(314 * 2, 0, 2, 600);
+      g.drawRect(314+LEFT_OFFSET, 0, 2, 600);
+      g.drawRect(314 * 2 + LEFT_OFFSET, 0, 2, 600);
     }
     g.endFill();
   }, []);

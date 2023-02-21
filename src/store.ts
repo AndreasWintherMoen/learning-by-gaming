@@ -5,6 +5,7 @@ const defaultState: Data = {
   amplitude: 1,
   angularFrequency: 1,
   phaseShift: 0,
+  verticalShift: 0,
   fireSubscribers: [],
   isFiring: false,
 };
@@ -15,6 +16,8 @@ function reducer(state = defaultState, action: SetDataAction) {
       return { ...state, amplitude: action.payload };
     case 'SET_FREQUENCY':
       return { ...state, angularFrequency: action.payload };
+    case 'SET_VERTICAL':
+      return { ...state, verticalShift: action.payload };
     case 'SET_PHASE':
       return { ...state, phaseShift: action.payload };
     case 'ADD_FIRE_SUBSCRIBER':
@@ -45,6 +48,12 @@ export const setAngularFrequency = (frequency: number) => ({
   type: 'SET_FREQUENCY',
   payload: frequency,
 });
+
+export const setVerticalShift = (vertical: number) => ({
+  type: 'SET_VERTICAL',
+  payload: vertical,
+});
+
 
 export const setPhaseShift = (phase: number) => ({
   type: 'SET_PHASE',

@@ -7,16 +7,19 @@ import {
   setAngularFrequency,
   setIsFiring,
   setPhaseShift,
+  setVerticalShift,
 } from '../store';
 
 export type DataContext = {
   amplitude: number;
   angularFrequency: number;
   phaseShift: number;
+  verticalShift: number;
   isFiring: boolean;
   setAmplitude: (amplitude: number) => void;
   setAngularFrequency: (angularFrequency: number) => void;
   setPhaseShift: (phaseShift: number) => void;
+  setVerticalShift: (verticalShift: number) => void;
   addFireSubscriber: (subscriber: () => void) => void;
   removeFireSubscriber: (subscriber: () => void) => void;
   fire: () => void;
@@ -47,6 +50,9 @@ export default function useData(): DataContext {
     dispatch(removeFireSubscriber(subscriber));
   }
 
+  function dispatchVerticalShift(verticalShift: number) {
+    dispatch(setVerticalShift(verticalShift));
+  }
   function fire() {
     data.fireSubscribers.forEach((subscriber) => subscriber());
     dispatch(setIsFiring(true));
@@ -58,6 +64,7 @@ export default function useData(): DataContext {
 
   return {
     ...data,
+    setVerticalShift: dispatchVerticalShift,
     setAmplitude: dispatchAmplitude,
     setAngularFrequency: dispatchAngularFrequency,
     setPhaseShift: dispatchPhaseShift,

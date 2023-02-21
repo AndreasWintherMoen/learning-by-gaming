@@ -2,6 +2,7 @@ import { Graphics, useApp, useTick } from '@pixi/react';
 import { useCallback, useEffect, useState } from 'react';
 import useData from '../../hooks/useData';
 import { Draw } from '../../types';
+import useConstants from "../../hooks/useConstants";
 
 const pixelsPerUnit = 100;
 const startX = -314 * 2 - 2;
@@ -9,6 +10,7 @@ const startY = 0;
 const speed = 20;
 
 export default function SineWave() {
+  const {LEFT_OFFSET} = useConstants();
   const {
     amplitude,
     angularFrequency,
@@ -50,7 +52,8 @@ export default function SineWave() {
       const startI = Math.floor(timer * speed * pixelsPerUnit);
       if (startI > width) stopFire();
       for (let i = startI; i < startI + 314 * 2; i++) {
-        const x = startX + i;
+        const x = startX + i + LEFT_OFFSET;
+        if (x < LEFT_OFFSET) continue;
         const y =
           height / 4 -
           // startY +
