@@ -1,6 +1,6 @@
 import useData from '../hooks/useData';
 import {useEffect} from "react";
-import {setVerticalShift} from "../store";
+import {setVerticalShift} from "../redux/gameSlice";
 
 export default function SineController() {
   const {
