@@ -1,14 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
+import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {
   addFireSubscriber,
   removeFireSubscriber,
-  RootState,
   setAmplitude,
-  setAngularFrequency,
-  setIsFiring,
-  setPhaseShift,
-  setVerticalShift,
-} from '../store';
+  setAngularFrequency, setIsFiring,
+  setPhaseShift, setVerticalShift
+} from "../redux/gameSlice";
 
 export type DataContext = {
   amplitude: number;
@@ -27,8 +24,8 @@ export type DataContext = {
 };
 
 export default function useData(): DataContext {
-  const data = useSelector((state: RootState) => state);
-  const dispatch = useDispatch();
+  const data = useAppSelector((state) => state.game)
+  const dispatch = useAppDispatch();
 
   function dispatchAmplitude(amplitude: number) {
     dispatch(setAmplitude(amplitude));
@@ -74,3 +71,4 @@ export default function useData(): DataContext {
     stopFire,
   };
 }
+

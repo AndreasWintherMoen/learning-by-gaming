@@ -4,9 +4,9 @@ import SineWave from './components/pixi/SineWave';
 import SineText from './components/pixi/SineText';
 import Axes from './components/pixi/Axes';
 import { Provider } from 'react-redux';
-import store from './store';
 import React from "react";
 import Player from "./components/pixi/Player";
+import {store} from "./redux/store";
 
 export default function Game() {
   return (
