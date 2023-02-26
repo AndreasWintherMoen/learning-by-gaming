@@ -30,7 +30,7 @@ export default function Canvas() {
 
   const { nextLevel } = useData();
 
-  const handleRect = useCallback((rect: Rectangle) => {
+  const handleBulletChange = useCallback((rect: Rectangle) => {
     setBulletRect(rect);
   }, []);
 
@@ -56,7 +56,7 @@ export default function Canvas() {
 
   return (
     <>
-      <SineWave ref={handleRect} />
+      <SineWave ref={handleBulletChange} />
       <SineText />
       <LevelText />
       <Axes showHorizontalLines={true} showVerticalLines={true} />
