@@ -29,8 +29,8 @@ export default function SineText() {
       y={0}
       style={
         new TextStyle({
-          fontFamily: '"Source Sans Pro", Helvetica, sans-serif',
-          fontSize: 32,
+          fontFamily: 'Handdrawn, "Source Sans Pro", Helvetica, sans-serif',
+          fontSize: 36,
           fill: '#ffffff',
         })
       }
