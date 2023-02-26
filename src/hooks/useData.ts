@@ -1,18 +1,25 @@
-import {useAppDispatch, useAppSelector} from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import {
   addFireSubscriber,
+  nextLevel,
   removeFireSubscriber,
+  resetLevel,
   setAmplitude,
-  setAngularFrequency, setIsFiring,
-  setPhaseShift, setVerticalShift
-} from "../redux/gameSlice";
+  setAngularFrequency,
+  setIsFiring,
+  setPhaseShift,
+  setVerticalShift,
+} from '../redux/gameSlice';
 
 export type DataContext = {
+  level: number;
   amplitude: number;
   angularFrequency: number;
   phaseShift: number;
   verticalShift: number;
   isFiring: boolean;
+  nextLevel: () => void;
+  resetLevel: () => void;
   setAmplitude: (amplitude: number) => void;
   setAngularFrequency: (angularFrequency: number) => void;
   setPhaseShift: (phaseShift: number) => void;
@@ -24,8 +31,16 @@ export type DataContext = {
 };
 
 export default function useData(): DataContext {
-  const data = useAppSelector((state) => state.game)
+  const data = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
+
+  function dispatchNextLevel() {
+    dispatch(nextLevel());
+  }
+
+  function dispatchResetLevel() {
+    dispatch(resetLevel());
+  }
 
   function dispatchAmplitude(amplitude: number) {
     dispatch(setAmplitude(amplitude));
@@ -50,6 +65,7 @@ export default function useData(): DataContext {
   function dispatchVerticalShift(verticalShift: number) {
     dispatch(setVerticalShift(verticalShift));
   }
+
   function fire() {
     data.fireSubscribers.forEach((subscriber) => subscriber());
     dispatch(setIsFiring(true));
@@ -61,6 +77,8 @@ export default function useData(): DataContext {
 
   return {
     ...data,
+    nextLevel: dispatchNextLevel,
+    resetLevel: dispatchResetLevel,
     setVerticalShift: dispatchVerticalShift,
     setAmplitude: dispatchAmplitude,
     setAngularFrequency: dispatchAngularFrequency,
@@ -71,4 +89,3 @@ export default function useData(): DataContext {
     stopFire,
   };
 }
-

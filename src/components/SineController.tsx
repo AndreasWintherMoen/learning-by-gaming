@@ -1,6 +1,5 @@
 import useData from '../hooks/useData';
-import {useEffect} from "react";
-import {setVerticalShift} from "../redux/gameSlice";
+import { useEffect } from 'react';
 
 export default function SineController() {
   const {
@@ -12,6 +11,7 @@ export default function SineController() {
     setAmplitude,
     setAngularFrequency,
     setPhaseShift,
+    setVerticalShift,
     fire,
   } = useData();
 
@@ -22,15 +22,19 @@ export default function SineController() {
       if (ev.key === 'Enter') {
         fire();
       } else if (ev.key === 'ArrowUp') {
-        setPhaseShift(phaseShift + 0.1);
+        setVerticalShift(verticalShift + 0.1);
       } else if (ev.key === 'ArrowDown') {
+        setVerticalShift(verticalShift - 0.1);
+      } else if (ev.key === 'ArrowLeft') {
         setPhaseShift(phaseShift - 0.1);
+      } else if (ev.key === 'ArrowRight') {
+        setPhaseShift(phaseShift + 0.1);
       }
-    }
+    };
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-    }
+    };
   }, [isFiring, phaseShift]);
 
   return (
