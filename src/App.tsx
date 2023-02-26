@@ -1,5 +1,5 @@
+import Canvas from './Canvas';
 import Game from './Game';
-import GameProvider from './GameProvider';
 
 function App() {
   return (
@@ -10,9 +10,9 @@ function App() {
           Et masterprosjekt av Andreas Winther Moen & Haakon Reithaug Jacobsen
         </h2>
       </div>
-      <GameProvider>
-        <Game />
-      </GameProvider>
+      <Game>
+        <Canvas />
+      </Game>
     </div>
   );
 }
