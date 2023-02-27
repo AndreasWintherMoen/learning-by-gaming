@@ -7,12 +7,7 @@ export default function Game({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <Provider store={store}>
-        <Stage
-          options={{
-            height: 600,
-            width: 800,
-          }}
-        >
+        <Stage height={600} width={800}>
           <Provider store={store}>{children}</Provider>
         </Stage>
         <SineController />
