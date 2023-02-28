@@ -6,12 +6,16 @@ const GRID_CELL_SIZE = 30;
 
 export default function TextbookBackground() {
   const app = useApp();
-  const { width, height } = app.view;
+  // const { width, height } = app.view;
+
+  const width = app.view.width / 2;
+  const height = app.view.height / 2;
+  console.log(width, height);
 
   const draw = useCallback<Draw>((g) => {
     g.clear();
     g.beginFill(0xffffff);
-    g.drawRect(0, 0, app.screen.width, app.screen.height);
+    g.drawRect(0, 0, width, height);
     g.beginFill(0x000000, 0.1);
     for (let i = 0; i < width; i += GRID_CELL_SIZE) {
       g.drawRect(i, 0, 2, height);

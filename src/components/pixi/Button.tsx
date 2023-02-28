@@ -5,9 +5,10 @@ type Props = {
   image: string;
   x: number;
   y: number;
+  opacity?: number;
 };
 
-export default function Button({ onClick, image, x, y }: Props) {
+export default function Button({ onClick, image, x, y, opacity }: Props) {
   return (
     <Sprite
       image={image}
@@ -16,6 +17,7 @@ export default function Button({ onClick, image, x, y }: Props) {
       y={y}
       interactive={true}
       pointerdown={onClick}
+      alpha={opacity ?? 1}
     />
   );
 }

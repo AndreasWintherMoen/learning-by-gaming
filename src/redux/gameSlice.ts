@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Data } from '../types';
 
 const initialState = {
-  level: 1,
+  level: 0,
   amplitude: 1,
   angularFrequency: 1,
   phaseShift: 0,
@@ -19,7 +19,7 @@ export const gameSlice = createSlice({
       state.level = state.level + 1;
     },
     resetLevel: (state) => {
-      state.level = 1;
+      state.level = 0;
     },
     setAmplitude: (state, action) => {
       state.amplitude = action.payload;

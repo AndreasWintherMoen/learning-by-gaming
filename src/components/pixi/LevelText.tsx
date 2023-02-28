@@ -11,7 +11,7 @@ export default function SineText() {
   return (
     <Text
       text={text}
-      x={app.view.width / 2 - 110}
+      x={app.view.width / 4 - 110}
       y={0}
       style={
         new TextStyle({

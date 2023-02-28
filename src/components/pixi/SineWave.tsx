@@ -32,7 +32,9 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     const totalXOffset = LEFT_OFFSET + phaseShift * 100;
 
     const app = useApp();
-    const { height, width } = app.view;
+    // const { height, width } = app.view;
+    const width = app.view.width / 2;
+    const height = app.view.height / 2;
 
     const [speed, setSpeed] = useState(5);
     const [timer, setTimer] = useState(0);
