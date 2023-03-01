@@ -1,4 +1,4 @@
-import { Graphics, useApp, useTick } from '@pixi/react';
+import { Graphics, useTick } from '@pixi/react';
 import {
   forwardRef,
   useCallback,
@@ -10,6 +10,7 @@ import useData from '../../hooks/useData';
 import { Draw } from '../../types';
 import useConstants from '../../hooks/useConstants';
 import { Rectangle } from 'pixi.js';
+import useCanvasSize from '../../hooks/useCanvasSize';
 
 const pixelsPerUnit = 100;
 const startX = -314 * 2 - 2;
@@ -31,10 +32,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     const { LEFT_OFFSET } = useConstants();
     const totalXOffset = LEFT_OFFSET + phaseShift * 100;
 
-    const app = useApp();
-    // const { height, width } = app.view;
-    const width = app.view.width / 2;
-    const height = app.view.height / 2;
+    const { width, height } = useCanvasSize();
 
     const [speed, setSpeed] = useState(5);
     const [timer, setTimer] = useState(0);

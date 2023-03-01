@@ -1,5 +1,6 @@
 import { Sprite, Text, useApp } from '@pixi/react';
 import { TextStyle } from '@pixi/text';
+import useCanvasSize from '../../hooks/useCanvasSize';
 import useData from '../../hooks/useData';
 import useTween from '../../hooks/useTween';
 import Button from './Button';
@@ -7,10 +8,7 @@ import Button from './Button';
 const animationDuration = 1.6;
 
 export default function Frontpage() {
-  const app = useApp();
-  // const { width, height } = app.view;
-  const width = app.view.width / 2;
-  const height = app.view.height / 2;
+  const { width, height } = useCanvasSize();
 
   const { nextLevel } = useData();
 

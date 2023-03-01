@@ -1,17 +1,18 @@
-import { Text, useApp } from '@pixi/react';
+import { Text } from '@pixi/react';
 import { TextStyle } from 'pixi.js';
 import { useMemo } from 'react';
+import useCanvasSize from '../../hooks/useCanvasSize';
 import useData from '../../hooks/useData';
 
 export default function SineText() {
-  const app = useApp();
+  const { width } = useCanvasSize();
   const { level } = useData();
   const text = useMemo(() => `Level ${level}`, [level]);
 
   return (
     <Text
       text={text}
-      x={app.view.width / 4 - 110}
+      x={width / 2 - 110}
       y={0}
       style={
         new TextStyle({

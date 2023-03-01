@@ -1,16 +1,12 @@
 import { Graphics, useApp } from '@pixi/react';
 import { useCallback } from 'react';
+import useCanvasSize from '../../hooks/useCanvasSize';
 import { Draw } from '../../types';
 
 const GRID_CELL_SIZE = 30;
 
 export default function TextbookBackground() {
-  const app = useApp();
-  // const { width, height } = app.view;
-
-  const width = app.view.width / 2;
-  const height = app.view.height / 2;
-  console.log(width, height);
+  const { width, height } = useCanvasSize();
 
   const draw = useCallback<Draw>((g) => {
     g.clear();

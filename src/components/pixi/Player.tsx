@@ -6,7 +6,7 @@ export default function Player() {
   const app = useApp();
   const data = useData();
   const x = 0 + data.phaseShift * 100;
-  const y = app.view.height / 4 - data.verticalShift * 100;
+  const y = app.view.height / 2 - data.verticalShift * 100;
   return (
     <>
       <CoordinationTag
