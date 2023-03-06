@@ -110,6 +110,12 @@ export default function Frontpage() {
       <Button
         onClick={handleClick}
         image='startbutton.png'
+        x={width / 4}
+        y={height / 4 + 150}
+      />
+      <Button
+        onClick={handleClick}
+        image='startbutton.png'
         x={width / 2}
         y={height / 2 + 150}
         opacity={subtitleOpacity}
