@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Data } from '../types';
+import { sound } from '@pixi/sound';
 
 const initialState = {
   level: 0,
@@ -9,6 +10,7 @@ const initialState = {
   verticalShift: 0,
   fireSubscribers: [],
   isFiring: false,
+  isBackgroundSound: true,
 } as Data;
 
 export const gameSlice = createSlice({
@@ -44,6 +46,15 @@ export const gameSlice = createSlice({
     setIsFiring: (state, action) => {
       state.isFiring = action.payload;
     },
+    setIsBackgroundSound: (state, action) => {
+      state.isBackgroundSound = action.payload;
+      console.log('state.isBackgroundSound', state.isBackgroundSound)
+      if (state.isBackgroundSound) {
+        sound.volume('intro-music', 0.1);
+      } else {
+        sound.volume('intro-music', 0);
+      }
+    }
   },
 });
 
@@ -57,6 +68,7 @@ export const {
   addFireSubscriber,
   setVerticalShift,
   setPhaseShift,
+  setIsBackgroundSound,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

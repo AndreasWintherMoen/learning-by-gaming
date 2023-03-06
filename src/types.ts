@@ -11,6 +11,7 @@ export type Data = {
   verticalShift: number;
   fireSubscribers: (() => void)[];
   isFiring: boolean;
+  isBackgroundSound: boolean;
 };
 
 export type EasingFunctions =
