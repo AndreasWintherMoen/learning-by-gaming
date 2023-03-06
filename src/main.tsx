@@ -10,7 +10,7 @@ sound.add('intro-music', {
   url:'src/assets/sounds/intro-music.mp3',
   preload: true,
   loop: true,
-  volume: 0.1,
+  volume: 0.0,
   autoPlay: true,
 });
 
