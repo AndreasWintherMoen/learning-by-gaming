@@ -8,14 +8,6 @@ import { sound } from '@pixi/sound';
 
 
 const animationDuration = 1.6;
-sound.add('button-click', {url:'src/assets/sounds/mouse-click.mp3', preload: true, });
-sound.add('intro-music', {
-  url:'src/assets/sounds/intro-music.mp3',
-  preload: true,
-  loop: true,
-  volume: 0.1,
-  autoPlay: true,
-});
 
 export default function Frontpage() {
   const { width, height } = useCanvasSize();
