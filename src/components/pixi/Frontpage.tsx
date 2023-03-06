@@ -1,11 +1,14 @@
-import { Sprite, Text, useApp } from '@pixi/react';
+import { Sprite, Text } from '@pixi/react';
 import { TextStyle } from '@pixi/text';
 import useCanvasSize from '../../hooks/useCanvasSize';
 import useData from '../../hooks/useData';
 import useTween from '../../hooks/useTween';
 import Button from './Button';
+import { sound } from '@pixi/sound';
+
 
 const animationDuration = 1.6;
+sound.add('button-click', {url:'src/assets/sounds/mouse-click.mp3', preload: true, });
 
 export default function Frontpage() {
   const { width, height } = useCanvasSize();
@@ -49,6 +52,12 @@ export default function Frontpage() {
     startTitlePosAnimation();
     startTitleFontsizeAnimation();
     startSubtitleOpacityAnimation();
+  };
+
+  const handleClick = () => {
+    sound.play('button-click');
+    startAllAnimations();
+    nextLevel();
   };
 
   return (
@@ -99,10 +108,7 @@ export default function Frontpage() {
         }
       />
       <Button
-        onClick={() => {
-          startAllAnimations();
-          nextLevel();
-        }}
+        onClick={handleClick}
         image='startbutton.png'
         x={width / 2}
         y={height / 2 + 150}
