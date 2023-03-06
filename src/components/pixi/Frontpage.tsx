@@ -9,11 +9,18 @@ import { sound } from '@pixi/sound';
 
 const animationDuration = 1.6;
 sound.add('button-click', {url:'src/assets/sounds/mouse-click.mp3', preload: true, });
+sound.add('intro-music', {
+  url:'src/assets/sounds/intro-music.mp3',
+  preload: true,
+  loop: true,
+  volume: 0.1,
+  autoPlay: true,
+});
 
 export default function Frontpage() {
   const { width, height } = useCanvasSize();
 
-  const { nextLevel } = useData();
+  const { nextLevel, isBackgroundSound, toggleBackgroundSound } = useData();
 
   const [topPos, startTopPosAnimation] = useTween({
     func: 'easeInOutCubic',
@@ -54,10 +61,14 @@ export default function Frontpage() {
     startSubtitleOpacityAnimation();
   };
 
-  const handleClick = () => {
+  const handleStart = () => {
     sound.play('button-click');
     startAllAnimations();
     nextLevel();
+  };
+
+  const handleSound = () => {
+    toggleBackgroundSound();
   };
 
   return (
@@ -108,17 +119,17 @@ export default function Frontpage() {
         }
       />
       <Button
-        onClick={handleClick}
-        image='startbutton.png'
-        x={width / 4}
-        y={height / 4 + 150}
-      />
-      <Button
-        onClick={handleClick}
+        onClick={handleStart}
         image='startbutton.png'
         x={width / 2}
         y={height / 2 + 150}
         opacity={subtitleOpacity}
+      />
+      <Button
+        onClick={handleSound}
+        image={isBackgroundSound ? 'sound-button.png': 'sound-button-off.png'}
+        x={0 + 75}
+        y={height -75}
       />
     </>
   );
