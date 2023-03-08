@@ -5,14 +5,14 @@ import useCanvasSize from '../../hooks/useCanvasSize';
 import useData from '../../hooks/useData';
 
 export default function SineText() {
-  const { width } = useCanvasSize();
+  const { gridWidth } = useCanvasSize();
   const { level } = useData();
   const text = useMemo(() => `Level ${level}`, [level]);
 
   return (
     <Text
       text={text}
-      x={width / 2 - 110}
+      x={gridWidth / 2 - 110}
       y={0}
       style={
         new TextStyle({
