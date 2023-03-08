@@ -6,6 +6,7 @@ import {
   resetLevel,
   setAmplitude,
   setAngularFrequency,
+  setIsBackgroundSound,
   setIsFiring,
   setPhaseShift,
   setVerticalShift,
@@ -18,6 +19,7 @@ export type DataContext = {
   phaseShift: number;
   verticalShift: number;
   isFiring: boolean;
+  isBackgroundSound: boolean;
   nextLevel: () => void;
   resetLevel: () => void;
   setAmplitude: (amplitude: number) => void;
@@ -28,6 +30,7 @@ export type DataContext = {
   removeFireSubscriber: (subscriber: () => void) => void;
   fire: () => void;
   stopFire: () => void;
+  toggleBackgroundSound: () => void;
 };
 
 export default function useData(): DataContext {
@@ -75,6 +78,10 @@ export default function useData(): DataContext {
     dispatch(setIsFiring(false));
   }
 
+  function toggleBackgroundSound() {
+    dispatch(setIsBackgroundSound(!data.isBackgroundSound));
+  }
+
   return {
     ...data,
     nextLevel: dispatchNextLevel,
@@ -87,5 +94,6 @@ export default function useData(): DataContext {
     removeFireSubscriber: dispatchRemoveFireSubscriber,
     fire,
     stopFire,
+    toggleBackgroundSound,
   };
 }
