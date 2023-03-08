@@ -1,15 +1,8 @@
-import { Graphics, useTick } from '@pixi/react';
-import {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useImperativeHandle,
-  useState,
-} from 'react';
+import {Graphics, useTick} from '@pixi/react';
+import {forwardRef, useCallback, useEffect, useImperativeHandle, useState,} from 'react';
 import useData from '../../hooks/useData';
-import { Draw } from '../../types';
-import useConstants from '../../hooks/useConstants';
-import { Rectangle } from 'pixi.js';
+import {Draw} from '../../types';
+import {Rectangle} from 'pixi.js';
 import useCanvasSize from '../../hooks/useCanvasSize';
 
 const pixelsPerUnit = 100;
@@ -29,10 +22,10 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       stopFire,
     } = useData();
 
-    const { LEFT_OFFSET } = useConstants();
-    const totalXOffset = LEFT_OFFSET + phaseShift * 100;
+    const { cellSize } = useCanvasSize();
+    const totalXOffset = cellSize * 4;
 
-    const { width, height } = useCanvasSize();
+    const { pixelWidth, pixelHeight } = useCanvasSize();
 
     const [speed, setSpeed] = useState(5);
     const [timer, setTimer] = useState(0);
@@ -41,7 +34,6 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     useImperativeHandle(ref, () => bulletCollider);
 
     useTick((_, ticker) => {
-      if (!isFiring) return;
       setTimer((timer) => timer + ticker.deltaMS / 1000);
     });
 
@@ -64,7 +56,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         g.lineStyle(4, 0xffff00, 1);
         g.moveTo(startX, startY);
         const startI = Math.floor(timer * speed * pixelsPerUnit);
-        if (startI > width) {
+        if (startI > pixelWidth) {
           stopFire();
           setBulletCollider(undefined);
         }
@@ -73,7 +65,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           const x = startX + i + totalXOffset;
           if (x < totalXOffset) continue;
           const y =
-            height / 4 -
+            pixelHeight / 4 -
             amplitude *
               Math.sin((angularFrequency * i) / pixelsPerUnit) *
               pixelsPerUnit -

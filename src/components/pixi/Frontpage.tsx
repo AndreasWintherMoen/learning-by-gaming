@@ -10,7 +10,7 @@ import { sound } from '@pixi/sound';
 const animationDuration = 1.6;
 
 export default function Frontpage() {
-  const { width, height } = useCanvasSize();
+  const { pixelWidth, pixelHeight } = useCanvasSize();
 
   const { nextLevel, isBackgroundSound, toggleBackgroundSound } = useData();
 
@@ -22,14 +22,14 @@ export default function Frontpage() {
   });
   const [bottomPos, startBottomPosAnimation] = useTween({
     func: 'easeInOutCubic',
-    start: height - 350,
-    end: height - 220,
+    start: pixelHeight - 350,
+    end: pixelHeight - 220,
     duration: animationDuration,
   });
   const [titlePos, startTitlePosAnimation] = useTween({
     func: 'easeInOutCubic',
-    start: height / 2 - 100,
-    end: height / 2 - 300,
+    start: pixelHeight / 2 - 100,
+    end: pixelHeight / 2 - 300,
     duration: animationDuration,
   });
   const [titleFontsize, startTitleFontsizeAnimation] = useTween({
@@ -65,12 +65,12 @@ export default function Frontpage() {
 
   return (
     <>
-      <Sprite image='top.png' width={width} height={500} y={topPos} />
-      <Sprite image='bottom.png' width={width} height={500} y={bottomPos} />
+      <Sprite image='top.png' width={pixelWidth} height={500} y={topPos} />
+      <Sprite image='bottom.png' width={pixelWidth} height={500} y={bottomPos} />
       <Text
         text='AFTERMATH'
         anchor={0.5}
-        x={width / 2}
+        x={pixelWidth / 2}
         y={titlePos}
         style={
           new TextStyle({
@@ -85,8 +85,8 @@ export default function Frontpage() {
       <Text
         text='A MATHEMATICAL JOURNEY'
         anchor={0.5}
-        x={width / 2}
-        y={height / 2 - 10}
+        x={pixelWidth / 2}
+        y={pixelHeight / 2 - 10}
         style={
           new TextStyle({
             fontFamily:
@@ -99,8 +99,8 @@ export default function Frontpage() {
       <Text
         text='FROM ORIGO TO INFINITY'
         anchor={0.5}
-        x={width / 2}
-        y={height / 2 + 50}
+        x={pixelWidth / 2}
+        y={pixelHeight / 2 + 50}
         style={
           new TextStyle({
             fontFamily:
@@ -113,15 +113,15 @@ export default function Frontpage() {
       <Button
         onClick={handleStart}
         image='startbutton.png'
-        x={width / 2}
-        y={height / 2 + 150}
+        x={pixelWidth / 2}
+        y={pixelHeight / 2 + 150}
         opacity={subtitleOpacity}
       />
       <Button
         onClick={handleSound}
         image={isBackgroundSound ? 'sound-button.png': 'sound-button-off.png'}
         x={0 + 75}
-        y={height -75}
+        y={pixelHeight -75}
       />
     </>
   );
