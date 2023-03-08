@@ -1,5 +1,5 @@
-import {useApp} from '@pixi/react';
-import useLevel from "./useLevel";
+import { useApp } from '@pixi/react';
+import useLevel from './useLevel';
 
 export default function useCanvasSize() {
   const { level } = useLevel();
@@ -12,9 +12,9 @@ export default function useCanvasSize() {
   const gridWidth = Math.floor(pixelWidth / cellSize);
   const gridHeight = Math.floor(pixelHeight / cellSize);
   const origoPosition = {
-    y: 3,
-    x: 4
-  }
+    y: gridHeight / 2,
+    x: 4,
+  };
 
   return {
     gridWidth,

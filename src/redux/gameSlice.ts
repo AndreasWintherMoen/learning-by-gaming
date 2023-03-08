@@ -48,13 +48,13 @@ export const gameSlice = createSlice({
     },
     setIsBackgroundSound: (state, action) => {
       state.isBackgroundSound = action.payload;
-      console.log('state.isBackgroundSound', state.isBackgroundSound)
+      console.log('state.isBackgroundSound', state.isBackgroundSound);
       if (state.isBackgroundSound) {
         sound.volume('intro-music', 0.1);
       } else {
         sound.volume('intro-music', 0);
       }
-    }
+    },
   },
 });
 

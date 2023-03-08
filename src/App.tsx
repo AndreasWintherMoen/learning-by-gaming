@@ -3,7 +3,7 @@ import NewCanvas from './NewCanvas';
 
 function App() {
   return (
-    <div>
+    <div className='w-screen overflow-x-hidden flex justify-center'>
       <Game>
         {/* <Canvas /> */}
         <NewCanvas />
