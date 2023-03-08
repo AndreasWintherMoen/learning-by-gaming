@@ -6,7 +6,6 @@ import useTween from '../../hooks/useTween';
 import Button from './Button';
 import { sound } from '@pixi/sound';
 
-
 const animationDuration = 1.6;
 
 export default function Frontpage() {
@@ -66,7 +65,12 @@ export default function Frontpage() {
   return (
     <>
       <Sprite image='top.png' width={pixelWidth} height={500} y={topPos} />
-      <Sprite image='bottom.png' width={pixelWidth} height={500} y={bottomPos} />
+      <Sprite
+        image='bottom.png'
+        width={pixelWidth}
+        height={500}
+        y={bottomPos}
+      />
       <Text
         text='AFTERMATH'
         anchor={0.5}
@@ -119,9 +123,9 @@ export default function Frontpage() {
       />
       <Button
         onClick={handleSound}
-        image={isBackgroundSound ? 'sound-button.png': 'sound-button-off.png'}
+        image={isBackgroundSound ? 'sound-button.png' : 'sound-button-off.png'}
         x={0 + 75}
-        y={pixelHeight -75}
+        y={pixelHeight - 75}
       />
     </>
   );

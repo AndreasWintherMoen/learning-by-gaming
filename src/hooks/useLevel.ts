@@ -2,12 +2,20 @@ import { useState } from 'react';
 
 type Level = {
   cellSize: number;
+  origoPosition: {
+    x: number;
+    y: number;
+  };
   enemyPositions: number[][];
   coinPositions: number[][];
 };
 const levels: Level[] = [
   {
-    cellSize: 30,
+    cellSize: 50,
+    origoPosition: {
+      y: 0,
+      x: 2,
+    },
     enemyPositions: [
       [0, 0],
       [0, 1],

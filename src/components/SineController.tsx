@@ -37,6 +37,8 @@ export default function SineController() {
     };
   }, [isFiring, phaseShift]);
 
+  return <></>;
+
   return (
     <div className='flex w-full justify-around items-center'>
       <div className='flex flex-col'>
