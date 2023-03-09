@@ -1,13 +1,15 @@
-import {Graphics, useTick} from '@pixi/react';
-import {forwardRef, useCallback, useEffect, useImperativeHandle, useState,} from 'react';
+import { Graphics, useTick } from '@pixi/react';
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import useData from '../../hooks/useData';
-import {Draw} from '../../types';
-import {Rectangle} from 'pixi.js';
+import { Draw } from '../../types';
+import { Rectangle } from 'pixi.js';
 import useCanvasSize from '../../hooks/useCanvasSize';
-
-const pixelsPerUnit = 100;
-const startX = -314 * 2 - 2;
-const startY = 0;
 
 const SineWave = forwardRef<Rectangle | undefined, {}>(
   ({}: {}, ref: React.ForwardedRef<Rectangle | undefined>): JSX.Element => {
@@ -21,19 +23,19 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       removeFireSubscriber,
       stopFire,
     } = useData();
+    const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
+    const startX = origoPosition.x * cellSize + phaseShift * cellSize;
+    const startY = origoPosition.y * cellSize;
+    const sineLength = cellSize * 3.14 * 2; // one full sine wave period
 
-    const { cellSize } = useCanvasSize();
-    const totalXOffset = cellSize * 4;
-
-    const { pixelWidth, pixelHeight } = useCanvasSize();
-
-    const [speed, setSpeed] = useState(5);
+    const [speed, setSpeed] = useState(10);
     const [timer, setTimer] = useState(0);
     const [bulletCollider, setBulletCollider] = useState<Rectangle>();
 
     useImperativeHandle(ref, () => bulletCollider);
 
     useTick((_, ticker) => {
+      if (!isFiring) return;
       setTimer((timer) => timer + ticker.deltaMS / 1000);
     });
 
@@ -49,27 +51,26 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     const drawSineWave = useCallback<Draw>(
       (g) => {
         function drawPoint(x: number, y: number) {
-          g.beginFill(0xffff00);
+          g.beginFill(0x000000);
           g.drawCircle(x, y, 1);
         }
         g.clear();
-        g.lineStyle(4, 0xffff00, 1);
+        g.lineStyle(4, 0x000000, 1);
         g.moveTo(startX, startY);
-        const startI = Math.floor(timer * speed * pixelsPerUnit);
-        if (startI > pixelWidth) {
+        const startI = Math.floor(timer * speed * cellSize);
+        if (startI - sineLength > pixelWidth) {
           stopFire();
           setBulletCollider(undefined);
         }
         let lastPoint = { x: startX, y: startY };
-        for (let i = startI; i < startI + 314 * 2; i++) {
-          const x = startX + i + totalXOffset;
-          if (x < totalXOffset) continue;
+        for (let i = startI - sineLength; i < startI; i++) {
+          const x = startX + i;
+          if (x < startX) continue;
           const y =
-            pixelHeight / 4 -
-            amplitude *
-              Math.sin((angularFrequency * i) / pixelsPerUnit) *
-              pixelsPerUnit -
-            verticalShift * pixelsPerUnit;
+            startY -
+            amplitude * Math.sin((angularFrequency * i) / cellSize) * cellSize -
+            verticalShift * cellSize;
+
           drawPoint(x, y);
           lastPoint = { x, y };
         }

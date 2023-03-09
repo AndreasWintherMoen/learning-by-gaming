@@ -1,8 +1,8 @@
-import {Provider} from 'react-redux';
-import {store} from './redux/store';
-import {Sprite, Stage} from '@pixi/react';
-import {Texture} from 'pixi.js';
-import SineController from "./components/SineController";
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import { Sprite, Stage } from '@pixi/react';
+import { Texture } from 'pixi.js';
+import SineController from './components/SineController';
 
 export default function Game({ children }: { children: React.ReactNode }) {
   return (

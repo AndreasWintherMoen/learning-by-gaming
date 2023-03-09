@@ -1,9 +1,10 @@
-import {useApp} from '@pixi/react';
-import useLevel from "./useLevel";
+import { useApp } from '@pixi/react';
+import useLevel from './useLevel';
 
 export default function useCanvasSize() {
   const { level } = useLevel();
-  const { cellSize } = level;
+  const { cellSize, origoPosition } = level;
+
   const app = useApp();
   const { width, height } = app.view;
   const scale = window.devicePixelRatio;
@@ -11,17 +12,16 @@ export default function useCanvasSize() {
   const pixelHeight = height / scale;
   const gridWidth = Math.floor(pixelWidth / cellSize);
   const gridHeight = Math.floor(pixelHeight / cellSize);
-  const origoPosition = {
-    y: 3,
-    x: 4
-  }
 
   return {
     gridWidth,
     gridHeight,
     pixelWidth,
     pixelHeight,
-    origoPosition,
+    origoPosition: {
+      ...origoPosition,
+      y: gridHeight / 2 + origoPosition.y,
+    },
     cellSize,
   };
 }
