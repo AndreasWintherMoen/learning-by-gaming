@@ -59,7 +59,7 @@ export default function Canvas() {
       <SineWave ref={handleBulletChange} />
       <SineText />
       <LevelText />
-      <Axes showHorizontalLines={true} showVerticalLines={true} />
+      <Axes />
       <Player />
       {showEnemy ? (
         <Enemy x={750} y={300} bullet={bulletRect} onHit={onHitEnemy} />

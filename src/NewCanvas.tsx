@@ -3,6 +3,7 @@ import TextbookBackground from './components/pixi/TextbookBackground';
 import SineWave from "./components/pixi/SineWave";
 import Axes from "./components/pixi/Axes";
 import useData from "./hooks/useData";
+import ActionPanel from "./components/pixi/ActionPanel";
 
 export default function Canvas() {
   const { level } = useData();
@@ -11,6 +12,7 @@ export default function Canvas() {
       <TextbookBackground />
       {level > 0 && (<Axes />)}
       {level > 0 && (<SineWave />)}
+      <ActionPanel />
       <Frontpage />
     </>
   );

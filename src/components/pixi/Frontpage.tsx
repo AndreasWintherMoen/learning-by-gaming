@@ -23,7 +23,7 @@ export default function Frontpage() {
   const [bottomPos, startBottomPosAnimation] = useTween({
     func: 'easeInOutCubic',
     start: pixelHeight - 350,
-    end: pixelHeight - 220,
+    end: pixelHeight - 200,
     duration: animationDuration,
   });
   const [titlePos, startTitlePosAnimation] = useTween({
