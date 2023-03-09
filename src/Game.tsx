@@ -8,7 +8,7 @@ export default function Game({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <Provider store={store}>
-        <div className='flex gap-4'>
+        <div className='flex gap-4 items-center relative'>
           <Stage width={1200} height={800}>
             {/* For some reason, this empty sprite MUST be here to enable onclick events in the canvas */}
             {/* See https://github.com/pixijs/pixi-react/issues/402 for updates... */}

@@ -1,10 +1,12 @@
 import { Text } from '@pixi/react';
-import { TextStyle } from 'pixi.js';
+import { TextStyle} from 'pixi.js';
 import { useMemo } from 'react';
 import useData from '../../hooks/useData';
+import useTheme from "../../hooks/useTheme";
 
-export default function SineText() {
+export default function SineText({ x, y }: { x: number, y: number }): JSX.Element {
   const { amplitude, angularFrequency, phaseShift, verticalShift } = useData();
+  const theme = useTheme();
 
   const text = useMemo(() => {
     const amplitudeText = amplitude !== 1 ? amplitude : '';
@@ -24,14 +26,16 @@ export default function SineText() {
 
   return (
     <Text
+      anchor={0.5}
       text={text}
-      x={0}
-      y={0}
+      x={x}
+
+      y={y}
       style={
         new TextStyle({
           fontFamily: 'Handdrawn, "Source Sans Pro", Helvetica, sans-serif',
           fontSize: 36,
-          fill: '#ffffff',
+          fill: theme.text.primary,
         })
       }
     />

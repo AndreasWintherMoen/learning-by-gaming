@@ -1,5 +1,6 @@
 import Game from './Game';
 import NewCanvas from './NewCanvas';
+import SineController from "./components/SineController";
 
 function App() {
   return (
