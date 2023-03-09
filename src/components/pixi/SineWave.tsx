@@ -24,7 +24,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       stopFire,
     } = useData();
     const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
-    const startX = origoPosition.x * cellSize + phaseShift * cellSize;
+    const startX = origoPosition.x * cellSize + verticalShift * cellSize;
     const startY = origoPosition.y * cellSize;
     const sineLength = cellSize * 3.14 * 2; // one full sine wave period
 
@@ -63,13 +63,13 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           setBulletCollider(undefined);
         }
         let lastPoint = { x: startX, y: startY };
-        for (let i = startI - sineLength; i < startI; i++) {
+        for (let i = startI - sineLength; i < startI; i += 0.2) {
           const x = startX + i;
           if (x < startX) continue;
           const y =
             startY -
             amplitude * Math.sin((angularFrequency * i) / cellSize) * cellSize -
-            verticalShift * cellSize;
+            phaseShift * cellSize;
 
           drawPoint(x, y);
           lastPoint = { x, y };

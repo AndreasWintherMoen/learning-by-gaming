@@ -92,7 +92,7 @@ export default function SineController() {
           onClick={setVerticalShift}
           color={theme.color.purple}
         />
-        <p>))</p>
+        <p>)){phaseShift >= 0 && '+'}</p>
         <FunctionInputPicker
           variable={phaseShift}
           onClick={setPhaseShift}
