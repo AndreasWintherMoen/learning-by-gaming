@@ -51,7 +51,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     const drawSineWave = useCallback<Draw>(
       (g) => {
         function drawPoint(x: number, y: number) {
-          g.beginFill(0x000000);
+          g.beginFill(0xf00000, 0);
           g.drawCircle(x, y, 1);
         }
         g.clear();
@@ -63,7 +63,9 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           setBulletCollider(undefined);
         }
         let lastPoint = { x: startX, y: startY };
-        for (let i = startI - sineLength; i < startI; i += 0.2) {
+        for (let i = startI - sineLength; i < startI; i += 1) {
+          const opacity = (1 - (startI - i) / sineLength) * 0.3;
+          g.lineStyle(4, 0x000000, opacity);
           const x = startX + i;
           if (x < startX) continue;
           const y =
