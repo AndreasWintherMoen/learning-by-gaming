@@ -11,6 +11,7 @@ import useCanvasSize from './hooks/useCanvasSize';
 import LevelText from './components/pixi/LevelText';
 import { sound } from '@pixi/sound';
 import delay from './utils/delay';
+import PowerBar from './components/pixi/PowerBar';
 
 export default function Canvas() {
   const { level: levelIndex, nextLevel, setAmplitude, amplitude } = useData();
@@ -25,6 +26,7 @@ export default function Canvas() {
   }, [levelIndex, level, coinsVisibilities?.current]);
 
   const onHitCoin = async (index: number) => {
+    console.log('onHitCoin', index);
     sound.play('hit-coin');
     coinsVisibilities.current[index] = false;
     if (!isChangingLevel && coinsVisibilities.current.every((v) => !v)) {
@@ -47,6 +49,7 @@ export default function Canvas() {
       {levelIndex > 0 && <Axes />}
       {levelIndex > 0 && <SineWave ref={handleBulletChange} />}
       {levelIndex > 0 && <LevelText />}
+      {levelIndex > 0 && <PowerBar />}
       {level &&
         level.coinPositions.map(([x, y], i) => (
           <Coin

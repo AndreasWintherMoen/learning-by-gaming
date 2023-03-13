@@ -11,8 +11,6 @@ export default function SineText() {
   const { level, numAttempts } = useData();
   const text = useMemo(() => `Level ${level}`, [level]);
 
-  console.log('numAttempts', numAttempts);
-
   return (
     <>
       <Text

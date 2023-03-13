@@ -12,6 +12,8 @@ export type Data = {
   verticalShift: number;
   fireSubscribers: (() => void)[];
   isFiring: boolean;
+  isCharging: boolean;
+  chargePower: number;
   isBackgroundSound: boolean;
 };
 

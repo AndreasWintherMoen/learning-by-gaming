@@ -18,6 +18,7 @@ export default function SineController() {
     setPhaseShift,
     setVerticalShift,
     fire,
+    startCharge,
     level,
   } = useData();
 
@@ -38,8 +39,8 @@ export default function SineController() {
     //Listen for keypresses and fire the sine wave
     const handleKeyDown = (ev: KeyboardEvent) => {
       if (isFiring) return;
-      if (ev.key === 'Enter') {
-        fire();
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        startCharge();
       } else if (ev.key === 'ArrowUp') {
         setVerticalShift(verticalShift + 0.1);
       } else if (ev.key === 'ArrowDown') {
@@ -50,9 +51,16 @@ export default function SineController() {
         setPhaseShift(phaseShift + 0.1);
       }
     };
+    const handleKeyUp = (ev: KeyboardEvent) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        fire();
+      }
+    };
     document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keyup', handleKeyUp);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keyup', handleKeyUp);
     };
   }, [isFiring, phaseShift]);
 

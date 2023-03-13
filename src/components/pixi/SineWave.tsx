@@ -22,13 +22,14 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       addFireSubscriber,
       removeFireSubscriber,
       stopFire,
+      chargePower,
     } = useData();
     const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
     const startX = origoPosition.x * cellSize + verticalShift * cellSize;
     const startY = origoPosition.y * cellSize;
     const sineLength = cellSize * 3.14 * 2; // one full sine wave period
 
-    const [speed, setSpeed] = useState(10);
+    // const [speed, setSpeed] = useState(2);
     const [timer, setTimer] = useState(0);
     const [bulletCollider, setBulletCollider] = useState<Rectangle>();
 
@@ -36,7 +37,13 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
 
     useTick((_, ticker) => {
       if (!isFiring) return;
-      setTimer((timer) => timer + ticker.deltaMS / 1000);
+      const newTimer = timer + ticker.deltaMS / 1000;
+      if (newTimer > 4) {
+        setTimer(0);
+        stopFire();
+        return;
+      }
+      setTimer(newTimer);
     });
 
     useEffect(() => {
@@ -50,6 +57,13 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
 
     const drawSineWave = useCallback<Draw>(
       (g) => {
+        if (!isFiring) {
+          g.clear();
+
+          setTimer(0);
+          setBulletCollider(undefined);
+          return;
+        }
         function drawPoint(x: number, y: number) {
           g.beginFill(0xf00000, 0);
           g.drawCircle(x, y, 1);
@@ -57,13 +71,30 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         g.clear();
         g.lineStyle(4, 0x000000, 1);
         g.moveTo(startX, startY);
-        const startI = Math.floor(timer * speed * cellSize);
-        if (startI - sineLength > pixelWidth) {
-          stopFire();
-          setBulletCollider(undefined);
-        }
+
+        // WARNING: Complex and poorly documented math incoming!!
+        const amplitudeAngFreqFactors = Math.min(
+          2,
+          Math.max(
+            0.05,
+            (amplitude + 0.1) * 0.2 * ((angularFrequency + 0.1) * 0.2)
+          )
+        );
+        const startI = Math.floor(
+          (timer * chargePower * 0.5 * cellSize) / amplitudeAngFreqFactors
+        );
         let lastPoint = { x: startX, y: startY };
-        for (let i = startI - sineLength; i < startI; i += 1) {
+        let paintAccuracyMultiplier = 1;
+        if (amplitude >= 5) paintAccuracyMultiplier *= 0.5;
+        if (angularFrequency >= 5) paintAccuracyMultiplier *= 0.5;
+        if (amplitude + angularFrequency >= 5) paintAccuracyMultiplier *= 0.5;
+        if (chargePower > 0.8) paintAccuracyMultiplier *= 0.5;
+        else if (chargePower < 0.2) paintAccuracyMultiplier *= 2;
+        for (
+          let i = startI - sineLength;
+          i < startI;
+          i += 1 * paintAccuracyMultiplier
+        ) {
           const opacity = (1 - (startI - i) / sineLength) * 0.3;
           g.lineStyle(4, 0x000000, opacity);
           const x = startX + i;
@@ -78,7 +109,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         }
         setBulletCollider(new Rectangle(lastPoint.x, lastPoint.y, 1, 1));
       },
-      [amplitude, angularFrequency, phaseShift, timer]
+      [amplitude, angularFrequency, phaseShift, timer, isFiring]
     );
 
     return <Graphics draw={drawSineWave} />;

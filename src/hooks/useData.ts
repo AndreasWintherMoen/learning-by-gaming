@@ -8,6 +8,8 @@ import {
   setAngularFrequency,
   setIsBackgroundSound,
   setIsFiring,
+  setIsCharging,
+  setChargePower,
   setPhaseShift,
   setVerticalShift,
 } from '../redux/gameSlice';
@@ -20,6 +22,8 @@ export type DataContext = {
   phaseShift: number;
   verticalShift: number;
   isFiring: boolean;
+  isCharging: boolean;
+  chargePower: number;
   isBackgroundSound: boolean;
   nextLevel: () => void;
   resetLevel: () => void;
@@ -31,6 +35,8 @@ export type DataContext = {
   removeFireSubscriber: (subscriber: () => void) => void;
   fire: () => void;
   stopFire: () => void;
+  startCharge: () => void;
+  setChargePower: (chargePower: number) => void;
   toggleBackgroundSound: () => void;
 };
 
@@ -73,10 +79,19 @@ export default function useData(): DataContext {
   function fire() {
     data.fireSubscribers.forEach((subscriber) => subscriber());
     dispatch(setIsFiring(true));
+    dispatch(setIsCharging(false));
   }
 
   function stopFire() {
     dispatch(setIsFiring(false));
+  }
+
+  function startCharge() {
+    dispatch(setIsCharging(true));
+  }
+
+  function dispatchSetChargePower(chargePower: number) {
+    dispatch(setChargePower(chargePower));
   }
 
   function toggleBackgroundSound() {
@@ -95,6 +110,8 @@ export default function useData(): DataContext {
     removeFireSubscriber: dispatchRemoveFireSubscriber,
     fire,
     stopFire,
+    startCharge,
+    setChargePower: dispatchSetChargePower,
     toggleBackgroundSound,
   };
 }

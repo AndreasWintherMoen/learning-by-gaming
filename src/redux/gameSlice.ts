@@ -11,6 +11,8 @@ const initialState = {
   verticalShift: 0,
   fireSubscribers: [],
   isFiring: false,
+  isCharging: false,
+  chargePower: 0,
   isBackgroundSound: true,
 } as Data;
 
@@ -21,6 +23,9 @@ export const gameSlice = createSlice({
     nextLevel: (state) => {
       state.level = state.level + 1;
       state.numAttempts = 0;
+      state.chargePower = 0;
+      state.isCharging = false;
+      state.isFiring = false;
     },
     resetLevel: (state) => {
       state.level = 0;
@@ -47,9 +52,18 @@ export const gameSlice = createSlice({
     },
     setIsFiring: (state, action) => {
       state.isFiring = action.payload;
+      state.isCharging = false;
       if (!!action.payload) {
         state.numAttempts += 1;
+      } else {
+        state.chargePower = 0;
       }
+    },
+    setIsCharging: (state, action) => {
+      state.isCharging = action.payload;
+    },
+    setChargePower: (state, action) => {
+      state.chargePower = action.payload;
     },
     setIsBackgroundSound: (state, action) => {
       state.isBackgroundSound = action.payload;
@@ -69,6 +83,8 @@ export const {
   setAmplitude,
   setAngularFrequency,
   setIsFiring,
+  setIsCharging,
+  setChargePower,
   removeFireSubscriber,
   addFireSubscriber,
   setVerticalShift,

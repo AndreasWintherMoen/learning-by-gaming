@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 type Level = {
   cellSize: number;
   origoPosition: {
@@ -29,11 +27,6 @@ const levels: Level[] = [
       [3.14 * 3, 0],
       [3.14 * 3.5, 1],
       [3.14 * 4, 0],
-      [3.14 * 4.5, -1],
-      [3.14 * 5, 0],
-      [3.14 * 5.5, 1],
-      [3.14 * 6, 0],
-      [3.14 * 6.5, -1],
     ],
   },
   {
