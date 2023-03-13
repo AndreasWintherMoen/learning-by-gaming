@@ -4,6 +4,7 @@ import { sound } from '@pixi/sound';
 
 const initialState = {
   level: 0,
+  numAttempts: 0,
   amplitude: 1,
   angularFrequency: 1,
   phaseShift: 0,
@@ -19,6 +20,7 @@ export const gameSlice = createSlice({
   reducers: {
     nextLevel: (state) => {
       state.level = state.level + 1;
+      state.numAttempts = 0;
     },
     resetLevel: (state) => {
       state.level = 0;
@@ -45,6 +47,9 @@ export const gameSlice = createSlice({
     },
     setIsFiring: (state, action) => {
       state.isFiring = action.payload;
+      if (!!action.payload) {
+        state.numAttempts += 1;
+      }
     },
     setIsBackgroundSound: (state, action) => {
       state.isBackgroundSound = action.payload;

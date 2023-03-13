@@ -31,8 +31,8 @@ export default function Coin({
   return (
     <Sprite
       image='coin.png'
-      width={50}
-      height={50}
+      width={30}
+      height={30}
       anchor={0.5}
       x={x}
       y={y}

@@ -1,8 +1,24 @@
 import { useApp } from '@pixi/react';
+import useData from './useData';
 import useLevel from './useLevel';
 
+const defaultCanvasSize = {
+  pixelWidth: 1200,
+  pixelHeight: 800,
+  cellSize: 50,
+  gridWidth: 1200 / 50,
+  gridHeight: 800 / 50,
+  origoPosition: {
+    x: 1,
+    y: 0,
+  },
+};
+
 export default function useCanvasSize() {
-  const { level } = useLevel();
+  const { level: levelIndex } = useData();
+  const level = useLevel(levelIndex);
+  if (!level) return defaultCanvasSize;
+
   const { cellSize, origoPosition } = level;
 
   const app = useApp();

@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import useTheme from '../hooks/useTheme';
 import FunctionInputPicker from './FunctionInputPicker';
 import SineFunctionIndicator from './SineFunctionIndicator';
+import useTween from '../hooks/useTween';
 
 export default function SineController() {
   const theme = useTheme();
@@ -19,6 +20,19 @@ export default function SineController() {
     fire,
     level,
   } = useData();
+
+  const [position, startPositionAnimation] = useTween({
+    func: 'easeInOutCubic',
+    start: -200,
+    end: 0,
+    duration: 2,
+  });
+
+  useEffect(() => {
+    if (level === 1) {
+      startPositionAnimation();
+    }
+  }, [level]);
 
   useEffect(() => {
     //Listen for keypresses and fire the sine wave
@@ -52,7 +66,7 @@ export default function SineController() {
         height: 130,
         width: 800,
         position: 'absolute',
-        bottom: 0,
+        bottom: position,
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',

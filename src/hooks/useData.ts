@@ -14,6 +14,7 @@ import {
 
 export type DataContext = {
   level: number;
+  numAttempts: number;
   amplitude: number;
   angularFrequency: number;
   phaseShift: number;

@@ -11,7 +11,7 @@ type Level = {
 };
 const levels: Level[] = [
   {
-    cellSize: 50,
+    cellSize: 80,
     origoPosition: {
       y: 0,
       x: 2,
@@ -21,28 +21,48 @@ const levels: Level[] = [
       [0, 1],
     ],
     coinPositions: [
-      [0, 2],
-      [0, 3],
-      [0, 4],
+      [3.14 * 0.5, -1],
+      [3.14 * 1, 0],
+      [3.14 * 1.5, 1],
+      [3.14 * 2, 0],
+      [3.14 * 2.5, -1],
+      [3.14 * 3, 0],
+      [3.14 * 3.5, 1],
+      [3.14 * 4, 0],
+      [3.14 * 4.5, -1],
+      [3.14 * 5, 0],
+      [3.14 * 5.5, 1],
+      [3.14 * 6, 0],
+      [3.14 * 6.5, -1],
+    ],
+  },
+  {
+    cellSize: 50,
+    origoPosition: {
+      y: 0,
+      x: 2,
+    },
+    enemyPositions: [[0, 0]],
+    coinPositions: [
+      [3.14 * 0.5, -2],
+      [3.14 * 1, 0],
+      [3.14 * 1.5, 2],
+      [3.14 * 2, 0],
+      [3.14 * 2.5, -2],
+      [3.14 * 3, 0],
+      [3.14 * 3.5, 2],
+      [3.14 * 4, 0],
+      [3.14 * 4.5, -2],
+      [3.14 * 5, 0],
+      [3.14 * 5.5, 2],
+      [3.14 * 6, 0],
+      [3.14 * 6.5, -2],
     ],
   },
 ];
 
-export default function useLevel() {
-  const [level, setLevel] = useState(0);
-
-  function nextLevel() {
-    setLevel(level + 1);
-  }
-
-  function resetLevel() {
-    setLevel(0);
-  }
-
-  return {
-    level: levels[level],
-    levelIndex: level,
-    nextLevel,
-    resetLevel,
-  };
+export default function useLevel(index: number) {
+  const zeroIndexed = index - 1;
+  if (zeroIndexed > levels.length) return null;
+  return levels[zeroIndexed];
 }
