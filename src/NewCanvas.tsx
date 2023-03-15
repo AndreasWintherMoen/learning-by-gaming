@@ -12,6 +12,7 @@ import LevelText from './components/pixi/LevelText';
 import { sound } from '@pixi/sound';
 import delay from './utils/delay';
 import PowerBar from './components/pixi/PowerBar';
+import LearningNote from './components/pixi/LearningNote';
 
 export default function Canvas() {
   const { level: levelIndex, nextLevel, setAmplitude, amplitude } = useData();
@@ -61,6 +62,14 @@ export default function Canvas() {
             onHit={() => onHitCoin(i)}
           />
         ))}
+
+      {levelIndex > 0 && (
+        <LearningNote
+          text='Sinus til vinkelen x defineres som forholdet mellom motstående katet til x og hypotenusen.'
+          x={200}
+          y={200}
+        />
+      )}
       <Frontpage />
     </>
   );

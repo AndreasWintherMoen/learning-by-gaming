@@ -24,10 +24,12 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       stopFire,
       chargePower,
     } = useData();
-    const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
+    const { origoPosition, cellSize } = useCanvasSize();
     const startX = origoPosition.x * cellSize + verticalShift * cellSize;
     const startY = origoPosition.y * cellSize;
     const sineLength = cellSize * 3.14 * 2; // one full sine wave period
+
+    const adjustedChargePower = ((chargePower + 0.5) * 2) / 3;
 
     // const [speed, setSpeed] = useState(2);
     const [timer, setTimer] = useState(0);
@@ -81,15 +83,16 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           )
         );
         const startI = Math.floor(
-          (timer * chargePower * 0.5 * cellSize) / amplitudeAngFreqFactors
+          (timer * adjustedChargePower * 0.5 * cellSize) /
+            amplitudeAngFreqFactors
         );
         let lastPoint = { x: startX, y: startY };
         let paintAccuracyMultiplier = 1;
         if (amplitude >= 5) paintAccuracyMultiplier *= 0.5;
         if (angularFrequency >= 5) paintAccuracyMultiplier *= 0.5;
         if (amplitude + angularFrequency >= 5) paintAccuracyMultiplier *= 0.5;
-        if (chargePower > 0.8) paintAccuracyMultiplier *= 0.5;
-        else if (chargePower < 0.2) paintAccuracyMultiplier *= 2;
+        if (adjustedChargePower > 0.8) paintAccuracyMultiplier *= 0.5;
+        else if (adjustedChargePower < 0.2) paintAccuracyMultiplier *= 2;
         for (
           let i = startI - sineLength;
           i < startI;
