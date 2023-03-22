@@ -1,10 +1,9 @@
-import { useCallback, useState } from 'react';
+import {useCallback, useState} from 'react';
 import SineWave from './components/pixi/SineWave';
-import SineText from './components/pixi/SineText';
 import Axes from './components/pixi/Axes';
 import Player from './components/pixi/Player';
 import Enemy from './components/pixi/Enemy';
-import { Rectangle } from 'pixi.js';
+import {Rectangle} from 'pixi.js';
 import Fireworks from './components/pixi/Fireworks';
 import Coin from './components/pixi/Coin';
 import LevelText from './components/pixi/LevelText';
@@ -57,7 +56,6 @@ export default function Canvas() {
   return (
     <>
       <SineWave ref={handleBulletChange} />
-      <SineText />
       <LevelText />
       <Axes />
       <Player />

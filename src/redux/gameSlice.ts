@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Data } from '../types';
-import { sound } from '@pixi/sound';
+import {createSlice} from '@reduxjs/toolkit';
+import {Data} from '../types';
+import {sound} from '@pixi/sound';
 
 const initialState = {
   level: 0,
@@ -14,6 +14,7 @@ const initialState = {
   isCharging: false,
   chargePower: 0,
   isBackgroundSound: true,
+  showTutorial: false,
 } as Data;
 
 export const gameSlice = createSlice({
@@ -74,6 +75,10 @@ export const gameSlice = createSlice({
         sound.volume('intro-music', 0);
       }
     },
+    setShowTutorial: (state, action) => {
+      console.log('setShowTutorial', action.payload);
+      state.showTutorial = action.payload;
+    }
   },
 });
 
@@ -90,6 +95,7 @@ export const {
   setVerticalShift,
   setPhaseShift,
   setIsBackgroundSound,
+  setShowTutorial
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

@@ -15,6 +15,7 @@ export type Data = {
   isCharging: boolean;
   chargePower: number;
   isBackgroundSound: boolean;
+  showTutorial: boolean;
 };
 
 export type EasingFunctions =

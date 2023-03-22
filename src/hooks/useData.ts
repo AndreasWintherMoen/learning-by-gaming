@@ -11,7 +11,7 @@ import {
   setIsCharging,
   setChargePower,
   setPhaseShift,
-  setVerticalShift,
+  setVerticalShift, setShowTutorial,
 } from '../redux/gameSlice';
 
 export type DataContext = {
@@ -27,6 +27,7 @@ export type DataContext = {
   isBackgroundSound: boolean;
   nextLevel: () => void;
   resetLevel: () => void;
+  showTutorial: boolean;
   setAmplitude: (amplitude: number) => void;
   setAngularFrequency: (angularFrequency: number) => void;
   setPhaseShift: (phaseShift: number) => void;
@@ -38,6 +39,7 @@ export type DataContext = {
   startCharge: () => void;
   setChargePower: (chargePower: number) => void;
   toggleBackgroundSound: () => void;
+  setShowTutorial: (showTutorial: boolean) => void;
 };
 
 export default function useData(): DataContext {
@@ -98,6 +100,10 @@ export default function useData(): DataContext {
     dispatch(setIsBackgroundSound(!data.isBackgroundSound));
   }
 
+  function dispatchSetTutorial(showTutorial: boolean) {
+    dispatch(setShowTutorial(showTutorial));
+  }
+
   return {
     ...data,
     nextLevel: dispatchNextLevel,
@@ -113,5 +119,6 @@ export default function useData(): DataContext {
     startCharge,
     setChargePower: dispatchSetChargePower,
     toggleBackgroundSound,
+    setShowTutorial: dispatchSetTutorial,
   };
 }
