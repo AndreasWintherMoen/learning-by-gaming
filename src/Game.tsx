@@ -1,8 +1,10 @@
-import { Provider } from 'react-redux';
-import { store } from './redux/store';
-import { Sprite, Stage } from '@pixi/react';
-import { Texture } from 'pixi.js';
+import {Provider} from 'react-redux';
+import {store} from './redux/store';
+import {Sprite, Stage} from '@pixi/react';
+import {Texture} from 'pixi.js';
 import SineController from './components/SineController';
+import InfoModal from "./components/InfoModal";
+import QuestionButton from "./components/QuestionButton";
 
 export default function Game({ children }: { children: React.ReactNode }) {
   return (
@@ -16,7 +18,10 @@ export default function Game({ children }: { children: React.ReactNode }) {
             <Provider store={store}>{children}</Provider>
           </Stage>
           <SineController />
+          <InfoModal />
+          <QuestionButton />
         </div>
+        <InfoModal />
       </Provider>
     </div>
   );
