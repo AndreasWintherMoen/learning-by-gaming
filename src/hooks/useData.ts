@@ -5,6 +5,7 @@ import {
   removeFireSubscriber,
   resetLevel,
   setAmplitude,
+  setDisplayScore,
   setAngularFrequency,
   setIsBackgroundSound,
   setIsFiring,
@@ -15,6 +16,7 @@ import {
 } from '../redux/gameSlice';
 
 export type DataContext = {
+  displayScore: boolean;
   level: number;
   numAttempts: number;
   amplitude: number;
@@ -28,6 +30,7 @@ export type DataContext = {
   nextLevel: () => void;
   resetLevel: () => void;
   showTutorial: boolean;
+  setDisplayScore: (displayScore: boolean) => void;
   setAmplitude: (amplitude: number) => void;
   setAngularFrequency: (angularFrequency: number) => void;
   setPhaseShift: (phaseShift: number) => void;
@@ -46,6 +49,9 @@ export default function useData(): DataContext {
   const data = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
 
+  function dispatchSetDisplayScore(displayScore: boolean) {
+    dispatch(setDisplayScore(displayScore));
+  }
   function dispatchNextLevel() {
     dispatch(nextLevel());
   }
@@ -106,6 +112,7 @@ export default function useData(): DataContext {
 
   return {
     ...data,
+    setDisplayScore: dispatchSetDisplayScore,
     nextLevel: dispatchNextLevel,
     resetLevel: dispatchResetLevel,
     setVerticalShift: dispatchVerticalShift,

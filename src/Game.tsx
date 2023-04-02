@@ -5,6 +5,8 @@ import {Texture} from 'pixi.js';
 import SineController from './components/SineController';
 import InfoModal from "./components/InfoModal";
 import QuestionButton from "./components/QuestionButton";
+import React from "react";
+import ScoreCard from "./components/ScoreCard";
 
 export default function Game({ children }: { children: React.ReactNode }) {
   return (
@@ -21,6 +23,7 @@ export default function Game({ children }: { children: React.ReactNode }) {
           <InfoModal />
           <QuestionButton />
         </div>
+        {<ScoreCard score={230} scores={[110, 220, 310]}  />}
         <InfoModal />
       </Provider>
     </div>
