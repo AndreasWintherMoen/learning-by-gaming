@@ -57,6 +57,7 @@ const levels: Level[] = [
     ],
   },
   {
+    showPowerBar: false,
     cellSize: 50,
     origoPosition: {
       y: 0,
@@ -80,6 +81,7 @@ const levels: Level[] = [
     ],
   },
   {
+    showPowerBar: true,
     cellSize: 50,
     origoPosition: {
       y: 0,
@@ -103,6 +105,7 @@ const levels: Level[] = [
     ],
   },
   {
+    showPowerBar: true,
     cellSize: 50,
     origoPosition: {
       y: 0,
