@@ -74,6 +74,7 @@ const levelData:ILevelDataMap = {
 
 export default function InfoModal() {
   const {level, showTutorial, setShowTutorial} = useData();
+  //TODO: The selected level should not be set to 1, but it crashed if we don't :-/ we need to figure this out
   const [selectedLevel, setSelectedLevel] = useState(level || 1); // If the user want to check the previous level, we need to keep track of the selected level. (added || 0 to prevent error when level is undefined, but this should never happen :)
   const data = levelData[selectedLevel];
 
