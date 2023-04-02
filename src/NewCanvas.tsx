@@ -49,7 +49,7 @@ export default function Canvas() {
       {levelIndex > 0 && <Axes />}
       {levelIndex > 0 && <SineWave ref={handleBulletChange} />}
       {levelIndex > 0 && <LevelText />}
-      {levelIndex > 0 && <PowerBar />}
+      {level?.showPowerBar && <PowerBar />}
       {level &&
         level.coinPositions.map(([x, y], i) => (
           <Coin
