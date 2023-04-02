@@ -32,6 +32,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+p {
+  color: #3D3D3D;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -72,7 +76,9 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
+.button {
+  cursor: pointer;
+}
 .modal {
   display: flex;
   justify-content: center;
@@ -93,12 +99,66 @@ button:focus-visible {
   z-index: 1000;
   overflow: auto;
   scroll-behavior: auto;
+  padding-bottom: 100px;
+}
+.headerText{
+  text-align: center;
+  color: #3D3D3D;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  font-size: 50px;
+  font-family: Sofija;
+}
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .infoText {
   color: #3D3D3D;
 }
 .easeIn {
   animation: easeIn 0.5s ease-in;
+}
+.noselect {
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+.star {
+  opacity: 0; /* Initial opacity */
+  animation: fadeIn 2s forwards; /* Apply the animation */
+}
+.star1 {
+  animation: fadeIn 2s forwards;
+}
+
+.star2 {
+  animation: fadeIn 2s forwards 0.5s; /* 0.5s delay */
+}
+
+.star3 {
+  animation: fadeIn 2s forwards 1s; /* 1s delay */
+}
+.dropshadowM {
+  box-shadow: 0 2px 4px rgb(0 0 0 / 0.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (prefers-color-scheme: light) {

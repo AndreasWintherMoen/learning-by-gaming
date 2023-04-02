@@ -3,6 +3,7 @@ import {Data} from '../types';
 import {sound} from '@pixi/sound';
 
 const initialState = {
+  displayScore: false,
   level: 0,
   numAttempts: 0,
   amplitude: 1,
@@ -29,7 +30,7 @@ export const gameSlice = createSlice({
       state.isFiring = false;
     },
     resetLevel: (state) => {
-      state.level = 0;
+      state.level = state.level;
     },
     setAmplitude: (state, action) => {
       state.amplitude = action.payload;
@@ -78,11 +79,15 @@ export const gameSlice = createSlice({
     setShowTutorial: (state, action) => {
       console.log('setShowTutorial', action.payload);
       state.showTutorial = action.payload;
+    },
+    setDisplayScore: (state, action) => {
+      state.displayScore = action.payload;
     }
   },
 });
 
 export const {
+  setDisplayScore,
   nextLevel,
   resetLevel,
   setAmplitude,

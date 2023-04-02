@@ -14,7 +14,7 @@ import delay from './utils/delay';
 import PowerBar from './components/pixi/PowerBar';
 
 export default function Canvas() {
-  const { level: levelIndex, nextLevel, setAmplitude, amplitude } = useData();
+  const { level: levelIndex, setDisplayScore, setAmplitude, amplitude } = useData();
   const { origoPosition } = useCanvasSize();
   const level = useLevel(levelIndex);
   const [bulletRect, setBulletRect] = useState<Rectangle | null>(null);
@@ -32,7 +32,7 @@ export default function Canvas() {
     if (!isChangingLevel && coinsVisibilities.current.every((v) => !v)) {
       setIsChangingLevel(true);
       await delay(2000);
-      nextLevel();
+      setDisplayScore(true);
       setIsChangingLevel(false);
       setAmplitude(amplitude + 1);
       setTimeout(() => setAmplitude(amplitude), 0);
@@ -56,6 +56,8 @@ export default function Canvas() {
             key={i}
             x={(origoPosition.x + x) * level.cellSize}
             y={(origoPosition.y + y) * level.cellSize}
+            xCord={x}
+            yCord={y}
             show={coinsVisibilities.current?.[i] ?? false}
             bullet={bulletRect}
             onHit={() => onHitCoin(i)}
