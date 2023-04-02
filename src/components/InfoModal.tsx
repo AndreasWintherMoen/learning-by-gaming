@@ -1,82 +1,13 @@
 import useData from "../hooks/useData";
 import { Player } from '@lottiefiles/react-lottie-player';
 import {useState} from "react";
-interface IDescriptionPart {
-  type: 'text' | 'image' | 'lottieAnimation' | 'svgAnimation';
-  content: string;
-}
-interface ILevelData {
-  title: string;
-  descriptions: IDescriptionPart[];
-}
-
-interface ILevelDataMap {
-  [key: number]: ILevelData;
-}
-
-const levelData:ILevelDataMap = {
-  1: {
-    title: 'Level 1',
-    descriptions: [
-      {type: 'text', content: 'Trig functions like sine and cosine have periodic graphs which we called Sinusoidal Graph, or Sine wave.'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:932/format:webp/0*qtpAmBFyFAV_40YH.png'},
-      {type: 'text', content: 'Every period of sine wave is a whole unit circle:'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
-      {type: 'lottieAnimation', content: '../assets/lottie/sine-loader.json'},
-    ]
-  },
-  2: {
-    title: 'Level 2',
-    descriptions: [
-      {type: 'text', content: 'Trig functions like sine and cosine have periodic graphs which we called Sinusoidal Graph, or Sine wave.'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:932/format:webp/0*qtpAmBFyFAV_40YH.png'},
-      {type: 'text', content: 'Every period of sine wave is a whole unit circle:'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
-      {type: 'lottieAnimation', content: '../assets/lottie/sine-loader.json'},
-    ]
-  },
-  3: {
-    title: 'Level 3',
-    descriptions: [
-      {type: 'text', content: 'Skyt med spacebar'},
-      {type: 'image', content: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg/400px-Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg.png'}
-    ]
-  },
-  4: {
-    title: 'Level 4',
-    descriptions: [
-      {type: 'text', content: 'Skyt med spacebar'},
-      {type: 'image', content: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg/400px-Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg.png'}
-    ]
-  },
-  5: {
-    title: 'Level 5',
-    descriptions: [
-      {type: 'text', content: 'Skyt med spacebar'},
-      {type: 'image', content: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg/400px-Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg.png'}
-    ]
-  },
-  6: {
-    title: 'Level 6',
-    descriptions: [
-      {type: 'text', content: 'Skyt med spacebar'},
-      {type: 'image', content: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg/400px-Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg.png'}
-    ]
-  },
-  7: {
-    title: 'Level 7',
-    descriptions: [
-      {type: 'text', content: 'Skyt med spacebar'},
-      {type: 'image', content: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg/400px-Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg.png'}
-    ]
-  }
-}
+import {levels} from "../hooks/useLevel";
 
 export default function InfoModal() {
   const {level, showTutorial, setShowTutorial} = useData();
   //TODO: The selected level should not be set to 1, but it crashed if we don't :-/ we need to figure this out
   const [selectedLevel, setSelectedLevel] = useState(level || 1); // If the user want to check the previous level, we need to keep track of the selected level. (added || 0 to prevent error when level is undefined, but this should never happen :)
-  const data = levelData[selectedLevel];
+  const data = levels[selectedLevel];
 
   if (!showTutorial) return null;
 
@@ -126,13 +57,13 @@ export default function InfoModal() {
             </svg>
           </div>
           <div style={{width: 370, display:'flex', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 20, gap:8, overflow:'scroll'}}>
-            {Object.keys(levelData).map((key, index) => (
+            {Object.keys(levels).map((key, index) => (
               <div
                 key={index}
                 className={'button dropshadowM'}
                 onClick={() => {
                   if (Number(key) <= level) {
-                    setSelectedLevel(Number(key))
+                    setSelectedLevel(Number(index))
                   }
                 }
                 }
