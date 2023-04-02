@@ -74,10 +74,8 @@ const levelData:ILevelDataMap = {
 
 export default function InfoModal() {
   const {level, showTutorial, setShowTutorial} = useData();
-  const [selectedLevel, setSelectedLevel] = useState(level || 0); // If the user want to check the previous level, we need to keep track of the selected level. (added || 0 to prevent error when level is undefined, but this should never happen :)
+  const [selectedLevel, setSelectedLevel] = useState(level || 1); // If the user want to check the previous level, we need to keep track of the selected level. (added || 0 to prevent error when level is undefined, but this should never happen :)
   const data = levelData[selectedLevel];
-
-  if (!data) return null;
 
   if (!showTutorial) return null;
 
@@ -165,7 +163,7 @@ export default function InfoModal() {
                 return <img key={index} src={description.content} alt={'illustration'} style={{width: '70%', height: "auto", marginBottom: 40}}/>
               }
               else if (description.type === 'lottieAnimation') {
-                return <Player className="player" src={description.content} loop autoplay style={{ height: '300px', width: '300px' }}/>
+                return <Player className="player" src={description.content} loop autoplay style={{ width: '70%' }}/>
               }
               else if (description.type === 'svgAnimation') {
                 return null
