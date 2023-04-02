@@ -11,7 +11,8 @@ export interface ILevelDataMap {
   [key: number]: ILevelData;
 }
 
-export interface Level {
+type Level = {
+  showPowerBar: boolean;
   cellSize: number;
   origoPosition: {
     x: number;
@@ -23,7 +24,7 @@ export interface Level {
   descriptions: IDescriptionPart[];
 }
 
-export const levels: Level[] = [
+const levels: Level[] = [
   {
     title: 'Sinus Funksjon Intro',
     descriptions: [
@@ -33,6 +34,7 @@ export const levels: Level[] = [
       {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
       {type: 'lottieAnimation', content: '../assets/lottie/sine-loader.json'},
     ],
+    showPowerBar: false,
     cellSize: 80,
     origoPosition: {
       y: 0,
@@ -62,6 +64,7 @@ export const levels: Level[] = [
       {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
       {type: 'lottieAnimation', content: '../assets/lottie/sine-loader.json'},
     ],
+    showPowerBar: false,
     cellSize: 50,
     origoPosition: {
       y: 0,
@@ -93,6 +96,7 @@ export const levels: Level[] = [
       {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
       {type: 'lottieAnimation', content: '../assets/lottie/sine-loader.json'},
     ],
+    showPowerBar: false,
     cellSize: 50,
     origoPosition: {
       y: 0,
@@ -124,6 +128,7 @@ export const levels: Level[] = [
       {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
       {type: 'lottieAnimation', content: '../assets/lottie/sine-loader.json'},
     ],
+    showPowerBar: true,
     cellSize: 50,
     origoPosition: {
       y: 0,
@@ -155,6 +160,7 @@ export const levels: Level[] = [
       {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
       {type: 'lottieAnimation', content: '../assets/lottie/sine-loader.json'},
     ],
+    showPowerBar: true,
     cellSize: 50,
     origoPosition: {
       y: 0,
