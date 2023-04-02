@@ -4,6 +4,7 @@ import useTheme from '../hooks/useTheme';
 import FunctionInputPicker from './FunctionInputPicker';
 import SineFunctionIndicator from './SineFunctionIndicator';
 import useTween from '../hooks/useTween';
+import useLevel from '../hooks/useLevel';
 
 export default function SineController() {
   const theme = useTheme();
@@ -21,6 +22,7 @@ export default function SineController() {
     startCharge,
     level,
   } = useData();
+  const levelInfo = useLevel(level);
 
   const [position, startPositionAnimation] = useTween({
     func: 'easeInOutCubic',
@@ -40,7 +42,12 @@ export default function SineController() {
     const handleKeyDown = (ev: KeyboardEvent) => {
       if (isFiring) return;
       if (ev.key === 'Enter' || ev.key === ' ') {
-        startCharge();
+        if (level === 1)
+          if (levelInfo?.showPowerBar) {
+            startCharge();
+          } else {
+            fire();
+          }
       } else if (ev.key === 'ArrowUp') {
         setVerticalShift(verticalShift + 0.1);
       } else if (ev.key === 'ArrowDown') {

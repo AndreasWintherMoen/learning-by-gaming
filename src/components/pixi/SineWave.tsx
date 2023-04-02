@@ -10,6 +10,7 @@ import useData from '../../hooks/useData';
 import { Draw } from '../../types';
 import { Rectangle } from 'pixi.js';
 import useCanvasSize from '../../hooks/useCanvasSize';
+import useLevel from '../../hooks/useLevel';
 
 const SineWave = forwardRef<Rectangle | undefined, {}>(
   ({}: {}, ref: React.ForwardedRef<Rectangle | undefined>): JSX.Element => {
@@ -23,13 +24,17 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       removeFireSubscriber,
       stopFire,
       chargePower,
+      level,
     } = useData();
     const { origoPosition, cellSize } = useCanvasSize();
     const startX = origoPosition.x * cellSize + verticalShift * cellSize;
     const startY = origoPosition.y * cellSize;
     const sineLength = cellSize * 3.14 * 2; // one full sine wave period
 
-    const adjustedChargePower = ((chargePower + 0.5) * 2) / 3;
+    const levelInfo = useLevel(level);
+    const adjustedChargePower = levelInfo?.showPowerBar
+      ? ((chargePower + 0.5) * 2) / 3
+      : 1;
 
     // const [speed, setSpeed] = useState(2);
     const [timer, setTimer] = useState(0);

@@ -1,4 +1,5 @@
 type Level = {
+  showPowerBar: boolean;
   cellSize: number;
   origoPosition: {
     x: number;
@@ -7,8 +8,10 @@ type Level = {
   enemyPositions: number[][];
   coinPositions: number[][];
 };
+
 const levels: Level[] = [
   {
+    showPowerBar: false,
     cellSize: 80,
     origoPosition: {
       y: 0,
@@ -30,6 +33,7 @@ const levels: Level[] = [
     ],
   },
   {
+    showPowerBar: false,
     cellSize: 50,
     origoPosition: {
       y: 0,
