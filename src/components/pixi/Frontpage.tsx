@@ -125,7 +125,7 @@ export default function Frontpage() {
       />
       <Button
         onClick={handleSound}
-        image={isBackgroundSound ? 'sound-button.png' : 'sound-button-off.png'}
+        image={isBackgroundSound ? 'sound-coin.png' : 'sound-button-off.png'}
         x={0 + 75}
         y={pixelHeight - 75}
       />

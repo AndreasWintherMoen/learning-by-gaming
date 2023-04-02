@@ -52,7 +52,7 @@ export default function Coin({
           x={x}
           y={y+30}
           style={new TextStyle({
-            fill: 0x000000,
+            fill: 0x6D6F6E,
             fontSize: 12,
             fontFamily: 'Handdrawn'
           })
