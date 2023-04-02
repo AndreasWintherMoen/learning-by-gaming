@@ -32,6 +32,10 @@
   -webkit-text-size-adjust: 100%;
 }
 
+p {
+  color: #3D3D3D;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -94,11 +98,50 @@ button:focus-visible {
   overflow: auto;
   scroll-behavior: auto;
 }
+.headerText{
+  margin-top: 25px;
+  font-size: 50px;
+  font-family: Sofija;
+}
 .infoText {
   color: #3D3D3D;
 }
 .easeIn {
   animation: easeIn 0.5s ease-in;
+}
+.noselect {
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+.star {
+  opacity: 0; /* Initial opacity */
+  animation: fadeIn 2s forwards; /* Apply the animation */
+}
+.star1 {
+  animation: fadeIn 2s forwards;
+}
+
+.star2 {
+  animation: fadeIn 2s forwards 0.5s; /* 0.5s delay */
+}
+
+.star3 {
+  animation: fadeIn 2s forwards 1s; /* 1s delay */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (prefers-color-scheme: light) {

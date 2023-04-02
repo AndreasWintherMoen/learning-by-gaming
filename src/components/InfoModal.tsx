@@ -1,4 +1,3 @@
-import useTheme from '../hooks/useTheme';
 import useData from "../hooks/useData";
 
 export default function InfoModal() {
@@ -11,21 +10,7 @@ export default function InfoModal() {
       <div style={{ position: 'absolute', width: 500, height:500, top: '50%', right: '50%', transform: 'translate(50%,-50%)', display:'flex', justifyContent:'center', alignItems:'center', padding: 60}}>
         {/* Info part */}
         <div className={'modalInfoContainer'}>
-          <p className={'infoText'}>
-            Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun Stuff and thing is going here, stuff lorem ipsun,
-          </p>
-          <br/>
-          <p className={'infoText'}>
-            Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun Stuff and thing is going here, stuff lorem ipsun,
-          </p>
-          <br/>
-          <p className={'infoText'}>
-            Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun Stuff and thing is going here, stuff lorem ipsun,
-          </p>
-          <br/>
-          <p className={'infoText'}>
-            Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun, Stuff and thing is going here, stuff lorem ipsun Stuff and thing is going here, stuff lorem ipsun,
-          </p>
+          <p className={'headerText'}>Skyt med spacebar</p>
           <div className={'bottomGradient'}/>
         </div>
         {/* Close Button */}
