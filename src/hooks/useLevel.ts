@@ -24,7 +24,7 @@ type Level = {
   descriptions: IDescriptionPart[];
 }
 
-const levels: Level[] = [
+export const levels: Level[] = [
   {
     title: 'Sinus Funksjon Intro',
     descriptions: [
