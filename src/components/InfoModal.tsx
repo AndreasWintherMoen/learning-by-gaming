@@ -28,8 +28,11 @@ const levelData:ILevelDataMap = {
   2: {
     title: 'Level 2',
     descriptions: [
-      {type: 'text', content: 'Skyt med spacebar'},
-      {type: 'image', content: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg/400px-Trigonometric_functions_and_their_reciprocals_on_the_unit_circle.svg.png'}
+      {type: 'text', content: 'Trig functions like sine and cosine have periodic graphs which we called Sinusoidal Graph, or Sine wave.'},
+      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:932/format:webp/0*qtpAmBFyFAV_40YH.png'},
+      {type: 'text', content: 'Every period of sine wave is a whole unit circle:'},
+      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
+      {type: 'lottieAnimation', content: '../assets/lottie/sine-loader.json'},
     ]
   },
   3: {
