@@ -56,6 +56,8 @@ export default function Canvas() {
             key={i}
             x={(origoPosition.x + x) * level.cellSize}
             y={(origoPosition.y + y) * level.cellSize}
+            xCord={x}
+            yCord={y}
             show={coinsVisibilities.current?.[i] ?? false}
             bullet={bulletRect}
             onHit={() => onHitCoin(i)}
