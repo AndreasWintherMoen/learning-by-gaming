@@ -29,7 +29,7 @@ export const gameSlice = createSlice({
       state.isCharging = false;
       state.isFiring = false;
     },
-    resetLevel: (state, action) => {
+    resetLevel: (state) => {
       state.level = state.level;
     },
     setAmplitude: (state, action) => {
