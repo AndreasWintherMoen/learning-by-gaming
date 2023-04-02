@@ -49,12 +49,11 @@ export default function SineController() {
     const handleKeyDown = (ev: KeyboardEvent) => {
       if (isFiring) return;
       if (ev.key === 'Enter' || ev.key === ' ') {
-        if (level === 1)
-          if (levelInfo?.showPowerBar) {
-            startCharge();
-          } else {
-            fire();
-          }
+        if (levelInfo?.showPowerBar) {
+          startCharge();
+        } else {
+          fire();
+        }
       } else if (ev.key === 'ArrowUp') {
         setVerticalShift(verticalShift + 0.1);
       } else if (ev.key === 'ArrowDown') {
