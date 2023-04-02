@@ -5,6 +5,13 @@ import FunctionInputPicker from './FunctionInputPicker';
 import SineFunctionIndicator from './SineFunctionIndicator';
 import useTween from '../hooks/useTween';
 
+const levelIntroduced = {
+  'amplitude': 2,
+  'phase-shift': 3,
+  'angular-frequency': 4,
+  'vertical-shift': 5
+}
+
 export default function SineController() {
   const theme = useTheme();
   const {
@@ -66,6 +73,7 @@ export default function SineController() {
 
   if (level === 0) return <></>;
 
+
   return (
     <div
       style={{
@@ -93,33 +101,43 @@ export default function SineController() {
           alignItems: 'center',
           justifyContent: 'flex-start',
           paddingBottom: 22,
-          paddingTop: 5,
+          paddingTop: 5
         }}
       >
         <p>f(x)=</p>
-        <FunctionInputPicker
-          variable={amplitude}
-          onClick={setAmplitude}
-          color={theme.color.green}
-        />
+        { level >= levelIntroduced['amplitude'] && (
+          <FunctionInputPicker
+            variable={amplitude}
+            onClick={setAmplitude}
+            color={theme.color.green}
+          />)}
         <p>sin(</p>
-        <FunctionInputPicker
-          variable={angularFrequency}
-          onClick={setAngularFrequency}
-          color={theme.color.brown}
-        />
-        <p>(x{verticalShift >= 0 && '+'}</p>
-        <FunctionInputPicker
-          variable={verticalShift}
-          onClick={setVerticalShift}
-          color={theme.color.purple}
-        />
-        <p>)){phaseShift >= 0 && '+'}</p>
-        <FunctionInputPicker
-          variable={phaseShift}
-          onClick={setPhaseShift}
-          color={theme.color.pink}
-        />
+        {level >= levelIntroduced['angular-frequency'] && (
+          <FunctionInputPicker
+            variable={angularFrequency}
+            onClick={setAngularFrequency}
+            color={theme.color.brown}
+          />)
+        }
+        {level >= levelIntroduced['vertical-shift'] ? (
+          <>
+            <p>(x{verticalShift >= 0 && '+'}</p>
+            <FunctionInputPicker
+              variable={verticalShift}
+              onClick={setVerticalShift}
+              color={theme.color.purple}
+            />
+          </>) : <p>x</p>}
+        {level >= levelIntroduced['phase-shift'] ? (
+          <>
+            <p>)){phaseShift >= 0 && '+'}</p>
+            <FunctionInputPicker
+            variable={phaseShift}
+            onClick={setPhaseShift}
+            color={theme.color.pink}
+          />
+          </>
+        ) : <p>)</p>}
       </div>
       <SineFunctionIndicator
         amplitude={amplitude}
