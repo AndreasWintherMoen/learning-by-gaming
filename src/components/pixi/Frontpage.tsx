@@ -61,6 +61,7 @@ export default function Frontpage() {
   };
 
   const handleSound = () => {
+    sound.volumeAll = isBackgroundSound ? 0 : 1;
     toggleBackgroundSound();
   };
 
