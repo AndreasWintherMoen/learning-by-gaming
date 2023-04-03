@@ -1,18 +1,17 @@
-import { Sprite, Text } from '@pixi/react';
-import { TextStyle } from '@pixi/text';
+import {Sprite, Text} from '@pixi/react';
+import {TextStyle} from '@pixi/text';
 import useCanvasSize from '../../hooks/useCanvasSize';
 import useData from '../../hooks/useData';
 import useTween from '../../hooks/useTween';
 import Button from './Button';
-import { sound } from '@pixi/sound';
+import {sound} from '@pixi/sound';
 
 const animationDuration = 1.6;
 
 export default function Frontpage() {
   const { pixelWidth, pixelHeight } = useCanvasSize();
 
-  const { nextLevel, isBackgroundSound, toggleBackgroundSound, level } =
-    useData();
+  const { nextLevel, level } = useData();
 
   const [topPos, startTopPosAnimation] = useTween({
     func: 'easeInOutCubic',
@@ -60,10 +59,6 @@ export default function Frontpage() {
     nextLevel();
   };
 
-  const handleSound = () => {
-    sound.volumeAll = isBackgroundSound ? 0 : 1;
-    toggleBackgroundSound();
-  };
 
   return (
     <>
@@ -123,12 +118,6 @@ export default function Frontpage() {
         x={pixelWidth / 2}
         y={pixelHeight / 2 + 150}
         opacity={subtitleOpacity}
-      />
-      <Button
-        onClick={handleSound}
-        image={isBackgroundSound ? 'sound-coin.png' : 'sound-button-off.png'}
-        x={0 + 75}
-        y={pixelHeight - 75}
       />
     </>
   );
