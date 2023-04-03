@@ -1,6 +1,6 @@
 import useData from "../hooks/useData";
 import { Player } from '@lottiefiles/react-lottie-player';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {levels} from "../hooks/useLevel";
 
 export default function InfoModal() {
@@ -8,6 +8,12 @@ export default function InfoModal() {
   //TODO: The selected level should not be set to 1, but it crashed if we don't :-/ we need to figure this out
   const [selectedLevel, setSelectedLevel] = useState(level || 1); // If the user want to check the previous level, we need to keep track of the selected level. (added || 0 to prevent error when level is undefined, but this should never happen :)
   const data = levels[selectedLevel];
+
+  useEffect(() => {
+    if (level !== selectedLevel) {
+      setSelectedLevel(level);
+    }
+  }, [showTutorial]);
 
   if (!showTutorial) return null;
 
