@@ -7,6 +7,7 @@ import InfoModal from "./components/InfoModal";
 import QuestionButton from "./components/QuestionButton";
 import React from "react";
 import ScoreCard from "./components/ScoreCard";
+import SoundButton from "./components/SoundButton";
 
 export default function Game({ children }: { children: React.ReactNode }) {
   return (
@@ -22,6 +23,7 @@ export default function Game({ children }: { children: React.ReactNode }) {
           <SineController />
           <InfoModal />
           <QuestionButton />
+          <SoundButton />
         </div>
         {<ScoreCard score={230} scores={[110, 220, 310]}  />}
         <InfoModal />
