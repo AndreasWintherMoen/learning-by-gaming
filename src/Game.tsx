@@ -20,7 +20,6 @@ export default function Game({ children }: { children: React.ReactNode }) {
             <Provider store={store}>{children}</Provider>
           </Stage>
           <SineController />
-          <InfoModal />
           <QuestionButton />
         </div>
         {<ScoreCard score={230} scores={[110, 220, 310]}  />}
