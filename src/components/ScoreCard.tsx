@@ -10,7 +10,7 @@ interface ScoreCardProps {
 
 }
 export default function ScoreCard({ score, scores }: ScoreCardProps) {
-  const {displayScore, nextLevel, resetLevel, setDisplayScore} = useData();
+  const {displayScore, nextLevel, resetLevel, setDisplayScore, currentScore} = useData();
   const [score1, score2, score3] = scores;
   const width = 894;
   const height = 588;
@@ -35,7 +35,7 @@ export default function ScoreCard({ score, scores }: ScoreCardProps) {
       <div style={{ height: height, width: width, position: 'absolute', top: '50%', right: '50%', transform: 'translate(50%,-50%)', display:'flex', justifyContent:'center', alignItems:'flex-start', padding: 60 }}>
         {/* Score part */}
         <div style={{ justifyContent:'space-between', display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <p style={{ fontSize: 70, fontFamily: 'Sofija', textAlign:'center' }}>Din Score: {230}</p>
+          <p style={{ fontSize: 70, fontFamily: 'Sofija', textAlign:'center' }}>Din Score: {currentScore}</p>
           <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10}}>
             <Star className={'star1'} selected={score > score1} size={100} score={120}/>
             <Star className={'star2'} selected={score > score2} size={100} score={200}/>

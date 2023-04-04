@@ -26,6 +26,9 @@ export type Data = {
   isBackgroundSound: boolean;
   showTutorial: boolean;
   coins: Coin[];
+  coinsCollectedThisShot: number;
+  currentScore: number;
+  totalScore: number;
 };
 
 export type EasingFunctions =

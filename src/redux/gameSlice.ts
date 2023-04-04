@@ -18,6 +18,9 @@ const initialState = {
   isBackgroundSound: true,
   showTutorial: false,
   coins: [],
+  coinsCollectedThisShot: 0,
+  currentScore: 0,
+  totalScore: 0,
 } as Data;
 
 function generateNewCoins(levelIndex: number) {
@@ -51,6 +54,9 @@ export const gameSlice = createSlice({
       state.isCharging = false;
       state.isFiring = false;
       state.coins = generateNewCoins(state.level);
+      state.coinsCollectedThisShot = 0;
+      state.totalScore += state.currentScore;
+      state.currentScore = 0;
     },
     resetLevel: (state) => {
       state.numAttempts = 0;
@@ -58,6 +64,8 @@ export const gameSlice = createSlice({
       state.isCharging = false;
       state.isFiring = false;
       state.coins = generateNewCoins(state.level);
+      state.coinsCollectedThisShot = 0;
+      state.currentScore = 0;
     },
     setAmplitude: (state, action) => {
       state.amplitude = action.payload;
@@ -112,6 +120,12 @@ export const gameSlice = createSlice({
     },
     setCoins: (state, action) => {
       state.coins = action.payload;
+    },
+    setCoinsCollectedThisShot: (state, action) => {
+      state.coinsCollectedThisShot = action.payload;
+    },
+    setCurrentScore: (state, action) => {
+      state.currentScore = action.payload;
     }
   }
 });
@@ -132,6 +146,8 @@ export const {
   setIsBackgroundSound,
   setShowTutorial,
   setCoins,
+  setCurrentScore,
+  setCoinsCollectedThisShot,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
