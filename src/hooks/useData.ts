@@ -12,8 +12,9 @@ import {
   setIsCharging,
   setChargePower,
   setPhaseShift,
-  setVerticalShift, setShowTutorial,
+  setVerticalShift, setShowTutorial, setCoins,
 } from '../redux/gameSlice';
+import { Coin } from '../types';
 
 export type DataContext = {
   displayScore: boolean;
@@ -30,6 +31,7 @@ export type DataContext = {
   nextLevel: () => void;
   resetLevel: () => void;
   showTutorial: boolean;
+  coins: Coin[];
   setDisplayScore: (displayScore: boolean) => void;
   setAmplitude: (amplitude: number) => void;
   setAngularFrequency: (angularFrequency: number) => void;
@@ -43,6 +45,7 @@ export type DataContext = {
   setChargePower: (chargePower: number) => void;
   toggleBackgroundSound: () => void;
   setShowTutorial: (showTutorial: boolean) => void;
+  collectCoin: (index: number) => void;
 };
 
 export default function useData(): DataContext {
@@ -110,6 +113,12 @@ export default function useData(): DataContext {
     dispatch(setShowTutorial(showTutorial));
   }
 
+  function collectCoin(index: number) {
+    const coins = [...data.coins];
+    coins[index] = { ...coins[index], isCollected: true };
+    dispatch(setCoins(coins));
+  }
+
   return {
     ...data,
     setDisplayScore: dispatchSetDisplayScore,
@@ -127,5 +136,6 @@ export default function useData(): DataContext {
     setChargePower: dispatchSetChargePower,
     toggleBackgroundSound,
     setShowTutorial: dispatchSetTutorial,
+    collectCoin,
   };
 }

@@ -4,7 +4,7 @@ import SineWave from './components/pixi/SineWave';
 import Axes from './components/pixi/Axes';
 import useLevel from './hooks/useLevel';
 import Coin from './components/pixi/Coin';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {Rectangle} from 'pixi.js';
 import useData from './hooks/useData';
 import useCanvasSize from './hooks/useCanvasSize';
@@ -14,22 +14,17 @@ import delay from './utils/delay';
 import PowerBar from './components/pixi/PowerBar';
 
 export default function Canvas() {
-  const { level: levelIndex, setDisplayScore, setAmplitude, amplitude } = useData();
+  const { level: levelIndex, setDisplayScore, setAmplitude, amplitude, coins, collectCoin } = useData();
   const { origoPosition } = useCanvasSize();
   const level = useLevel(levelIndex);
   const [bulletRect, setBulletRect] = useState<Rectangle | null>(null);
   const [isChangingLevel, setIsChangingLevel] = useState(false);
 
-  const coinsVisibilities = useRef<boolean[]>([]);
-  useEffect(() => {
-    coinsVisibilities.current = level?.coinPositions.map(() => true) ?? [];
-  }, [levelIndex, level, coinsVisibilities?.current]);
-
   const onHitCoin = async (index: number) => {
     console.log('onHitCoin', index);
     sound.play('hit-coin');
-    coinsVisibilities.current[index] = false;
-    if (!isChangingLevel && coinsVisibilities.current.every((v) => !v)) {
+    collectCoin(index);
+    if (!isChangingLevel && coins.every((v) => v.isCollected === false)) {
       setIsChangingLevel(true);
       await delay(2000);
       setDisplayScore(true);
@@ -51,14 +46,14 @@ export default function Canvas() {
       {levelIndex > 0 && <LevelText />}
       {level?.showPowerBar && <PowerBar />}
       {level &&
-        level.coinPositions.map(([x, y], i) => (
+        coins.map((coin) => coin.position).map(([x, y], i) => (
           <Coin
             key={i}
             x={(origoPosition.x + x) * level.cellSize}
             y={(origoPosition.y + y) * level.cellSize}
             xCord={x}
             yCord={y}
-            show={coinsVisibilities.current?.[i] ?? false}
+            show={!coins[i].isCollected}
             bullet={bulletRect}
             onHit={() => onHitCoin(i)}
           />
