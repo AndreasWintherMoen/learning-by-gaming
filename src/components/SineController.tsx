@@ -65,6 +65,7 @@ export default function SineController() {
       }
     };
     const handleKeyUp = (ev: KeyboardEvent) => {
+      if (isFiring) return;
       if (ev.key === 'Enter' || ev.key === ' ') {
         fire();
       }
