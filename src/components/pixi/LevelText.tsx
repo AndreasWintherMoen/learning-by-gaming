@@ -59,6 +59,5 @@ export default function SineText() {
 function formatScore(score: number) {
   const text = Math.round(score).toString();
   const desiredLength = 4;
-  const padding = '0'.repeat(desiredLength - text.length);
-  return `${padding}${text}`;
+  return text.padStart(desiredLength, '0');
 }
