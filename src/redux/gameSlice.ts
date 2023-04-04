@@ -21,11 +21,24 @@ const initialState = {
 } as Data;
 
 function generateNewCoins(levelIndex: number) {
-  return levels[levelIndex - 1]?.coinPositions.map(([x, y]) => ({
+  const level = levels[levelIndex-1];
+  if(!level) return [];
+
+  const coins = level.coinPositions.map(([x, y]) => ({
+    type: 'coin',
     position: [x, y],
     isCollected: false,
   } as Coin));
+
+  const bombs = level.bombPositions.map(([x, y]) => ({
+    type: 'bomb',
+    position: [x, y],
+    isCollected: false,
+  } as Coin));
+
+  return [...coins, ...bombs];
 }
+
 
 export const gameSlice = createSlice({
   name: 'counter',

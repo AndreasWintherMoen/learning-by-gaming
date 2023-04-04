@@ -20,6 +20,10 @@ sound.add('hit-coin', {
   url: 'src/assets/sounds/hit-coin.wav',
   preload: true,
 });
+sound.add('bomb-hit', {
+  url: 'src/assets/sounds/explosion.mp3',
+  preload: true,
+});
 
 await new FontFaceObserver('Handdrawn').load();
 await new FontFaceObserver('Sofija').load();

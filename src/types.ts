@@ -1,7 +1,10 @@
 import { Graphics } from '@pixi/react';
 import { ComponentProps } from 'react';
 
+export type CoinType = 'coin' | 'sin' | 'cos' | 'divide' | 'multiply' | 'plus' | 'minus' | 'bomb';
+
 export type Coin = {
+  type: CoinType;
   position: [number, number];
   isCollected: boolean;
 }
