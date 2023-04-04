@@ -46,6 +46,7 @@ export type DataContext = {
   toggleBackgroundSound: () => void;
   setShowTutorial: (showTutorial: boolean) => void;
   collectCoin: (index: number) => void;
+  collectBomb: (index: number) => void;
 };
 
 export default function useData(): DataContext {
@@ -119,6 +120,14 @@ export default function useData(): DataContext {
     dispatch(setCoins(coins));
   }
 
+  function  collectBomb(index: number) {
+    const coins = [...data.coins];
+    const bombsIndex = coins.findIndex((coin) => coin.type === 'bomb');
+    const finalIndex = index + bombsIndex;
+    coins[finalIndex] = { ...coins[finalIndex], isCollected: true };
+    dispatch(setCoins(coins));
+  }
+
   return {
     ...data,
     setDisplayScore: dispatchSetDisplayScore,
@@ -137,5 +146,6 @@ export default function useData(): DataContext {
     toggleBackgroundSound,
     setShowTutorial: dispatchSetTutorial,
     collectCoin,
+    collectBomb
   };
 }

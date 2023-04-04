@@ -18,7 +18,7 @@ type Level = {
     x: number;
     y: number;
   };
-  enemyPositions: number[][];
+  bombPositions: number[][];
   coinPositions: number[][];
   title: string;
   descriptions: IDescriptionPart[];
@@ -40,9 +40,8 @@ export const levels: Level[] = [
       y: 0,
       x: 2,
     },
-    enemyPositions: [
-      [0, 0],
-      [0, 1],
+    bombPositions: [
+      [3.14 * 4, 0],
     ],
     coinPositions: [
       [3.14 * 0.5, -1],
@@ -52,7 +51,6 @@ export const levels: Level[] = [
       [3.14 * 2.5, -1],
       [3.14 * 3, 0],
       [3.14 * 3.5, 1],
-      [3.14 * 4, 0],
     ],
   },
   {
@@ -70,7 +68,9 @@ export const levels: Level[] = [
       y: 0,
       x: 2,
     },
-    enemyPositions: [[0, 0]],
+    bombPositions: [
+      [3.14 * 4, 0],
+    ],
     coinPositions: [
       [3.14 * 0.5, -2],
       [3.14 * 1, 0],
@@ -79,7 +79,6 @@ export const levels: Level[] = [
       [3.14 * 2.5, -2],
       [3.14 * 3, 0],
       [3.14 * 3.5, 2],
-      [3.14 * 4, 0],
       [3.14 * 4.5, -2],
       [3.14 * 5, 0],
       [3.14 * 5.5, 2],
@@ -102,7 +101,7 @@ export const levels: Level[] = [
       y: 0,
       x: 2,
     },
-    enemyPositions: [[0, 0]],
+    bombPositions: [[0, 0]],
     coinPositions: [
       [3.14 * 0.5, -3],
       [3.14 * 1, -1],
@@ -134,7 +133,7 @@ export const levels: Level[] = [
       y: 0,
       x: 2,
     },
-    enemyPositions: [[0, 0]],
+    bombPositions: [[0, 0]],
     coinPositions: [
       [3.14 * 0.5 /2, -2],
       [3.14 * 1 /2, 0],
@@ -166,7 +165,7 @@ export const levels: Level[] = [
       y: 0,
       x: 2,
     },
-    enemyPositions: [[3.14 * 0.5 /2, -2]],
+    bombPositions: [[3.14 * 0.5 /2, -2]],
     coinPositions: [
       [3.14 * 1 /2 - 1, 0],
       [3.14 * 1.5 /2 - 1, 2],
