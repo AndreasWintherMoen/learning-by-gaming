@@ -27,7 +27,7 @@ export default function Canvas() {
     collectCoin(index);
     if (!isChangingLevel && coins.every((v) => !v.isCollected)) {
       setIsChangingLevel(true);
-      await delay(2000);
+      await delay(6000);
       setDisplayScore(true);
       setIsChangingLevel(false);
       setAmplitude(amplitude + 1);
