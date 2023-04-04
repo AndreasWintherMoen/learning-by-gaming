@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {Data} from '../types';
+import {Coin, Data} from '../types';
 import {sound} from '@pixi/sound';
+import { levels } from '../hooks/useLevel';
 
 const initialState = {
   displayScore: false,
@@ -16,7 +17,15 @@ const initialState = {
   chargePower: 0,
   isBackgroundSound: true,
   showTutorial: false,
+  coins: [],
 } as Data;
+
+function generateNewCoins(levelIndex: number) {
+  return levels[levelIndex - 1]?.coinPositions.map(([x, y]) => ({
+    position: [x, y],
+    isCollected: false,
+  } as Coin));
+}
 
 export const gameSlice = createSlice({
   name: 'counter',
@@ -28,9 +37,14 @@ export const gameSlice = createSlice({
       state.chargePower = 0;
       state.isCharging = false;
       state.isFiring = false;
+      state.coins = generateNewCoins(state.level);
     },
     resetLevel: (state) => {
-      state.level = state.level;
+      state.numAttempts = 0;
+      state.chargePower = 0;
+      state.isCharging = false;
+      state.isFiring = false;
+      state.coins = generateNewCoins(state.level);
     },
     setAmplitude: (state, action) => {
       state.amplitude = action.payload;
@@ -82,8 +96,11 @@ export const gameSlice = createSlice({
     },
     setDisplayScore: (state, action) => {
       state.displayScore = action.payload;
+    },
+    setCoins: (state, action) => {
+      state.coins = action.payload;
     }
-  },
+  }
 });
 
 export const {
@@ -100,7 +117,8 @@ export const {
   setVerticalShift,
   setPhaseShift,
   setIsBackgroundSound,
-  setShowTutorial
+  setShowTutorial,
+  setCoins,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

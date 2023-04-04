@@ -1,6 +1,11 @@
 import { Graphics } from '@pixi/react';
 import { ComponentProps } from 'react';
 
+export type Coin = {
+  position: [number, number];
+  isCollected: boolean;
+}
+
 export type Draw = Exclude<ComponentProps<typeof Graphics>['draw'], undefined>;
 
 export type Data = {
@@ -17,6 +22,7 @@ export type Data = {
   chargePower: number;
   isBackgroundSound: boolean;
   showTutorial: boolean;
+  coins: Coin[];
 };
 
 export type EasingFunctions =
