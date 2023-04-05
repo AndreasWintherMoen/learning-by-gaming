@@ -12,7 +12,7 @@ import {
   setIsCharging,
   setChargePower,
   setPhaseShift,
-  setVerticalShift, setShowTutorial, setCoins,
+  setVerticalShift, setShowTutorial, setCoins, setCurrentScore, setCoinsCollectedThisShot,
 } from '../redux/gameSlice';
 import { Coin } from '../types';
 
@@ -32,6 +32,9 @@ export type DataContext = {
   resetLevel: () => void;
   showTutorial: boolean;
   coins: Coin[];
+  coinsCollectedThisShot: number;
+  currentScore: number;
+  totalScore: number;
   setDisplayScore: (displayScore: boolean) => void;
   setAmplitude: (amplitude: number) => void;
   setAngularFrequency: (angularFrequency: number) => void;
@@ -48,6 +51,10 @@ export type DataContext = {
   collectCoin: (index: number) => void;
   collectBomb: (index: number) => void;
 };
+
+// TODO: Move this somewhere else (either to Coin.value or to a separate file of constants)
+const SCORE_PER_COIN = 100;
+const SCORE_LOST_PER_BOMB = 300;
 
 export default function useData(): DataContext {
   const data = useAppSelector((state) => state.game);
@@ -118,14 +125,23 @@ export default function useData(): DataContext {
     const coins = [...data.coins];
     coins[index] = { ...coins[index], isCollected: true };
     dispatch(setCoins(coins));
+
+    const chargeScoreMultiplier = (data.chargePower + 1) / 2; // 0.5 to 1 depending on charge power
+    const coinsCollectedMultiplier = 1 + data.coinsCollectedThisShot * 0.1; // 1 + 0.1 per coin collected
+    const levelScore = SCORE_PER_COIN * chargeScoreMultiplier * coinsCollectedMultiplier;
+    dispatch(setCurrentScore(data.currentScore + levelScore));
+
+    dispatch(setCoinsCollectedThisShot(data.coinsCollectedThisShot + 1));
   }
 
-  function  collectBomb(index: number) {
+  function collectBomb(index: number) {
     const coins = [...data.coins];
     const bombsIndex = coins.findIndex((coin) => coin.type === 'bomb');
     const finalIndex = index + bombsIndex;
     coins[finalIndex] = { ...coins[finalIndex], isCollected: true };
     dispatch(setCoins(coins));
+    const newScore = data.currentScore - SCORE_LOST_PER_BOMB;
+    dispatch(setCurrentScore(newScore));
   }
 
   return {
