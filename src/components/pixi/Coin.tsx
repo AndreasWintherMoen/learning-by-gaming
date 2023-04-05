@@ -19,6 +19,9 @@ const spritesheet = [
   'coins/coin-2.png',
   'coins/coin-3.png',
   'coins/coin-4.png',
+  'coins/coin-3.png',
+  'coins/coin-2.png',
+  'coins/coin-1.png',
 ];
 
 export default function Coin({
