@@ -41,7 +41,6 @@ export const levels: Level[] = [
       x: 2,
     },
     bombPositions: [
-      [3.14 * 4, 0],
     ],
     coinPositions: [
       [3.14 * 0.5, -1],
