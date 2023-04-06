@@ -4,7 +4,7 @@ import SineWave from './components/pixi/SineWave';
 import Axes from './components/pixi/Axes';
 import useLevel from './hooks/useLevel';
 import Coin from './components/pixi/Coin';
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {Rectangle} from 'pixi.js';
 import useData from './hooks/useData';
 import useCanvasSize from './hooks/useCanvasSize';
@@ -21,19 +21,28 @@ export default function Canvas() {
   const [bulletRect, setBulletRect] = useState<Rectangle | null>(null);
   const [isChangingLevel, setIsChangingLevel] = useState(false);
 
-  const onHitCoin = async (index: number) => {
+  const onHitCoin = (index: number) => {
     console.log('onHitCoin', index);
     sound.play('hit-coin');
     collectCoin(index);
-    if (!isChangingLevel && coins.every((v) => !v.isCollected)) {
+  };
+
+  useEffect(() => {
+    async function changeLevel() {
       setIsChangingLevel(true);
-      await delay(6000);
+      await delay(2000);
       setDisplayScore(true);
       setIsChangingLevel(false);
       setAmplitude(amplitude + 1);
       setTimeout(() => setAmplitude(amplitude), 0);
     }
-  };
+    if (isChangingLevel) return;
+    if (levelIndex === 0) return;
+    const coinCoins = coins.filter((coin) => coin.type === 'coin');
+    if (coinCoins.length === 0) return;
+    if (coinCoins.some((coin) => !coin.isCollected)) return;
+    changeLevel();
+  }, [coins]);
 
   const onHitBomb = async (index: number) => {
     console.log('onHitBomb', index);
