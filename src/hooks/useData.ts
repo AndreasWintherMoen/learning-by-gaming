@@ -1,8 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import {
-  addFireSubscriber,
   nextLevel,
-  removeFireSubscriber,
   resetLevel,
   setAmplitude,
   setDisplayScore,
@@ -41,8 +39,6 @@ export type DataContext = {
   setAngularFrequency: (angularFrequency: number) => void;
   setPhaseShift: (phaseShift: number) => void;
   setVerticalShift: (verticalShift: number) => void;
-  addFireSubscriber: (subscriber: () => void) => void;
-  removeFireSubscriber: (subscriber: () => void) => void;
   fire: () => void;
   stopFire: () => void;
   startCharge: () => void;
@@ -85,20 +81,11 @@ export default function useData(): DataContext {
     dispatch(setPhaseShift(phaseShift));
   }
 
-  function dispatchAddFireSubscriber(subscriber: () => void) {
-    dispatch(addFireSubscriber(subscriber));
-  }
-
-  function dispatchRemoveFireSubscriber(subscriber: () => void) {
-    dispatch(removeFireSubscriber(subscriber));
-  }
-
   function dispatchVerticalShift(verticalShift: number) {
     dispatch(setVerticalShift(verticalShift));
   }
 
   function fire() {
-    data.fireSubscribers.forEach((subscriber) => subscriber());
     dispatch(setIsFiring(true));
     dispatch(setIsCharging(false));
   }
@@ -159,8 +146,6 @@ export default function useData(): DataContext {
     setAmplitude: dispatchAmplitude,
     setAngularFrequency: dispatchAngularFrequency,
     setPhaseShift: dispatchPhaseShift,
-    addFireSubscriber: dispatchAddFireSubscriber,
-    removeFireSubscriber: dispatchRemoveFireSubscriber,
     setSelectedFunction: dispatchSetSelectedFunction,
     fire,
     stopFire,
