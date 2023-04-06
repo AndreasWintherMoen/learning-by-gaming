@@ -9,12 +9,12 @@ import FunctionSelctor from "./FunctionSelctor";
 
 export const levelIntroduced = {
   'amplitude': 2,
-  'phase-shift': 5,
-  'angular-frequency': 4,
   'vertical-shift': 3,
+  'angular-frequency': 4,
+  'phase-shift': 5,
   'cos': 1,
-  'arcsin': 1,
-  'arccos': 1,
+  'arcsin': 6,
+  'arccos': 7,
 }
 
 export default function SineController() {
@@ -175,6 +175,7 @@ export default function SineController() {
       </div>
       {/* Sine wave illustration */}
       <SineFunctionIndicator
+        selectedFunction={selectedFunction}
         amplitude={amplitude}
         angularFrequency={angularFrequency}
         isFiring
