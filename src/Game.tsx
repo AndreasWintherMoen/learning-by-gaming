@@ -24,7 +24,7 @@ export default function Game({ children }: { children: React.ReactNode }) {
           <QuestionButton />
           <SoundButton />
         </div>
-        {<ScoreCard score={230} scores={[110, 220, 310]}  />}
+        <ScoreCard />
         <InfoModal />
       </Provider>
     </div>

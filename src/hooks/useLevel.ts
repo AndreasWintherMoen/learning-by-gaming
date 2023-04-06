@@ -22,6 +22,7 @@ type Level = {
   coinPositions: number[][];
   title: string;
   descriptions: IDescriptionPart[];
+  starScores: [number, number, number];
 }
 
 export const levels: Level[] = [
@@ -51,6 +52,7 @@ export const levels: Level[] = [
       [3.14 * 3, 0],
       [3.14 * 3.5, 1],
     ],
+    starScores: [100, 200, 400],
   },
   {
     title: 'Amplitude Intro',
@@ -84,6 +86,7 @@ export const levels: Level[] = [
       [3.14 * 6, 0],
       [3.14 * 6.5, -2],
     ],
+    starScores: [300, 600, 900],
   },
   {
     title: 'Level 3',
@@ -115,7 +118,8 @@ export const levels: Level[] = [
       [3.14 * 5.5, 1],
       [3.14 * 6, -1],
       [3.14 * 6.5, -3],
-    ]
+    ],
+    starScores: [300, 600, 900],
   },
   {
     title: 'Level 4',
@@ -147,7 +151,8 @@ export const levels: Level[] = [
       [3.14 * 5.5 /2, 2],
       [3.14 * 6 /2, 0],
       [3.14 * 6.5 /2, -2],
-    ]
+    ],
+    starScores: [300, 600, 900],
   },
   {
     title: 'Level 5',
@@ -178,7 +183,8 @@ export const levels: Level[] = [
       [3.14 * 5.5 /2 - 1, 2],
       [3.14 * 6 /2 - 1, 0],
       [3.14 * 6.5 /2 - 1, -2],
-    ]
+    ],
+    starScores: [300, 600, 900],
   },
 ];
 

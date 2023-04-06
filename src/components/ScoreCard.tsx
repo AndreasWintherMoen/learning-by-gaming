@@ -3,15 +3,14 @@ import React from "react";
 import AMButton from "./AFButton";
 import ReplayIcon from "./svg/ReplayIcon";
 import useData from "../hooks/useData";
+import useLevel from '../hooks/useLevel';
 
-interface ScoreCardProps {
-  score: number;
-  scores: [number, number, number];
-
-}
-export default function ScoreCard({ score, scores }: ScoreCardProps) {
-  const {displayScore, nextLevel, resetLevel, setDisplayScore, currentScore} = useData();
-  const [score1, score2, score3] = scores;
+export default function ScoreCard() {
+  const {displayScore, nextLevel, resetLevel, setDisplayScore, currentScore, level: levelIndex} = useData();
+  const level = useLevel(levelIndex);
+  if (!level) return null;
+  const {starScores} = level;
+  const [score1, score2, score3] = starScores;
   const width = 894;
   const height = 588;
 
@@ -37,9 +36,9 @@ export default function ScoreCard({ score, scores }: ScoreCardProps) {
         <div style={{ justifyContent:'space-between', display: 'flex', flexDirection: 'column', height: '100%' }}>
           <p style={{ fontSize: 70, fontFamily: 'Sofija', textAlign:'center' }}>Din Score: {currentScore}</p>
           <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10}}>
-            <Star className={'star1'} selected={score > score1} size={100} score={120}/>
-            <Star className={'star2'} selected={score > score2} size={100} score={200}/>
-            <Star className={'star3'} selected={score > score3} size={100} score={330}/>
+            <Star className={'star1'} selected={currentScore > score1} size={100} score={score1}/>
+            <Star className={'star2'} selected={currentScore > score2} size={100} score={score2}/>
+            <Star className={'star3'} selected={currentScore > score3} size={100} score={score3}/>
           </div>
           <div style={{display:'flex', gap: 32}}>
             <AMButton
