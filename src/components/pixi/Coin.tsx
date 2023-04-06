@@ -39,6 +39,8 @@ export default function Coin({
   const [frames, setFrames] = useState<Texture[]>(spritesheet.map((url) => Texture.from(url)));
   const [spriteAlpha, setSpriteAlpha] = useState(1);
   const [fadeOutInterval, setFadeOutInterval] = useState<number>();
+  const [timeoutCoroutine, setTimeoutCoroutine] = useState<number>();
+
   // this is a hack to force a re-render
   const [foo, setFoo] = useState({ bar: 'baz'});
 
@@ -58,7 +60,11 @@ export default function Coin({
     if (!bullet || !show || !ref.current) return;
     if (bullet.intersects(ref.current.getBounds())) {
       onHit();
-      setTimeout(fadeOutSprite, 1000);
+      const timeout = setTimeout(fadeOutSprite, 1000);
+      if (timeoutCoroutine) {
+        clearTimeout(timeout);
+      }
+      setTimeoutCoroutine(timeout);
     }
   }, [bullet, onHit, ref]);
 
