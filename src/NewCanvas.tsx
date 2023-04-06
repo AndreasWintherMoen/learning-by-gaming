@@ -4,7 +4,7 @@ import SineWave from './components/pixi/SineWave';
 import Axes from './components/pixi/Axes';
 import useLevel from './hooks/useLevel';
 import Coin from './components/pixi/Coin';
-import {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Rectangle} from 'pixi.js';
 import useData from './hooks/useData';
 import useCanvasSize from './hooks/useCanvasSize';
@@ -14,6 +14,7 @@ import delay from './utils/delay';
 import PowerBar from './components/pixi/PowerBar';
 import Bomb from "./components/pixi/Bomb";
 import StartCoin from "./components/pixi/StartCoin";
+import BackgroundItems from "./components/pixi/BackgroundItems";
 
 export default function Canvas() {
   const { level: levelIndex, setDisplayScore, setAmplitude, amplitude, coins, collectCoin, stopFire, collectBomb} = useData();
@@ -67,6 +68,7 @@ export default function Canvas() {
   return (
     <>
       <TextbookBackground />
+      <BackgroundItems />
       {levelIndex > 0 && <Axes />}
       {levelIndex > 0 && <SineWave ref={handleBulletChange} />}
       {levelIndex > 0 && <LevelText />}
@@ -97,7 +99,7 @@ export default function Canvas() {
             onHit={() => onHitBomb(i)}
           />
         ))}
-        <StartCoin />
+      <StartCoin />
       <Frontpage />
     </>
   );
