@@ -43,9 +43,9 @@ export default function Coin({
   const [foo, setFoo] = useState({ bar: 'baz'});
 
   function fadeOutSprite() {
-    const stuff = setInterval(() => setSpriteAlpha((spriteAlpha) => spriteAlpha - 0.15), 100);
+    const interval = setInterval(() => setSpriteAlpha((spriteAlpha) => spriteAlpha - 0.15), 100);
     if(fadeOutInterval) clearInterval(fadeOutInterval);
-    setFadeOutInterval(stuff);
+    setFadeOutInterval(interval);
   }
 
   useEffect(() => {
