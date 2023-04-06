@@ -131,6 +131,9 @@ button:focus-visible {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+.noselecttext{
+  cursor: default;
+}
 .star {
   opacity: 0; /* Initial opacity */
   animation: fadeIn 2s forwards; /* Apply the animation */
