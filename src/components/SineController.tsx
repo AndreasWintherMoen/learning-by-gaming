@@ -83,6 +83,7 @@ export default function SineController() {
 
   return (
     <div
+      className='select-none'
       style={{
         fontSize: 32,
         color: theme.text.primary,
