@@ -11,7 +11,6 @@ export default function StartCoin() {
 
   const xStart = (origoPosition.x - phaseShift) * cellSize;
   const yStart = (origoPosition.y - verticalShift - func(0)) * cellSize;
-  console.log("xStart", xStart);
 
   return (
     <Sprite
