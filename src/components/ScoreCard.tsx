@@ -15,6 +15,7 @@ export default function ScoreCard() {
   const height = 588;
 
   if (!displayScore) return null;
+  console.log('displayScore', currentScore);
 
   return (
     <div className={'modal'}>
@@ -34,7 +35,7 @@ export default function ScoreCard() {
       <div style={{ height: height, width: width, position: 'absolute', top: '50%', right: '50%', transform: 'translate(50%,-50%)', display:'flex', justifyContent:'center', alignItems:'flex-start', padding: 60 }}>
         {/* Score part */}
         <div style={{ justifyContent:'space-between', display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <p style={{ fontSize: 70, fontFamily: 'Sofija', textAlign:'center' }}>Din Score: {currentScore}</p>
+          <p style={{ fontSize: 70, fontFamily: 'Sofija', textAlign:'center' }}>Din Score: {Math.round(currentScore)}</p>
           <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10}}>
             <Star className={'star1'} selected={currentScore > score1} size={100} score={score1}/>
             <Star className={'star2'} selected={currentScore > score2} size={100} score={score2}/>
