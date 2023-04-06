@@ -15,6 +15,7 @@ export default function ScoreCard() {
   const height = 588;
 
   if (!displayScore) return null;
+  console.log('displayScore', currentScore);
 
   return (
     <div className={'modal'}>
