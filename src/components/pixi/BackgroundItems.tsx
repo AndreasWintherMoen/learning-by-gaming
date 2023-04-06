@@ -15,7 +15,7 @@ export default function BackgroundItems() {
         image='seagull.png'
         anchor={0.5}
         x={750}
-        y={110}
+        y={105}
         width={62.91/2}
         height={38.57/2}
       />
