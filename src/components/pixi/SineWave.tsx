@@ -87,7 +87,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         const startI = Math.floor(timer * adjustedChargePower * cellSize * 5);
         const func = getFunction(selectedFunction);
         let lastPoint = { x: startX, y: startY };
-        const paintAccuracyMultiplier = (amplitude > 2 || angularFrequency > 2) ? 0.5 : 1;
+        const paintAccuracyMultiplier = (Math.abs(amplitude) > 2 || Math.abs(angularFrequency) > 2) ? 0.5 : 1;
         for (
           let i = startI - sineLength;
           i < Math.min(startI, targetDistance - adjustedOrigoX);
