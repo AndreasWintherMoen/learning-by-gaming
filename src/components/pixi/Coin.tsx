@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {AnimatedSprite, Container, Text} from '@pixi/react';
 import {Rectangle, Sprite as PixiSprite, Texture} from 'pixi.js';
 import {TextStyle} from "@pixi/text";
+import coinSpritesheet from '../../utils/coinSpritesheet';
 
 type Props = {
   x: number;
@@ -12,17 +13,6 @@ type Props = {
   bullet: Rectangle | null;
   onHit: () => void;
 };
-
-const spritesheet = [
-  'coins/coin-0.png',
-  'coins/coin-1.png',
-  'coins/coin-2.png',
-  'coins/coin-3.png',
-  'coins/coin-4.png',
-  'coins/coin-3.png',
-  'coins/coin-2.png',
-  'coins/coin-1.png',
-];
 
 export default function Coin({
   x,
@@ -36,7 +26,6 @@ export default function Coin({
   const ref = useRef<PixiSprite | null>(null);
   const [showCord, setShowCord] = useState(true);
 
-  const [frames, setFrames] = useState<Texture[]>(spritesheet.map((url) => Texture.from(url)));
   const [spriteAlpha, setSpriteAlpha] = useState(1);
   const [fadeOutInterval, setFadeOutInterval] = useState<number>();
   const [timeoutCoroutine, setTimeoutCoroutine] = useState<number>();
@@ -76,7 +65,7 @@ export default function Coin({
           width={1}
           alpha={spriteAlpha}
           anchor={0.5}
-          textures={frames}
+          textures={coinSpritesheet}
           isPlaying={!show}
           initialFrame={0}
           animationSpeed={0.1}
