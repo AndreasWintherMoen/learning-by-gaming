@@ -12,11 +12,12 @@ import {
   setIsCharging,
   setChargePower,
   setPhaseShift,
-  setVerticalShift, setShowTutorial, setCoins, setCurrentScore, setCoinsCollectedThisShot,
+  setVerticalShift, setShowTutorial, setCoins, setCurrentScore, setCoinsCollectedThisShot, setSelectedFunction,
 } from '../redux/gameSlice';
-import { Coin } from '../types';
+import {Coin, SupportedFunctions} from '../types';
 
 export type DataContext = {
+  selectedFunction: SupportedFunctions;
   displayScore: boolean;
   level: number;
   numAttempts: number;
@@ -50,6 +51,7 @@ export type DataContext = {
   setShowTutorial: (showTutorial: boolean) => void;
   collectCoin: (index: number) => void;
   collectBomb: (index: number) => void;
+  setSelectedFunction: (selectedFunction: string) => void;
 };
 
 // TODO: Move this somewhere else (either to Coin.value or to a separate file of constants)
@@ -144,6 +146,10 @@ export default function useData(): DataContext {
     dispatch(setCurrentScore(newScore));
   }
 
+  function dispatchSetSelectedFunction(selectedFunction: string) {
+    dispatch(setSelectedFunction(selectedFunction));
+  }
+
   return {
     ...data,
     setDisplayScore: dispatchSetDisplayScore,
@@ -155,6 +161,7 @@ export default function useData(): DataContext {
     setPhaseShift: dispatchPhaseShift,
     addFireSubscriber: dispatchAddFireSubscriber,
     removeFireSubscriber: dispatchRemoveFireSubscriber,
+    setSelectedFunction: dispatchSetSelectedFunction,
     fire,
     stopFire,
     startCharge,

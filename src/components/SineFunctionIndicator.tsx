@@ -1,5 +1,4 @@
-import useData from '../hooks/useData';
-import React, { useEffect } from 'react';
+import React from 'react';
 import useTheme from "../hooks/useTheme";
 
 
@@ -10,7 +9,7 @@ interface FunctionInputPickerProps {
   verticalShift: number;
   isFiring: boolean;
 }
-export default function SineFunctionIndicator({ amplitude, angularFrequency, phaseShift, verticalShift, isFiring }: FunctionInputPickerProps) {
+export default function SineFunctionIndicator({ amplitude, angularFrequency, phaseShift, verticalShift }: FunctionInputPickerProps) {
   const theme = useTheme();
 
   const XMAX = 350;
@@ -19,7 +18,7 @@ export default function SineFunctionIndicator({ amplitude, angularFrequency, pha
   const path = [];
   for (let x = 0; x <= XMAX; x++) {
     const angle = (x / XMAX) * Math.PI * 2;  // angle = 0 -> 2π
-    const y = amplitude * Math.sin(angularFrequency * angle + verticalShift) * (YMAX / 2) + (YMAX / 2) + phaseShift * -10
+    const y = amplitude * Math.sin(angularFrequency * angle + phaseShift) * (YMAX / 2) + (YMAX / 2) + verticalShift * -10
     // M = move to, L = line to
     path.push((x == 0 ? 'M' : 'L') + x.toFixed(2) + ',' + y.toFixed(2));
   }

@@ -13,6 +13,7 @@ import {sound} from '@pixi/sound';
 import delay from './utils/delay';
 import PowerBar from './components/pixi/PowerBar';
 import Bomb from "./components/pixi/Bomb";
+import StartCoin from "./components/pixi/StartCoin";
 
 export default function Canvas() {
   const { level: levelIndex, setDisplayScore, setAmplitude, amplitude, coins, collectCoin, stopFire, collectBomb} = useData();
@@ -96,6 +97,7 @@ export default function Canvas() {
             onHit={() => onHitBomb(i)}
           />
         ))}
+        <StartCoin />
       <Frontpage />
     </>
   );
