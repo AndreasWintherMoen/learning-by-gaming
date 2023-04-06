@@ -17,11 +17,12 @@ const defaultCanvasSize = {
 export default function useCanvasSize() {
   const { level: levelIndex } = useData();
   const level = useLevel(levelIndex);
+  const app = useApp();
+
   if (!level) return defaultCanvasSize;
 
   const { cellSize, origoPosition } = level;
 
-  const app = useApp();
   const { width, height } = app.view;
   const scale = window.devicePixelRatio;
   const pixelWidth = width / scale;
