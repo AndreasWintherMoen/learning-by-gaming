@@ -141,6 +141,7 @@ export default function SineController() {
         <p>f(x)=</p>
         { level >= levelIntroduced['amplitude'] && (
           <FunctionInputPicker
+            isFiring={isFiring}
             variable={amplitude}
             onClick={(value) => { if (!isFiring) setAmplitude(value)}}
             color={theme.color.green}
@@ -148,6 +149,7 @@ export default function SineController() {
         <p>{`${selectedFunction}(`}</p>
         {level >= levelIntroduced['angular-frequency'] && (
           <FunctionInputPicker
+            isFiring={isFiring}
             variable={angularFrequency}
             onClick={(value) => { if (!isFiring) setAngularFrequency(value)}}
             color={theme.color.brown}
@@ -157,6 +159,7 @@ export default function SineController() {
           <>
             <p>(x{phaseShift >= 0 && '+'}</p>
             <FunctionInputPicker
+              isFiring={isFiring}
               variable={phaseShift}
               onClick={(value) => { if (!isFiring) setPhaseShift(value)}}
               color={theme.color.purple}
@@ -166,9 +169,10 @@ export default function SineController() {
           <>
             <p>)){verticalShift >= 0 && '+'}</p>
             <FunctionInputPicker
-            variable={verticalShift}
-            onClick={(value) => { if (!isFiring) setVerticalShift(value)}}
-            color={theme.color.pink}
+              isFiring={isFiring}
+              variable={verticalShift}
+              onClick={(value) => { if (!isFiring) setVerticalShift(value)}}
+              color={theme.color.pink}
           />
           </>
         ) : <p>)</p>}
