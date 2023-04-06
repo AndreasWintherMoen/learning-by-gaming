@@ -9,8 +9,8 @@ export default function StartCoin() {
   const {origoPosition, cellSize} = useCanvasSize();
   const func = getFunction(selectedFunction);
 
-  const xStart = origoPosition.x * cellSize - phaseShift*cellSize;
-  const yStart = origoPosition.y * cellSize - verticalShift*cellSize - func(0) * cellSize; // - func(0) * cellSize == cos support;
+  const xStart = (origoPosition.x - phaseShift) * cellSize;
+  const yStart = (origoPosition.y - verticalShift - func(0)) * cellSize;
   console.log("xStart", xStart);
 
   return (
