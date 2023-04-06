@@ -28,14 +28,14 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       level,
       selectedFunction
     } = useData();
-    const { origoPosition, cellSize } = useCanvasSize();
+    const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
     const startX = origoPosition.x * cellSize - phaseShift * cellSize;
     const startY = origoPosition.y * cellSize;
     const sineLength = cellSize * 3.14 * 2; // one full sine wave period
 
     const levelInfo = useLevel(level);
     const adjustedChargePower = levelInfo?.showPowerBar
-      ? ((chargePower + 0.5) * 2) / 3
+      ? ((chargePower + 0.5) * 2) / 3 // between 0.33 and 1
       : 1;
 
     // const [speed, setSpeed] = useState(2);
@@ -77,33 +77,20 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           g.beginFill(0xf00000, 0);
           g.drawCircle(x, y, 1);
         }
+        const powerDistance = levelInfo?.showPowerBar ? chargePower : 1;
+        const adjustedOrigoX = origoPosition.x * cellSize;
+        const targetDistance = (pixelWidth - adjustedOrigoX) * powerDistance + adjustedOrigoX;
         g.clear();
         g.lineStyle(4, 0x000000, 1);
         g.moveTo(startX, startY);
 
-        // WARNING: Complex and poorly documented math incoming!!
-        const amplitudeAngFreqFactors = Math.min(
-          2,
-          Math.max(
-            0.05,
-            (amplitude + 0.1) * 0.2 * ((angularFrequency + 0.1) * 0.2)
-          )
-        );
-        const startI = Math.floor(
-          (timer * adjustedChargePower * 0.5 * cellSize) /
-            amplitudeAngFreqFactors
-        );
+        const startI = Math.floor(timer * adjustedChargePower * cellSize * 5);
         const func = getFunction(selectedFunction);
         let lastPoint = { x: startX, y: startY };
-        let paintAccuracyMultiplier = 1;
-        if (amplitude >= 5) paintAccuracyMultiplier *= 0.5;
-        if (angularFrequency >= 5) paintAccuracyMultiplier *= 0.5;
-        if (amplitude + angularFrequency >= 5) paintAccuracyMultiplier *= 0.5;
-        if (adjustedChargePower > 0.8) paintAccuracyMultiplier *= 0.5;
-        else if (adjustedChargePower < 0.2) paintAccuracyMultiplier *= 2;
+        const paintAccuracyMultiplier = (amplitude > 2 || angularFrequency > 2) ? 0.5 : 1;
         for (
           let i = startI - sineLength;
-          i < startI;
+          i < Math.min(startI, targetDistance - adjustedOrigoX);
           i += 1 * paintAccuracyMultiplier
         ) {
           const opacity = (1 - (startI - i) / sineLength) * 0.3;
@@ -116,6 +103,10 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           lastPoint = { x, y };
         }
         setBulletCollider(new Rectangle(lastPoint.x, lastPoint.y, 1, 1));
+        // TODO: Adjust this with phase shift
+        if (startI - sineLength > targetDistance) {
+          stopFire();
+        }
       },
       [amplitude, angularFrequency, verticalShift, timer, isFiring]
     );
