@@ -15,6 +15,18 @@ export default function InfoModal() {
     }
   }, [showTutorial]);
 
+  useEffect(() => {
+    const handleKeyDown = (ev: KeyboardEvent) => {
+      if (ev.key === 'Escape') {
+        setShowTutorial(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   if (!showTutorial) return null;
 
   return (
