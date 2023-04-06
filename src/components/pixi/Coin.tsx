@@ -39,6 +39,9 @@ export default function Coin({
   const [frames, setFrames] = useState<Texture[]>(spritesheet.map((url) => Texture.from(url)));
   const [spriteAlpha, setSpriteAlpha] = useState(1);
   const [fadeOutInterval, setFadeOutInterval] = useState<number>();
+  // this is a hack to force a re-render
+  const [foo, setFoo] = useState({ bar: 'baz'});
+
   function fadeOutSprite() {
     const stuff = setInterval(() => setSpriteAlpha((spriteAlpha) => spriteAlpha - 0.15), 100);
     if(fadeOutInterval) clearInterval(fadeOutInterval);
@@ -48,6 +51,7 @@ export default function Coin({
   useEffect(() => {
     clearInterval(fadeOutInterval);
     setSpriteAlpha(1);
+    setFoo({ ...foo });
   }, [show]);
 
   useEffect(() => {
