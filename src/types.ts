@@ -21,7 +21,6 @@ export type Data = {
   angularFrequency: number;
   phaseShift: number;
   verticalShift: number;
-  fireSubscribers: (() => void)[];
   isFiring: boolean;
   isCharging: boolean;
   chargePower: number;

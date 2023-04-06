@@ -11,7 +11,6 @@ const initialState = {
   angularFrequency: 1,
   phaseShift: 0,
   verticalShift: 0,
-  fireSubscribers: [],
   isFiring: false,
   isCharging: false,
   chargePower: 0,
@@ -80,14 +79,6 @@ export const gameSlice = createSlice({
     setPhaseShift: (state, action) => {
       state.phaseShift = action.payload;
     },
-    addFireSubscriber: (state, action) => {
-      state.fireSubscribers = [...state.fireSubscribers, action.payload];
-    },
-    removeFireSubscriber: (state, action) => {
-      state.fireSubscribers = state.fireSubscribers.filter(
-        (subscriber) => subscriber !== action.payload
-      );
-    },
     setIsFiring: (state, action) => {
       state.isFiring = action.payload;
       state.isCharging = false;
@@ -146,8 +137,6 @@ export const {
   setIsFiring,
   setIsCharging,
   setChargePower,
-  removeFireSubscriber,
-  addFireSubscriber,
   setVerticalShift,
   setPhaseShift,
   setIsBackgroundSound,

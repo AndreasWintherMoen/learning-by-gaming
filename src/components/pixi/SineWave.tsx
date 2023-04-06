@@ -21,8 +21,6 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       phaseShift,
       verticalShift,
       isFiring,
-      addFireSubscriber,
-      removeFireSubscriber,
       stopFire,
       chargePower,
       level,
@@ -56,13 +54,8 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     });
 
     useEffect(() => {
-      addFireSubscriber(() => {
-        setTimer(0);
-      });
-      return () => {
-        removeFireSubscriber(() => setTimer(0));
-      };
-    }, []);
+      if (isFiring) setTimer(0);
+    }, [isFiring]);
 
     const drawSineWave = useCallback<Draw>(
       (g) => {
