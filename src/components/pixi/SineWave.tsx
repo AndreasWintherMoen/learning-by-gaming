@@ -11,6 +11,7 @@ import { Draw } from '../../types';
 import { Rectangle } from 'pixi.js';
 import useCanvasSize from '../../hooks/useCanvasSize';
 import useLevel from '../../hooks/useLevel';
+import getFunction from "../../utils/getFunction";
 
 const SineWave = forwardRef<Rectangle | undefined, {}>(
   ({}: {}, ref: React.ForwardedRef<Rectangle | undefined>): JSX.Element => {
@@ -25,9 +26,10 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       stopFire,
       chargePower,
       level,
+      selectedFunction
     } = useData();
     const { origoPosition, cellSize } = useCanvasSize();
-    const startX = origoPosition.x * cellSize + verticalShift * cellSize;
+    const startX = origoPosition.x * cellSize - phaseShift * cellSize;
     const startY = origoPosition.y * cellSize;
     const sineLength = cellSize * 3.14 * 2; // one full sine wave period
 
@@ -91,6 +93,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           (timer * adjustedChargePower * 0.5 * cellSize) /
             amplitudeAngFreqFactors
         );
+        const func = getFunction(selectedFunction);
         let lastPoint = { x: startX, y: startY };
         let paintAccuracyMultiplier = 1;
         if (amplitude >= 5) paintAccuracyMultiplier *= 0.5;
@@ -107,17 +110,14 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           g.lineStyle(4, 0x000000, opacity);
           const x = startX + i;
           if (x < startX) continue;
-          const y =
-            startY -
-            amplitude * Math.sin((angularFrequency * i) / cellSize) * cellSize -
-            phaseShift * cellSize;
+          const y = startY - amplitude * func((angularFrequency * i) / cellSize) * cellSize - verticalShift * cellSize;
 
           drawPoint(x, y);
           lastPoint = { x, y };
         }
         setBulletCollider(new Rectangle(lastPoint.x, lastPoint.y, 1, 1));
       },
-      [amplitude, angularFrequency, phaseShift, timer, isFiring]
+      [amplitude, angularFrequency, verticalShift, timer, isFiring]
     );
 
     return <Graphics draw={drawSineWave} />;

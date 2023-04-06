@@ -8,9 +8,9 @@ import useLevel from '../hooks/useLevel';
 
 const levelIntroduced = {
   'amplitude': 2,
-  'phase-shift': 3,
+  'phase-shift': 5,
   'angular-frequency': 4,
-  'vertical-shift': 5
+  'vertical-shift': 3
 }
 
 export default function SineController() {
@@ -127,21 +127,21 @@ export default function SineController() {
             color={theme.color.brown}
           />)
         }
-        {level >= levelIntroduced['vertical-shift'] ? (
+        {level >= levelIntroduced['phase-shift'] ? (
           <>
-            <p>(x{verticalShift >= 0 && '+'}</p>
+            <p>(x{phaseShift >= 0 && '+'}</p>
             <FunctionInputPicker
-              variable={verticalShift}
-              onClick={(value) => { if (!isFiring) setVerticalShift(value)}}
+              variable={phaseShift}
+              onClick={(value) => { if (!isFiring) setPhaseShift(value)}}
               color={theme.color.purple}
             />
           </>) : <p>x</p>}
-        {level >= levelIntroduced['phase-shift'] ? (
+        {level >= levelIntroduced['vertical-shift'] ? (
           <>
-            <p>)){phaseShift >= 0 && '+'}</p>
+            <p>)){verticalShift >= 0 && '+'}</p>
             <FunctionInputPicker
-            variable={phaseShift}
-            onClick={(value) => { if (!isFiring) setPhaseShift(value)}}
+            variable={verticalShift}
+            onClick={(value) => { if (!isFiring) setVerticalShift(value)}}
             color={theme.color.pink}
           />
           </>

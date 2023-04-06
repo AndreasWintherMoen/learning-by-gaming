@@ -21,6 +21,7 @@ const initialState = {
   coinsCollectedThisShot: 0,
   currentScore: 0,
   totalScore: 0,
+  selectedFunction: 'sin',
 } as Data;
 
 function generateNewCoins(levelIndex: number) {
@@ -126,6 +127,12 @@ export const gameSlice = createSlice({
     },
     setCurrentScore: (state, action) => {
       state.currentScore = action.payload;
+    },
+    setSelectedFunction: (state, action) => {
+      if (action.payload !== 'sin' && action.payload !== 'cos' && action.payload !== 'arcsin' && action.payload !== 'arccos') {
+        console.log('Invalid function selected', action.payload);
+      }
+      state.selectedFunction = action.payload;
     }
   }
 });
@@ -148,6 +155,7 @@ export const {
   setCoins,
   setCurrentScore,
   setCoinsCollectedThisShot,
+  setSelectedFunction,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

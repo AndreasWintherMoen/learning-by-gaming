@@ -11,6 +11,8 @@ export type Coin = {
 
 export type Draw = Exclude<ComponentProps<typeof Graphics>['draw'], undefined>;
 
+export type SupportedFunctions = 'sin' | 'cos' | 'arcsin' | 'arccos';
+
 export type Data = {
   displayScore: boolean;
   level: number;
@@ -29,6 +31,7 @@ export type Data = {
   coinsCollectedThisShot: number;
   currentScore: number;
   totalScore: number;
+  selectedFunction: SupportedFunctions;
 };
 
 export type EasingFunctions =
