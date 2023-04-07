@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {AnimatedSprite, Container, Text} from '@pixi/react';
-import {Rectangle, Sprite as PixiSprite, Texture} from 'pixi.js';
+import {Rectangle, Sprite as PixiSprite} from 'pixi.js';
 import {TextStyle} from "@pixi/text";
 import coinSpritesheet from '../../utils/coinSpritesheet';
 
@@ -69,7 +69,7 @@ export default function Coin({
       {showCord && (
         <Text
           alpha={spriteAlpha}
-          text={`(${xCord.toFixed(1)}, ${yCord.toFixed(1)})`}
+          text={`(${xCord.toFixed(1)}, ${(-yCord).toFixed(1)})`}
           anchor={0.5}
           x={x}
           y={y+30}
