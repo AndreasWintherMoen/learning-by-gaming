@@ -34,6 +34,7 @@ export default function SineController() {
     level,
     selectedFunction,
     showTutorial,
+    displayScore,
   } = useData();
   const levelInfo = useLevel(level);
 
@@ -53,7 +54,7 @@ export default function SineController() {
   useEffect(() => {
     //Listen for keypresses and fire the sine wave
     const handleKeyDown = (ev: KeyboardEvent) => {
-      if (isFiring || showTutorial) return;
+      if (isFiring || showTutorial || displayScore) return;
       if (ev.key === 'Enter' || ev.key === ' ') {
         if (levelInfo?.showPowerBar) {
           startCharge();
@@ -71,7 +72,7 @@ export default function SineController() {
       }
     };
     const handleKeyUp = (ev: KeyboardEvent) => {
-      if (isFiring || showTutorial) return;
+      if (isFiring || showTutorial || displayScore) return;
       if (ev.key === 'Enter' || ev.key === ' ') {
         fire();
       }
@@ -82,7 +83,7 @@ export default function SineController() {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
-  }, [isFiring, phaseShift, showTutorial]);
+  }, [isFiring, phaseShift, showTutorial, displayScore]);
 
   if (level === 0) return null;
 
