@@ -29,14 +29,13 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
     const startX = origoPosition.x * cellSize - phaseShift * cellSize;
     const startY = origoPosition.y * cellSize;
-    const sineLength = cellSize * 3.14 * 2; // one full sine wave period
+    const sineLength = cellSize * 3.14 * 1; // one half sine wave period
 
     const levelInfo = useLevel(level);
     const adjustedChargePower = levelInfo?.showPowerBar
       ? ((chargePower + 0.5) * 2) / 3 // between 0.33 and 1
       : 1;
 
-    // const [speed, setSpeed] = useState(2);
     const [timer, setTimer] = useState(0);
     const [bulletCollider, setBulletCollider] = useState<Rectangle>();
 
@@ -67,8 +66,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           return;
         }
         function drawPoint(x: number, y: number) {
-          g.beginFill(0xf00000, 0);
-          g.drawCircle(x, y, 1);
+          g.drawCircle(x, y, 2);
         }
         const powerDistance = levelInfo?.showPowerBar ? chargePower : 1;
         const adjustedOrigoX = origoPosition.x * cellSize;
@@ -78,20 +76,21 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         g.moveTo(startX, startY);
 
         const startI = Math.floor(timer * adjustedChargePower * cellSize * 5);
+        const stopI = Math.min(startI, targetDistance - adjustedOrigoX)
         const func = getFunction(selectedFunction);
         let lastPoint = { x: startX, y: startY };
         const paintAccuracyMultiplier = (Math.abs(amplitude) > 2 || Math.abs(angularFrequency) > 2) ? 0.5 : 1;
+        const yConstant = startY - verticalShift * cellSize;
         for (
           let i = startI - sineLength;
-          i < Math.min(startI, targetDistance - adjustedOrigoX);
-          i += 1 * paintAccuracyMultiplier
+          i < stopI;
+          i += 1.5 * paintAccuracyMultiplier
         ) {
           const opacity = (1 - (startI - i) / sineLength) * 0.3;
           g.lineStyle(4, 0x000000, opacity);
           const x = startX + i;
           if (x < startX) continue;
-          const y = startY - amplitude * func((angularFrequency * i) / cellSize) * cellSize - verticalShift * cellSize;
-
+          const y = yConstant - amplitude * func((angularFrequency * i) / cellSize) * cellSize;
           drawPoint(x, y);
           lastPoint = { x, y };
         }
