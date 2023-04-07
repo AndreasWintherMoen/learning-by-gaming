@@ -44,11 +44,6 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     useTick((_, ticker) => {
       if (!isFiring) return;
       const newTimer = timer + ticker.deltaMS / 1000;
-      if (newTimer > 4) {
-        setTimer(0);
-        stopFire();
-        return;
-      }
       setTimer(newTimer);
     });
 
