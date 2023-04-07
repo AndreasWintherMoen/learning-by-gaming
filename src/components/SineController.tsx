@@ -126,6 +126,7 @@ export default function SineController() {
       )}
       {/* Function interaction  */}
       <div
+        className={'noselecttext'}
         style={{
           marginLeft: 20,
           width: '50%',
@@ -133,9 +134,10 @@ export default function SineController() {
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
+          alignSelf:'center',
           justifyContent: 'flex-start',
           paddingBottom: 22,
-          paddingTop: 5
+          paddingTop: 5,
         }}
       >
         <p>f(x)=</p>
