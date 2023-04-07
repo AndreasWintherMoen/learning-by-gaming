@@ -23,6 +23,9 @@ type Level = {
   title: string;
   descriptions: IDescriptionPart[];
   starScores: [number, number, number];
+  maxAmplitude: number;
+  maxVerticalShift: number;
+  maxAngularFrequency: number;
 }
 
 export const levels: Level[] = [
@@ -53,6 +56,9 @@ export const levels: Level[] = [
       [3.14 * 3.5, 1],
     ],
     starScores: [100, 200, 400],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
   },
   {
     title: 'Amplitude Intro',
@@ -87,6 +93,9 @@ export const levels: Level[] = [
       [3.14 * 6.5, -2],
     ],
     starScores: [300, 600, 900],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
   },
   {
     title: 'Level 3',
@@ -120,6 +129,9 @@ export const levels: Level[] = [
       [3.14 * 6.5, -3],
     ],
     starScores: [300, 600, 900],
+    maxAmplitude: 3,
+    maxVerticalShift: 5,
+    maxAngularFrequency: 3,
   },
   {
     title: 'Level 4',
@@ -153,6 +165,9 @@ export const levels: Level[] = [
       [3.14 * 6.5 /2, -2],
     ],
     starScores: [300, 600, 900],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
   },
   {
     title: 'Level 5',
@@ -185,6 +200,9 @@ export const levels: Level[] = [
       [3.14 * 6.5 /2 - 1, -2],
     ],
     starScores: [300, 600, 900],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
   },
 ];
 

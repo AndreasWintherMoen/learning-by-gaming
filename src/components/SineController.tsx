@@ -7,10 +7,6 @@ import useTween from '../hooks/useTween';
 import useLevel from '../hooks/useLevel';
 import FunctionSelctor from "./FunctionSelctor";
 
-const MAX_AMPLITUDE = 3;
-const MAX_VERTICAL_SHIFT = 3;
-const MAX_ANGULAR_FREQUENCY = 3;
-
 export const levelIntroduced = {
   'amplitude': 2,
   'vertical-shift': 3,
@@ -96,18 +92,18 @@ export default function SineController() {
       if (isFiring) return;
       switch (parameter) {
         case 'amplitude':
-          if (Math.abs(value) > MAX_AMPLITUDE) break;
+          if (levelInfo && Math.abs(value) > levelInfo.maxAmplitude) break;
           setAmplitude(value);
           break;
         case 'angular-frequency':
-          if (Math.abs(value) > MAX_ANGULAR_FREQUENCY) break;
+          if (levelInfo && Math.abs(value) > levelInfo.maxAngularFrequency) break;
           setAngularFrequency(value);
           break;
         case 'phase-shift':
           setPhaseShift(value);
           break;
         case 'vertical-shift':
-          if (Math.abs(value) > MAX_VERTICAL_SHIFT) break;
+          if (levelInfo && Math.abs(value) > levelInfo.maxVerticalShift) break;
           setVerticalShift(value);
           break;
       }
