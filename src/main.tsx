@@ -10,11 +10,11 @@ sound.add('button-click', {
   preload: true,
 });
 sound.add('intro-music', {
-  url: 'sounds/intro-music.mp3',
+  url: 'sounds/intro-music-2.mp3',
   preload: true,
   loop: true,
   volume: 1,
-  autoPlay: false,
+  autoPlay: true,
 });
 sound.add('hit-coin', {
   url: 'sounds/hit-coin.wav',
