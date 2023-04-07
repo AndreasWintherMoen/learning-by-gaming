@@ -16,12 +16,12 @@ type Props = {
 };
 
 export default function Bomb({x, y, xCord, yCord, show, bullet, onHit}: Props): JSX.Element {
-  const [explotionFinished, setExplotionFinished] = useState(false);
+  const [explosionFinished, setExplosionFinished] = useState(false);
   const ref = useRef<PixiSprite | null>(null);
 
   const [showCord, setShowCord] = useState(true);
 
-  console.log('bomb exploded', explotionFinished)
+  console.log('bomb exploded', explosionFinished)
   useEffect(() => {
     if (!bullet || !show || !ref.current) return;
     if (bullet.intersects(ref.current.getBounds())) {
@@ -29,7 +29,7 @@ export default function Bomb({x, y, xCord, yCord, show, bullet, onHit}: Props): 
     }
   }, [bullet, onHit, ref]);
 
-  if(!show && explotionFinished) return <></>;
+  if(!show && explosionFinished) return <></>;
 
   if (!show) return (
     <Container position={[x, y]} width={125} height={125} ref={ref}>
@@ -42,7 +42,7 @@ export default function Bomb({x, y, xCord, yCord, show, bullet, onHit}: Props): 
         initialFrame={0}
         animationSpeed={0.2}
         loop={false}
-        onComplete={() => setExplotionFinished(true)}
+        onComplete={() => setExplosionFinished(true)}
       />
     </Container>
   );
