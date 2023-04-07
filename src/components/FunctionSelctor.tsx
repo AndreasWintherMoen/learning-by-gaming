@@ -12,7 +12,7 @@ export default function FunctionSelctor({isFiring}: {isFiring: boolean}) {
   }
 
   return (
-    <div style={{ height: '80%', flex: 1, paddingLeft: 30, display:'flex', flexDirection: 'column', gap: 10, flexWrap:'wrap', backgroundColor: 'lightgrey', justifyContent:'space-between'}}>
+    <div style={{ height: '80%', flex: 1, paddingLeft: 30, display:'flex', flexDirection: 'column', gap: 10, flexWrap:'wrap', justifyContent:'space-between'}}>
       <div className={isFiring ? '':'button'} style={{width: 45}} onClick={() => handleChange('sin')}>
         <svg viewBox="0 0 73 73" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M71.5686 36.6104C71.5686 55.9053 56.2264 71.5469 37.3009 71.5469C18.3754 71.5469 1.60267 56.7691 1.60267 37.4742C1.60267 18.1793 18.3754 1.67383 37.3009 1.67383C56.2264 1.67383 71.5686 17.3155 71.5686 36.6104Z" fill={selectedFunction === 'sin' ? '#D4FFC9':'#D3D3D3'}/>
