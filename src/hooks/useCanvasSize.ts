@@ -5,7 +5,7 @@ import useLevel from './useLevel';
 const defaultCanvasSize = {
   pixelWidth: 1200,
   pixelHeight: 800,
-  cellSize: 50,
+  cellSize: 80,
   gridWidth: 1200 / 50,
   gridHeight: 800 / 50,
   origoPosition: {
