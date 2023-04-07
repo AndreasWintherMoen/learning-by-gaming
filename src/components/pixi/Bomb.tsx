@@ -29,6 +29,10 @@ export default function Bomb({x, y, xCord, yCord, show, bullet, onHit}: Props): 
     }
   }, [bullet, onHit, ref]);
 
+  useEffect(() => {
+    setExplosionFinished(false);
+  }, [show]);
+
   if(!show && explosionFinished) return <></>;
 
   if (!show) return (
