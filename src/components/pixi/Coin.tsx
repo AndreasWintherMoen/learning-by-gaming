@@ -27,7 +27,7 @@ export default function Coin({
   const [showCord, setShowCord] = useState(true);
 
   const [spriteAlpha, setSpriteAlpha] = useState(1);
-  const [fadeOutInterval, setFadeOutInterval] = useState<number>();
+  const [fadeOutInterval, setFadeOutInterval] = useState<NodeJS.Timer>();
 
   // this is a hack to force a re-render
   const [foo, setFoo] = useState({ bar: 'baz'});
