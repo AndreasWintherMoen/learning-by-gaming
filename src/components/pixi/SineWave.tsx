@@ -36,7 +36,6 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       ? ((chargePower + 0.5) * 2) / 3 // between 0.33 and 1
       : 1;
 
-    // const [speed, setSpeed] = useState(2);
     const [timer, setTimer] = useState(0);
     const [bulletCollider, setBulletCollider] = useState<Rectangle>();
 
