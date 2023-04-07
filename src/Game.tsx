@@ -14,7 +14,7 @@ export default function Game({ children }: { children: React.ReactNode }) {
     <div>
       <Provider store={store}>
         <div className='flex gap-4 items-center relative'>
-          <Stage width={1200} height={800}>
+          <Stage width={1200} height={800} style={{borderRadius: 20}}>
             {/* For some reason, this empty sprite MUST be here to enable onclick events in the canvas */}
             {/* See https://github.com/pixijs/pixi-react/issues/402 for updates... */}
             <Sprite texture={Texture.WHITE} width={0} height={0} />
@@ -23,9 +23,9 @@ export default function Game({ children }: { children: React.ReactNode }) {
           <SineController />
           <QuestionButton />
           <SoundButton />
+          <InfoModal />
         </div>
         <ScoreCard />
-        <InfoModal />
       </Provider>
     </div>
   );
