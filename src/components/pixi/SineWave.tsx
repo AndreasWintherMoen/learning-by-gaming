@@ -67,7 +67,6 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           return;
         }
         function drawPoint(x: number, y: number) {
-          g.beginFill(0xf00000, 0);
           g.drawCircle(x, y, 1);
         }
         const powerDistance = levelInfo?.showPowerBar ? chargePower : 1;
