@@ -1,17 +1,15 @@
 import useData from "../hooks/useData";
-import { Player } from '@lottiefiles/react-lottie-player';
+import {Player} from '@lottiefiles/react-lottie-player';
 import {useEffect, useState} from "react";
 import {levels} from "../hooks/useLevel";
 
 export default function InfoModal() {
   const {level, showTutorial, setShowTutorial} = useData();
-  //TODO: The selected level should not be set to 1, but it crashed if we don't :-/ we need to figure this out
-  const [selectedLevel, setSelectedLevel] = useState(level || 1); // If the user want to check the previous level, we need to keep track of the selected level. (added || 0 to prevent error when level is undefined, but this should never happen :)
-  const data = levels[selectedLevel];
+  const [levelOffset, setLevelOffset] = useState(0);
 
   useEffect(() => {
     if (level !== selectedLevel) {
-      setSelectedLevel(level);
+      setLevelOffset(0);
     }
   }, [showTutorial]);
 
@@ -26,6 +24,20 @@ export default function InfoModal() {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+
+  function handleOffset(offset: number) {
+    const newOffset = levelOffset + offset;
+    const newLevel = level + newOffset;
+    const newLevelLookupIndex = newLevel - 1;
+    if(newLevelLookupIndex >= 0 && newLevelLookupIndex < levels.length){
+      setLevelOffset(newOffset);
+    }
+    console.log('Cannot set offset to', newOffset, 'because it is out of bounds');
+  }
+
+  const selectedLevel = level + levelOffset;
+  const levelLookupIndex = selectedLevel - 1;
+  const data = levels[levelLookupIndex];
 
   if (!showTutorial) return null;
 
@@ -42,12 +54,14 @@ export default function InfoModal() {
             <CloseButtonSvg />
           </div>
         </div>
-        {/* Navigation  */}
-        <div style={{zIndex: 1001, position: 'absolute', bottom: 20, left: 0, height: 50, width:'100%', display:'flex', flexDirection: 'row', justifyContent: level > 0 && selectedLevel === 1 ? 'space-between': selectedLevel < level ? 'flex-end':'flex-start', paddingLeft: 75, paddingRight: 60}}>
-          { selectedLevel > 0 && (<div className={'button'} onClick={() => setSelectedLevel(selectedLevel - 1 )} style={{width: 50, height: 50}}>
+        {/* Navigation  */
+          // The styling is a bit messy here, but it works :D
+        }
+        <div style={{zIndex: 1001, position: 'absolute', bottom: 20, left: 0, height: 50, width:'100%', display:'flex', flexDirection: 'row', justifyContent: levelLookupIndex > 0 && selectedLevel < level ? 'space-between': selectedLevel < level ? 'flex-end':'flex-start', paddingLeft: 75, paddingRight: 60}}>
+          { levelLookupIndex > 0 && (<div className={'button'} onClick={() => handleOffset(-1)} style={{width: 50, height: 50}}>
             <LeftNavArrowSvg />
           </div>)}
-          { selectedLevel < level && (<div className={'button'} onClick={() => setSelectedLevel(selectedLevel + 1 )} style={{width: 50, height: 50}}>
+          { selectedLevel < level && (<div className={'button'} onClick={() => handleOffset(1)} style={{width: 50, height: 50}}>
             <RightNavArrowSvg />
           </div>)}
         </div>
@@ -122,7 +136,7 @@ function CloseButtonSvg() {
       </defs>
     </svg>
   )
-};
+}
 
 function LeftNavArrowSvg() {
   return (
@@ -178,4 +192,4 @@ function RightNavArrowSvg() {
       </defs>
     </svg>
   )
-};
+}
