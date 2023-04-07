@@ -11,7 +11,7 @@ import SoundButton from "./components/SoundButton";
 
 export default function Game({ children }: { children: React.ReactNode }) {
   return (
-    <div>
+    <div style={{overflow:'hidden'}}>
       <Provider store={store}>
         <div className='flex gap-4 items-center relative'>
           <Stage width={1200} height={800} style={{borderRadius: 20}}>
