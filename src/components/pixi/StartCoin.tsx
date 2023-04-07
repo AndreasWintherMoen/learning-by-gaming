@@ -5,12 +5,12 @@ import useCanvasSize from "../../hooks/useCanvasSize";
 import getFunction from "../../utils/getFunction";
 
 export default function StartCoin() {
-  const {selectedFunction, verticalShift, phaseShift} = useData();
+  const {selectedFunction, verticalShift, phaseShift, amplitude} = useData();
   const {origoPosition, cellSize} = useCanvasSize();
   const func = getFunction(selectedFunction);
 
   const xStart = (origoPosition.x - phaseShift) * cellSize;
-  const yStart = (origoPosition.y - verticalShift - func(0)) * cellSize;
+  const yStart = (origoPosition.y - verticalShift - func(0) * amplitude) * cellSize;
 
   return (
     <Sprite
