@@ -6,22 +6,22 @@ import { sound } from '@pixi/sound';
 import FontFaceObserver from 'fontfaceobserver';
 
 sound.add('button-click', {
-  url: 'src/assets/sounds/mouse-click.mp3',
+  url: 'sounds/mouse-click.mp3',
   preload: true,
 });
 sound.add('intro-music', {
-  url: 'src/assets/sounds/intro-music.mp3',
+  url: 'sounds/intro-music.mp3',
   preload: true,
   loop: true,
   volume: 1,
   autoPlay: false,
 });
 sound.add('hit-coin', {
-  url: 'src/assets/sounds/hit-coin.wav',
+  url: 'sounds/hit-coin.wav',
   preload: true,
 });
 sound.add('bomb-hit', {
-  url: 'src/assets/sounds/explosion.mp3',
+  url: 'sounds/explosion.mp3',
   preload: true,
 });
 
