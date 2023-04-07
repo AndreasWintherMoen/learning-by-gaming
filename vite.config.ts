@@ -7,4 +7,12 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  build: {
+    target: 'esnext',
+  },
+  esbuild: {
+    supported: {
+      'top-level-await': true,
+    },
+  },
 });
