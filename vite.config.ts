@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 
@@ -9,5 +10,15 @@ export default defineConfig({
   },
   build: {
     target: 'esnext',
+  },
+  esbuild: {
+    supported: {
+      'top-level-await': true,
+    },
+  },
+  resolve: {
+    alias: {
+      $fonts: resolve('./public/fonts')
+    }
   },
 });

@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: Handdrawn;
-  src: url(fonts/GloriaHallelujah.woff2) format('woff2'),
-    url(fonts/GloriaHallelujah.woff) format('woff');
+  font-family: Sofija;
+  src: url($fonts/Sofija.woff2) format('woff2'),
+    url($fonts/Sofija.woff) format('woff'),
+    url($fonts/Sofija.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: Sofija;
-  src: url(fonts/Sofija.woff2) format('woff2'),
-    url(fonts/Sofija.woff) format('woff'),
-    url(fonts/Sofija.ttf) format('truetype');
+  font-family: Handdrawn;
+  src: url($fonts/GloriaHallelujah.woff2) format('woff2'),
+    url($fonts/GloriaHallelujah.woff) format('woff');
 }
 
 :root {
