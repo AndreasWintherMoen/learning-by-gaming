@@ -89,7 +89,9 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           drawPoint(x, y);
           lastPoint = { x, y };
         }
-        setBulletCollider(new Rectangle(lastPoint.x, lastPoint.y, 1, 1));
+        if (lastPoint.x !== startX && lastPoint.y !== startY) {
+          setBulletCollider(new Rectangle(lastPoint.x, lastPoint.y, 1, 1));
+        }
         // TODO: Adjust this with phase shift
         if (startI - sineLength > targetDistance) {
           stopFire();
