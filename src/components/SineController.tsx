@@ -9,9 +9,9 @@ import FunctionSelctor from "./FunctionSelctor";
 
 export const levelIntroduced = {
   'amplitude': 2,
-  'vertical-shift': 3,
-  'angular-frequency': 4,
-  'phase-shift': 5,
+  'verticalShift': 3,
+  'angularFrequency': 4,
+  'phaseShift': 5,
   'cos': 1,
   'arcsin': 6,
   'arccos': 7,
@@ -110,17 +110,16 @@ export default function SineController() {
     };
   }
 
-  if (level === 0) return null;
-
+  if (level === 0 || !levelInfo) return null;
 
   return (
     <div
       className='select-none'
       style={{
-        fontSize: 32,
+        fontSize: 28,
         color: theme.text.primary,
-        height: 130,
-        width: 800,
+        height: 138,
+        width: 850,
         position: 'absolute',
         bottom: position,
         left: '50%',
@@ -162,42 +161,54 @@ export default function SineController() {
           flexDirection: 'row',
           alignItems: 'center',
           alignSelf:'center',
-          justifyContent: 'flex-start',
+          justifyContent: 'center',
           paddingBottom: 22,
           paddingTop: 5,
         }}
       >
         <p>f(x)=</p>
         { level >= levelIntroduced['amplitude'] && (
-          <FunctionInputPicker
-            isFiring={isFiring}
-            variable={amplitude}
-            onClick={handleFunctionParameterChange('amplitude')}
-            color={theme.color.green}
-          />)}
-        <p>{`${selectedFunction}(`}</p>
-        {level >= levelIntroduced['angular-frequency'] && (
-          <FunctionInputPicker
-            isFiring={isFiring}
-            variable={angularFrequency}
-            onClick={handleFunctionParameterChange('angular-frequency')}
-            color={theme.color.brown}
-          />)
-        }
-        {level >= levelIntroduced['phase-shift'] ? (
           <>
-            <p>(x{phaseShift >= 0 && '+'}</p>
             <FunctionInputPicker
+              trigType={'amplitude'}
+              max={levelInfo.maxAmplitude}
+              isFiring={isFiring}
+              variable={amplitude}
+              onClick={handleFunctionParameterChange('amplitude')}
+              color={theme.color.green}
+            />
+        </>)}
+        <p>{`${selectedFunction}(`}</p>
+        {level >= levelIntroduced['angularFrequency'] && (
+          <>
+            <FunctionInputPicker
+              trigType={'angularFrequency'}
+              max={levelInfo.maxAngularFrequency}
+              isFiring={isFiring}
+              variable={angularFrequency}
+              onClick={handleFunctionParameterChange('angular-frequency')}
+              color={theme.color.brown}
+            />
+          </>)
+        }
+        {level >= levelIntroduced['phaseShift'] ? (
+          <>
+            <p>(x</p>
+            <FunctionInputPicker
+              trigType={'phaseShift'}
+              max={3}
               isFiring={isFiring}
               variable={phaseShift}
               onClick={handleFunctionParameterChange('phase-shift')}
               color={theme.color.purple}
             />
           </>) : <p>x</p>}
-        {level >= levelIntroduced['vertical-shift'] ? (
+        {level >= levelIntroduced['verticalShift'] ? (
           <>
-            <p>)){verticalShift >= 0 && '+'}</p>
+            <p>))</p>
             <FunctionInputPicker
+              trigType={'verticalShift'}
+              max={levelInfo.maxVerticalShift}
               isFiring={isFiring}
               variable={verticalShift}
               onClick={handleFunctionParameterChange('vertical-shift')}

@@ -2,7 +2,7 @@ import { Graphics } from '@pixi/react';
 import { ComponentProps } from 'react';
 
 export type CoinType = 'coin' | 'sin' | 'cos' | 'divide' | 'multiply' | 'plus' | 'minus' | 'bomb';
-
+export type TrigParams = 'amplitude' | 'angularFrequency' | 'phaseShift' | 'verticalShift';
 export type Coin = {
   type: CoinType;
   position: [number, number];
