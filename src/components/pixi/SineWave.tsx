@@ -29,7 +29,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
     const startX = origoPosition.x * cellSize - phaseShift * cellSize;
     const startY = origoPosition.y * cellSize;
-    const sineLength = cellSize * 3.14 * 2; // one full sine wave period
+    const sineLength = cellSize * 3.14 * 1; // one half sine wave period
 
     const levelInfo = useLevel(level);
     const adjustedChargePower = levelInfo?.showPowerBar
