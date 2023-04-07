@@ -7,6 +7,10 @@ import useTween from '../hooks/useTween';
 import useLevel from '../hooks/useLevel';
 import FunctionSelctor from "./FunctionSelctor";
 
+const MAX_AMPLITUDE = 3;
+const MAX_VERTICAL_SHIFT = 3;
+const MAX_ANGULAR_FREQUENCY = 3;
+
 export const levelIntroduced = {
   'amplitude': 2,
   'vertical-shift': 3,
@@ -83,6 +87,31 @@ export default function SineController() {
     };
   }, [isFiring, phaseShift]);
 
+  function handleFunctionParameterChange(
+    parameter: 'amplitude' | 'angular-frequency' | 'phase-shift' | 'vertical-shift',
+  ) {
+    return (value: number) => {
+      if (isFiring) return;
+      switch (parameter) {
+        case 'amplitude':
+          if (Math.abs(value) > MAX_AMPLITUDE) break;
+          setAmplitude(value);
+          break;
+        case 'angular-frequency':
+          if (Math.abs(value) > MAX_ANGULAR_FREQUENCY) break;
+          setAngularFrequency(value);
+          break;
+        case 'phase-shift':
+          setPhaseShift(value);
+          break;
+        case 'vertical-shift':
+          if (Math.abs(value) > MAX_VERTICAL_SHIFT) break;
+          setVerticalShift(value);
+          break;
+      }
+    };
+  }
+
   if (level === 0) return null;
 
 
@@ -143,7 +172,7 @@ export default function SineController() {
           <FunctionInputPicker
             isFiring={isFiring}
             variable={amplitude}
-            onClick={(value) => { if (!isFiring) setAmplitude(value)}}
+            onClick={handleFunctionParameterChange('amplitude')}
             color={theme.color.green}
           />)}
         <p>{`${selectedFunction}(`}</p>
@@ -151,7 +180,7 @@ export default function SineController() {
           <FunctionInputPicker
             isFiring={isFiring}
             variable={angularFrequency}
-            onClick={(value) => { if (!isFiring) setAngularFrequency(value)}}
+            onClick={handleFunctionParameterChange('angular-frequency')}
             color={theme.color.brown}
           />)
         }
@@ -161,7 +190,7 @@ export default function SineController() {
             <FunctionInputPicker
               isFiring={isFiring}
               variable={phaseShift}
-              onClick={(value) => { if (!isFiring) setPhaseShift(value)}}
+              onClick={handleFunctionParameterChange('phase-shift')}
               color={theme.color.purple}
             />
           </>) : <p>x</p>}
@@ -171,7 +200,7 @@ export default function SineController() {
             <FunctionInputPicker
               isFiring={isFiring}
               variable={verticalShift}
-              onClick={(value) => { if (!isFiring) setVerticalShift(value)}}
+              onClick={handleFunctionParameterChange('vertical-shift')}
               color={theme.color.pink}
           />
           </>
