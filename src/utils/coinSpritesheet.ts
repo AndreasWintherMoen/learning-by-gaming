@@ -1,6 +1,6 @@
 import { Texture } from 'pixi.js';
 
-const spritesheet = [
+const coinSpritesheet = [
   'coins/coin-0.png',
   'coins/coin-1.png',
   'coins/coin-2.png',
@@ -11,4 +11,4 @@ const spritesheet = [
   'coins/coin-1.png',
 ];
 
-export default spritesheet.map((url) => Texture.from(url));
+export default coinSpritesheet.map((url) => Texture.from(url));

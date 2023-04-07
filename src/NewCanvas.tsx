@@ -49,9 +49,6 @@ export default function Canvas() {
   const onHitBomb = async (index: number) => {
     console.log('onHitBomb', index);
     sound.play('bomb-hit');
-    // Subtract points
-    //TODO: Do this
-
     // Stop the sine wave
     stopFire();
     // Animate explosion
