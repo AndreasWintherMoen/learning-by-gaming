@@ -66,7 +66,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           return;
         }
         function drawPoint(x: number, y: number) {
-          g.drawCircle(x, y, 1);
+          g.drawCircle(x, y, 2);
         }
         const powerDistance = levelInfo?.showPowerBar ? chargePower : 1;
         const adjustedOrigoX = origoPosition.x * cellSize;
@@ -82,7 +82,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         for (
           let i = startI - sineLength;
           i < Math.min(startI, targetDistance - adjustedOrigoX);
-          i += 1 * paintAccuracyMultiplier
+          i += 1.5 * paintAccuracyMultiplier
         ) {
           const opacity = (1 - (startI - i) / sineLength) * 0.3;
           g.lineStyle(4, 0x000000, opacity);
