@@ -86,6 +86,7 @@ export default function useData(): DataContext {
   }
 
   function fire() {
+    dispatch(setCoinsCollectedThisShot(0));
     dispatch(setIsFiring(true));
     dispatch(setIsCharging(false));
   }
