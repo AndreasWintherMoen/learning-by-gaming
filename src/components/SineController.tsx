@@ -9,12 +9,12 @@ import FunctionSelctor from "./FunctionSelctor";
 
 export const levelIntroduced = {
   'amplitude': 2,
-  'verticalShift': 3,
-  'angularFrequency': 4,
-  'phaseShift': 5,
+  'verticalShift': 4,
+  'angularFrequency': 9,
+  'phaseShift': 10,
   'cos': 1,
-  'arcsin': 6,
-  'arccos': 7,
+  'arcsin': 11,
+  'arccos': 12,
 }
 
 export default function SineController() {

@@ -14,7 +14,7 @@ sound.add('intro-music', {
   preload: true,
   loop: true,
   volume: 1,
-  autoPlay: true,
+  autoPlay: false,
 });
 sound.add('hit-coin', {
   url: 'sounds/hit-coin.wav',
