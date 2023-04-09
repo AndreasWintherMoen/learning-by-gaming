@@ -8,6 +8,7 @@ import QuestionButton from "./components/QuestionButton";
 import React from "react";
 import ScoreCard from "./components/ScoreCard";
 import SoundButton from "./components/SoundButton";
+import NewPowerBar from "./components/NewPowerBar";
 
 export default function Game({ children }: { children: React.ReactNode }) {
   return (
@@ -21,6 +22,7 @@ export default function Game({ children }: { children: React.ReactNode }) {
             <Provider store={store}>{children}</Provider>
           </Stage>
           <SineController />
+          <NewPowerBar />
           <QuestionButton />
           <SoundButton />
           <InfoModal />
