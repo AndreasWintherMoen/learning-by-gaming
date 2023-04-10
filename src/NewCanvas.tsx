@@ -11,7 +11,6 @@ import useCanvasSize from './hooks/useCanvasSize';
 import LevelText from './components/pixi/LevelText';
 import {sound} from '@pixi/sound';
 import delay from './utils/delay';
-import PowerBar from './components/pixi/PowerBar';
 import Bomb from "./components/pixi/Bomb";
 import StartCoin from "./components/pixi/StartCoin";
 import BackgroundItems from "./components/pixi/BackgroundItems";
@@ -69,7 +68,6 @@ export default function Canvas() {
       {levelIndex > 0 && <Axes />}
       {levelIndex > 0 && <SineWave ref={handleBulletChange} />}
       {levelIndex > 0 && <LevelText />}
-      {level?.showPowerBar && <PowerBar />}
       {level &&
         coinCoins.map((coin) => coin.position).map(([x, y], i) => (
           <Coin
