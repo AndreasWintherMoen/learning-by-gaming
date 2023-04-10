@@ -12,9 +12,9 @@ export const levelIntroduced = {
   'verticalShift': 4,
   'angularFrequency': 9,
   'phaseShift': 10,
-  'cos': 1,
-  'arcsin': 11,
-  'arccos': 12,
+  'cos': 11,
+  'arcsin': 12,
+  'arccos': 13,
 }
 
 export default function SineController() {
