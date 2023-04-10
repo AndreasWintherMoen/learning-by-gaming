@@ -8,10 +8,10 @@ import useLevel from '../hooks/useLevel';
 import FunctionSelctor from "./FunctionSelctor";
 
 export const levelIntroduced = {
-  'amplitude': 2,
-  'verticalShift': 3,
-  'angularFrequency': 4,
-  'phaseShift': 5,
+  'amplitude': 1,
+  'verticalShift': 1,
+  'angularFrequency': 1,
+  'phaseShift': 1,
   'cos': 1,
   'arcsin': 6,
   'arccos': 7,

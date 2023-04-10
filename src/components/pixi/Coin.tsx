@@ -3,6 +3,7 @@ import {AnimatedSprite, Container, Text} from '@pixi/react';
 import {Rectangle, Sprite as PixiSprite} from 'pixi.js';
 import {TextStyle} from "@pixi/text";
 import coinSpritesheet from '../../utils/coinSpritesheet';
+import useData from '../../hooks/useData';
 
 type Props = {
   x: number;
@@ -32,10 +33,12 @@ export default function Coin({
   // this is a hack to force a re-render
   const [foo, setFoo] = useState({ bar: 'baz'});
 
+  const [shouldDie, setShouldDie] = useState(false);
+
   function fadeOutSprite() {
-    const interval = setInterval(() => setSpriteAlpha((spriteAlpha) => spriteAlpha - 0.15), 100);
-    if(fadeOutInterval) clearInterval(fadeOutInterval);
-    setFadeOutInterval(interval);
+    // const interval = setInterval(() => setSpriteAlpha((spriteAlpha) => spriteAlpha - 0.15), 100);
+    // if(fadeOutInterval) clearInterval(fadeOutInterval);
+    // setFadeOutInterval(interval);
   }
 
   useEffect(() => {

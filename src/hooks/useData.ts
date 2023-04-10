@@ -117,6 +117,7 @@ export default function useData(): DataContext {
 
     const chargeScoreMultiplier = (data.chargePower + 1) / 2; // 0.5 to 1 depending on charge power
     const coinsCollectedMultiplier = 1 + data.coinsCollectedThisShot * 0.1; // 1 + 0.1 per coin collected
+    console.log(coinsCollectedMultiplier);
     const levelScore = SCORE_PER_COIN * chargeScoreMultiplier * coinsCollectedMultiplier;
     dispatch(setCurrentScore(data.currentScore + levelScore));
 

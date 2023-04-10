@@ -12,6 +12,7 @@ import { Rectangle } from 'pixi.js';
 import useCanvasSize from '../../hooks/useCanvasSize';
 import useLevel from '../../hooks/useLevel';
 import getFunction from "../../utils/getFunction";
+import trigFunctionIntersectsPoint from '../../utils/trigFunctionIntersectsPoints';
 
 const SineWave = forwardRef<Rectangle | undefined, {}>(
   ({}: {}, ref: React.ForwardedRef<Rectangle | undefined>): JSX.Element => {
@@ -24,7 +25,8 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       stopFire,
       chargePower,
       level,
-      selectedFunction
+      selectedFunction,
+      coins,
     } = useData();
     const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
     const startX = origoPosition.x * cellSize - phaseShift * cellSize;
@@ -48,7 +50,22 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
     });
 
     useEffect(() => {
-      if (isFiring) setTimer(0);
+      if (!isFiring || !levelInfo) return;
+      setTimer(0);
+      const coinCoins = coins.filter((coin) => coin.type === 'coin');
+      coinCoins.forEach((coin) => {
+        const params = {
+          point: coin.position, 
+          func: 'sin', 
+          amplitude, 
+          angularFrequency, 
+          phaseShift, 
+          verticalShift,
+          cellSize: levelInfo.cellSize,
+        } as const;
+        console.log(trigFunctionIntersectsPoint(params));
+      });
+      const bombCoins = coins.filter((coin) => coin.type === 'bomb');
     }, [isFiring]);
 
     const drawSineWave = useCallback<Draw>(
@@ -70,7 +87,11 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         g.lineStyle(4, 0x000000, 1);
         g.moveTo(startX, startY);
 
-        const startI = Math.floor(timer * adjustedChargePower * cellSize * 5);
+        let speed = 5;
+
+        if (angularFrequency >= 2) speed *= 0.75;
+        if (amplitude >= 2) speed *= 0.75;
+        const startI = Math.floor(timer * adjustedChargePower * cellSize * speed);
         const stopI = Math.min(startI, targetDistance - adjustedOrigoX)
         const func = getFunction(selectedFunction);
         let lastPoint = { x: startX, y: startY };
