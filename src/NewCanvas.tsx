@@ -14,9 +14,10 @@ import delay from './utils/delay';
 import Bomb from "./components/pixi/Bomb";
 import StartCoin from "./components/pixi/StartCoin";
 import BackgroundItems from "./components/pixi/BackgroundItems";
+import { saveLevelData } from './utils/dataStorage';
 
 export default function Canvas() {
-  const { level: levelIndex, setDisplayScore, setAmplitude, amplitude, coins, collectCoin, stopFire, collectBomb} = useData();
+  const { level: levelIndex, setDisplayScore, setAmplitude, amplitude, coins, collectCoin, stopFire, collectBomb, currentScore} = useData();
   const { origoPosition } = useCanvasSize();
   const level = useLevel(levelIndex);
   const [bulletRect, setBulletRect] = useState<Rectangle | null>(null);
@@ -31,6 +32,7 @@ export default function Canvas() {
   useEffect(() => {
     async function changeLevel() {
       setIsChangingLevel(true);
+      await saveLevelData(levelIndex, currentScore);
       await delay(2000);
       setDisplayScore(true);
       setIsChangingLevel(false);
