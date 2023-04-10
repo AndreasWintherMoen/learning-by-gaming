@@ -9,6 +9,7 @@ import React from "react";
 import ScoreCard from "./components/ScoreCard";
 import SoundButton from "./components/SoundButton";
 import NewPowerBar from "./components/NewPowerBar";
+import LevelsModal from "./components/LevelsModal";
 
 export default function Game({ children }: { children: React.ReactNode }) {
   return (
@@ -26,6 +27,7 @@ export default function Game({ children }: { children: React.ReactNode }) {
           <QuestionButton />
           <SoundButton />
           <InfoModal />
+          <LevelsModal />
         </div>
         <ScoreCard />
       </Provider>
