@@ -52,11 +52,12 @@ export default function SineController() {
   }, [level]);
 
   useEffect(() => {
+    if (!levelInfo) return;
     //Listen for keypresses and fire the sine wave
     const handleKeyDown = (ev: KeyboardEvent) => {
       if (isFiring || showTutorial || displayScore) return;
       if (ev.key === 'Enter' || ev.key === ' ') {
-        if (levelInfo?.showPowerBar) {
+        if (levelInfo.showPowerBar) {
           startCharge();
         } else {
           fire();
@@ -83,7 +84,7 @@ export default function SineController() {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
-  }, [isFiring, phaseShift, showTutorial, displayScore]);
+  }, [isFiring, phaseShift, showTutorial, displayScore, levelInfo]);
 
   function handleFunctionParameterChange(
     parameter: 'amplitude' | 'angular-frequency' | 'phase-shift' | 'vertical-shift',

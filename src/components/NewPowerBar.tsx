@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useData from "../hooks/useData";
 import useLevel from "../hooks/useLevel";
+import { store } from '../redux/store';
 
 interface RGBColor {
   r: number;
@@ -22,14 +23,36 @@ function interpolateColor(startColor:RGBColor, endColor:RGBColor, chargePower:nu
 }
 
 function NewPowerBar() {
-  const { chargePower, level } = useData();
+  const { isCharging, chargePower, setChargePower, level } = useData();
   const levelInfo = useLevel(level);
-  if (level === 0 || !levelInfo?.showPowerBar) return null;
 
   const HEIGHT = 257;
   const startColor = { r: 142, g: 252, b: 140 };
   const endColor = { r: 255, g: 83, b: 83 };
   const currentColor = interpolateColor(startColor, endColor, chargePower);
+
+  useEffect(() => {
+    if (!isCharging) return;
+    const start = Date.now();
+    function animate() {
+      const now = Date.now();
+      const elapsed = now - start;
+      const t = elapsed / 1000;
+      if (t >= 1) {
+        setChargePower(1);
+        return;
+      }
+      setChargePower(t);
+      // We have to access Redux directly because we are inside a callback function and this function was registered 
+      // on the useEffect call and won't update isCharging when it changes.
+      const currentIsCharge = store.getState().game.isCharging;
+      if (!currentIsCharge) return;
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  }, [isCharging]);
+
+  if (level === 0 || !levelInfo?.showPowerBar) return null;
 
   return (
     <div style={{ position: 'absolute', bottom: '50%', left: 20, height: HEIGHT/2, width: 1 }}>
