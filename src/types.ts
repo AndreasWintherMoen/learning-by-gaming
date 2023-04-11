@@ -31,6 +31,7 @@ export type Data = {
   currentScore: number;
   totalScore: number;
   selectedFunction: SupportedFunctions;
+  showLevels: boolean;
 };
 
 export type EasingFunctions =

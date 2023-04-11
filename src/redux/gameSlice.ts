@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Coin, Data} from '../types';
 import {sound} from '@pixi/sound';
-import { levels } from '../hooks/useLevel';
+import {levels} from '../hooks/useLevel';
 
 const initialState = {
   displayScore: false,
@@ -15,12 +15,13 @@ const initialState = {
   isCharging: false,
   chargePower: 0,
   isBackgroundSound: true,
-  showTutorial: false,
+  showLevels: false,
   coins: [],
   coinsCollectedThisShot: 0,
   currentScore: 0,
   totalScore: 0,
   selectedFunction: 'sin',
+  showTutorial: false,
 } as Data;
 
 function generateNewCoins(levelIndex: number) {
@@ -124,6 +125,10 @@ export const gameSlice = createSlice({
         console.log('Invalid function selected', action.payload);
       }
       state.selectedFunction = action.payload;
+    },
+    setShowLevels: (state, action) => {
+      if (typeof action.payload != "boolean") return;
+      state.showLevels = action.payload;
     }
   }
 });
@@ -145,6 +150,7 @@ export const {
   setCurrentScore,
   setCoinsCollectedThisShot,
   setSelectedFunction,
+  setShowLevels
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

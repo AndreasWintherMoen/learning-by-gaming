@@ -10,6 +10,7 @@ import ScoreCard from "./components/ScoreCard";
 import SoundButton from "./components/SoundButton";
 import NewPowerBar from "./components/NewPowerBar";
 import LevelsModal from "./components/LevelsModal";
+import LevelsButton from "./components/LevelsButton";
 
 export default function Game({ children }: { children: React.ReactNode }) {
   return (
@@ -25,6 +26,7 @@ export default function Game({ children }: { children: React.ReactNode }) {
           <SineController />
           <NewPowerBar />
           <QuestionButton />
+          <LevelsButton />
           <SoundButton />
           <InfoModal />
           <LevelsModal />
