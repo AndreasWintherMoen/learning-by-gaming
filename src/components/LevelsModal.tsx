@@ -4,10 +4,13 @@ import { loadAllLevelData } from '../utils/dataStorage';
 import BackgroundPaperSvg from './svg/BackgroundPaper';
 import CloseButtonSvg from './svg/CloseButton';
 import { LevelScore } from '../types';
+import levelScoreToNumber from '../utils/levelScoreToNumber';
 
 export default function LevelsModal() {
   const {showLevels, setShowLevels, setLevel} = useData();
   const allLevels = useMemo(() => loadAllLevelData(), [showLevels]);
+  const collectedStars = useMemo(() => allLevels.reduce<number>((acc, level) => acc + levelScoreToNumber(level), 0), [allLevels]);
+  const maxStars = useMemo(() => allLevels.length * 3, [allLevels]);
 
   if (!showLevels) return null;
 
@@ -35,7 +38,7 @@ export default function LevelsModal() {
         </div>
         {/* Stars */}
         <div style={{position: 'absolute', top: 25, right: 80,width: 70, height: 40, display:'flex', flexDirection: 'row'}}>
-          <p style={{alignSelf:'center', marginRight: 10}}>{'21/40'}</p>
+          <p style={{alignSelf:'center', marginRight: 10}}>{`${collectedStars}/${maxStars}`}</p>
           <svg  viewBox="0 0 49 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M14.2154 15.6135C14.2154 15.6135 18.6938 2.05016 20.7413 1.01931C21.9175 0.427118 29.8971 13.6524 29.8971 13.6524C29.8971 13.6524 47.2546 12.0835 47.7217 13.6524C48.3055 15.6135 35.4003 25.7383 35.4003 25.7383C35.4003 25.7383 40.9495 44.2214 39.9295 44.7564C37.2131 46.1812 23.9069 33.8107 23.9069 33.8107C23.9069 33.8107 4.89629 46.7119 3.50116 46.9911C1.01737 47.4883 9.63749 26.8785 9.63749 26.8785C9.63749 26.8785 0.550296 20.5806 1.01741 19.1709C1.43895 17.8987 14.2154 15.6135 14.2154 15.6135Z" fill="#FAFC8C" stroke="#3D3D3D" strokeWidth="2"/>
           </svg>
