@@ -136,18 +136,18 @@ button:focus-visible {
 }
 .star {
   opacity: 0; /* Initial opacity */
-  animation: fadeIn 2s forwards; /* Apply the animation */
+  animation: fadeIn 1s forwards; /* Apply the animation */
 }
 .star1 {
-  animation: fadeIn 2s forwards;
+  animation: fadeIn 1s forwards;
 }
 
 .star2 {
-  animation: fadeIn 2s forwards 0.5s; /* 0.5s delay */
+  animation: fadeIn 1s forwards 0.3s;
 }
 
 .star3 {
-  animation: fadeIn 2s forwards 1s; /* 1s delay */
+  animation: fadeIn 1s forwards 0.6s;
 }
 .dropshadowM {
   box-shadow: 0 2px 4px rgb(0 0 0 / 0.2);
