@@ -2,12 +2,17 @@ import React from 'react';
 import useData from "../hooks/useData";
 
 export default function LevelsButton() {
-  const { level, setShowLevels } = useData();
+  const { level, setShowLevels, isFiring } = useData();
 
   if (level === 0) return null;
 
+  function handleClick() {
+    if (isFiring) return;
+    setShowLevels(true);
+  }
+
   return (
-    <div className={"easeIn button"} style={{ position: 'absolute', bottom: 20, left: 20, height: 110, width: 110 }} onClick={() => setShowLevels(true)}>
+    <div className={`easeIn button ${isFiring && "noselecttext"}`} style={{ position: 'absolute', bottom: 20, left: 20, height: 110, width: 110 }} onClick={handleClick}>
       <svg width="143" height="144" viewBox="0 0 143 144" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_247_1564)">
           <path d="M128.744 63.7382C132.223 95.8968 104.392 123.139 71.2097 121.544C40.8368 120.614 13.0061 95.5444 13.0061 63.4724C21.837 10.4506 47.9283 2.87597 71.2097 5.40086C103.502 5.40086 128.744 31.6661 128.744 63.7382Z" fill="#E2E2E2"/>
@@ -16,7 +21,7 @@ export default function LevelsButton() {
         <path d="M77.4091 118.088C76.41 118.336 76.4457 118.371 77.8729 118.407C78.8363 118.442 79.3358 118.3 79.1931 118.088C78.9433 117.698 78.9433 117.698 77.4091 118.088Z" fill="#3D3D3D"/>
         <path d="M74.84 118.336C75.1611 118.407 75.6606 118.407 75.9104 118.336C76.1245 118.23 75.8747 118.159 75.2681 118.159C74.6972 118.159 74.4832 118.23 74.84 118.336Z" fill="#3D3D3D"/>
         <path d="M72.8776 118.691C73.1273 118.797 73.4485 118.762 73.5555 118.655C73.6982 118.549 73.4841 118.443 73.0917 118.478C72.6992 118.478 72.5921 118.584 72.8776 118.691Z" fill="#3D3D3D"/>
-        <path d="M61.116 52.0611C61.116 52.0611 66.5774 34.3698 69.0743 33.0252C70.5087 32.2528 80.2397 49.5032 80.2397 49.5032C80.2397 49.5032 101.407 47.4567 101.977 49.5032C102.689 52.0611 86.9508 65.2673 86.9508 65.2673C86.9508 65.2673 93.7179 89.3757 92.4741 90.0736C89.1615 91.932 72.9347 75.7966 72.9347 75.7966C72.9347 75.7966 49.7515 92.6242 48.0501 92.9884C45.0212 93.637 55.5333 66.7545 55.5333 66.7545C55.5333 66.7545 44.4516 58.54 45.0212 56.7012C45.5353 55.0418 61.116 52.0611 61.116 52.0611Z" fill="#FAFC8C" stroke="#3D3D3D" strokeWidth="3"/>
+        <path d="M61.116 52.0611C61.116 52.0611 66.5774 34.3698 69.0743 33.0252C70.5087 32.2528 80.2397 49.5032 80.2397 49.5032C80.2397 49.5032 101.407 47.4567 101.977 49.5032C102.689 52.0611 86.9508 65.2673 86.9508 65.2673C86.9508 65.2673 93.7179 89.3757 92.4741 90.0736C89.1615 91.932 72.9347 75.7966 72.9347 75.7966C72.9347 75.7966 49.7515 92.6242 48.0501 92.9884C45.0212 93.637 55.5333 66.7545 55.5333 66.7545C55.5333 66.7545 44.4516 58.54 45.0212 56.7012C45.5353 55.0418 61.116 52.0611 61.116 52.0611Z" fill={isFiring ? "E2E2E2" : "#FAFC8C"} stroke="#3D3D3D" strokeWidth="3"/>
         <defs>
           <filter id="filter0_d_247_1564" x="0.00610352" y="0.980469" width="142.033" height="142.63" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
             <feFlood floodOpacity="0" result="BackgroundImageFix"/>
