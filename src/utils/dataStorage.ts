@@ -1,3 +1,5 @@
+import { levels } from '../hooks/useLevel';
+
 export function saveLevelData(level: number, score: number): void {
   const levelData = loadAllLevelData();
   const currentScore = levelData[level - 1];
@@ -14,11 +16,14 @@ export function getLevelData(level: number): number {
 }
 
 export function loadAllLevelData(): number[] {
+  const numLevels = levels.length;
   const dataString = localStorage.getItem('levelData');
-  if (!dataString) return [];
-  return dataString
-    .split(',')
-    .map((score) => parseInt(score, 10));
+  if (!dataString) return Array(numLevels).fill(-1);
+  const data = dataString.split(',').map((score) => parseInt(score, 10));
+  if (data.length < numLevels) {
+    return [...data, ...Array(numLevels - data.length).fill(-1)];
+  }
+  return data;
 }
 
 export function getLevelCount(): number {
