@@ -9,6 +9,8 @@ export type Coin = {
   isCollected: boolean;
 }
 
+export type LevelScore = "locked" | "not played" | 0 | 1 | 2 | 3;
+
 export type Draw = Exclude<ComponentProps<typeof Graphics>['draw'], undefined>;
 
 export type SupportedFunctions = 'sin' | 'cos' | 'arcsin' | 'arccos';
