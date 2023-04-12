@@ -8,6 +8,7 @@ export function saveLevelData(level: number, score: number): void {
   const starScore = scoreToLevelScore(score, level - 1);
   if (!!currentScore && typeof currentScore === 'number' && typeof starScore === 'number' && currentScore > starScore) return;
   levelData[level - 1] = starScore;
+  if (levelData[level] === "locked") levelData[level] = "not played";
   const dataString = levelData.map(serialize).join(',');
   localStorage.setItem('levelData', dataString);
 }
