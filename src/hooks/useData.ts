@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import {
+  setLevel,
   nextLevel,
   resetLevel,
   setAmplitude,
@@ -33,6 +34,7 @@ export type DataContext = {
   isCharging: boolean;
   chargePower: number;
   isBackgroundSound: boolean;
+  setLevel: (level: number) => void;
   nextLevel: () => void;
   resetLevel: () => void;
   showTutorial: boolean;
@@ -69,6 +71,11 @@ export default function useData(): DataContext {
   function dispatchSetDisplayScore(displayScore: boolean) {
     dispatch(setDisplayScore(displayScore));
   }
+
+  function dispatchSetLevel(level: number) {
+    dispatch(setLevel(level));
+  }
+
   function dispatchNextLevel() {
     dispatch(nextLevel());
   }
@@ -153,6 +160,7 @@ export default function useData(): DataContext {
   return {
     ...data,
     setDisplayScore: dispatchSetDisplayScore,
+    setLevel: dispatchSetLevel,
     nextLevel: dispatchNextLevel,
     resetLevel: dispatchResetLevel,
     setVerticalShift: dispatchVerticalShift,

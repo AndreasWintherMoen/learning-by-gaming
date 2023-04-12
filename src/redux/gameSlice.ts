@@ -48,15 +48,25 @@ export const gameSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    nextLevel: (state) => {
-      state.level = state.level + 1;
+    setLevel: (state, action) => {
+      state.level = action.payload;
       state.numAttempts = 0;
       state.chargePower = 0;
       state.isCharging = false;
       state.isFiring = false;
       state.coins = generateNewCoins(state.level);
       state.coinsCollectedThisShot = 0;
+      state.currentScore = 0;
+    },
+    nextLevel: (state) => {
+      state.level = state.level + 1;
       state.totalScore += state.currentScore;
+      state.numAttempts = 0;
+      state.chargePower = 0;
+      state.isCharging = false;
+      state.isFiring = false;
+      state.coins = generateNewCoins(state.level);
+      state.coinsCollectedThisShot = 0;
       state.currentScore = 0;
     },
     resetLevel: (state) => {
@@ -135,6 +145,7 @@ export const gameSlice = createSlice({
 
 export const {
   setDisplayScore,
+  setLevel,
   nextLevel,
   resetLevel,
   setAmplitude,

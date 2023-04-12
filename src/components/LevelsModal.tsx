@@ -6,12 +6,18 @@ import CloseButtonSvg from './svg/CloseButton';
 import { LevelScore } from '../types';
 
 export default function LevelsModal() {
-  const {showLevels, setShowLevels} = useData();
+  const {showLevels, setShowLevels, setLevel} = useData();
   const allLevels = useMemo(() => loadAllLevelData(), [showLevels]);
 
   if (!showLevels) return null;
+
   function handleClose() {
     setShowLevels(false);
+  }
+
+  function handleLevelSelect(level: number) {
+    setLevel(level + 1);
+    handleClose();
   }
 
   return (
@@ -41,7 +47,7 @@ export default function LevelsModal() {
           {/* Description */}
           <div style={{display:'flex', flexWrap:'wrap', alignSelf:'center'}}>
             {allLevels.map((score, index) => (
-              <LevelCard level={index} score={score} />
+              <LevelCard level={index} score={score} onClick={handleLevelSelect} />
             ))}
           </div>
         </div>
@@ -49,17 +55,19 @@ export default function LevelsModal() {
     </div>
   )};
 
+type LevelCardProps = {
+  level: number;
+  score: LevelScore;
+  onClick: (level: number) => void;
+}
 
-function LevelCard({level, score}: {level: number, score: LevelScore}) {
-  function handleLevelChange() {
-    console.log('Change level to ', level);
-  }
-
+function LevelCard({ level, score, onClick }: LevelCardProps) {
   if (score === "locked") {
     return <LockedLevel />;
   }
+
   return (
-    <div className={'button'} style={{width: 100, height: 100, display:'flex', justifyContent:'center', position:'relative'}} onClick={handleLevelChange}>
+    <div className={'button'} style={{width: 100, height: 100, display:'flex', justifyContent:'center', position:'relative'}} onClick={() => onClick(level)}>
       <svg viewBox="0 0 240 155" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M9.28031 6.9741L118.219 4.48691L176.353 5.85181L204.326 6.5086L216.59 6.39826L225.181 5.53787L227.87 7.99071L230.084 62.4749L231.077 122.374L229.533 136.277L227.762 150.309L135.237 148.643L89.0891 148.113L45.5658 148.113C45.5658 148.113 20.8517 149.401 19.9487 148.483C17.2768 145.765 17.9323 125.202 17.9323 125.202L16.3601 105.251L14.0971 89.2666L9.28031 6.9741Z" fill="#F0F0F0"/>
         <path d="M217.289 5.75122C203.024 6.34563 217.272 6.01635 181.453 5.57471C137.905 3.91639 126.577 3.84117 91.6762 4.80215C74.5443 5.22653 49.2234 5.71298 35.2592 5.83022C21.2951 5.94746 9.52319 6.24335 9.19265 6.48993C8.76137 6.67056 9.05614 16.8512 9.85398 29.0148C10.5471 41.176 11.5725 59.6399 12.0687 69.9525C12.6738 80.204 13.7738 92.5655 14.6266 97.2908C16.1468 106.356 17.5873 124.893 17.6268 139.074C17.6883 147.977 18.816 150.038 23.2654 149.38C24.4301 149.216 31.5251 149.369 39.005 148.909C53.8773 148.469 60.951 147.53 140.169 149.327C200.107 150.67 227.89 151.068 228.338 150.634C229.781 149.396 232.213 121.157 231.951 108.816C231.861 102.01 231.134 80.5007 230.275 61.0868C229.519 41.6754 228.91 21.6316 228.815 16.5425C228.843 4.58902 228.521 4.04378 217.289 5.75122ZM226.4 6.69358C227.609 7.48499 227.927 9.08211 227.659 13.2725C227.469 16.2566 227.715 27.1991 228.211 37.5116C230.631 90.0267 231.055 111.338 229.789 126.251C228.502 143.134 227.932 148.78 227.556 149.725C227.423 150.167 197.23 149.713 140.012 148.496C68.3343 146.941 50.3241 147.521 40.3173 148.113C33.6837 148.466 27.0138 148.196 25.1074 148.469C20.2389 149.118 18.6394 147.872 18.923 143.428C19.4173 135.682 17.7134 109.763 16.0084 98.6586C14.9547 92.1481 13.7424 78.2579 13.2583 67.7549C12.6695 57.2494 11.7124 39.3594 11.0714 28.026C10.3257 16.6903 9.76866 7.33007 9.77271 7.26658C9.79297 6.94913 21.1417 6.70689 43.9276 6.47885C55.4778 6.36852 75.5516 5.88603 88.593 5.4292C109.207 4.70506 119.068 4.74585 164.648 5.81599C200.801 6.60124 217.997 6.81422 220.23 6.35796C224.587 5.50647 224.587 5.50646 226.4 6.69358Z" fill="black"/>
@@ -73,7 +81,7 @@ function LevelCard({level, score}: {level: number, score: LevelScore}) {
           )
         }
       </svg>
-      <p className={'noselect noselecttext'} style={{fontSize:25, position:'absolute', left:'50%', top:'30%', transform:'translate(-50%)'}}>
+      <p className={'noselect'} style={{fontSize:25, position:'absolute', left:'50%', top:'30%', transform:'translate(-50%)'}}>
         {level+1}
       </p>
     </div>
