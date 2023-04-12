@@ -8,7 +8,7 @@ import levelScoreToNumber from '../utils/levelScoreToNumber';
 
 export default function LevelsModal() {
   const {showLevels, setShowLevels, setLevel} = useData();
-  const allLevels = useMemo(() => loadAllLevelData(), [showLevels]);
+  const allLevels = useMemo(loadAllLevelData, [showLevels]);
   const collectedStars = useMemo(() => allLevels.reduce<number>((acc, level) => acc + levelScoreToNumber(level), 0), [allLevels]);
   const maxStars = useMemo(() => allLevels.length * 3, [allLevels]);
 
