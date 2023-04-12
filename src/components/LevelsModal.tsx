@@ -1,11 +1,12 @@
+import { useMemo } from 'react';
 import useData from "../hooks/useData";
+import { loadAllLevelData } from '../utils/dataStorage';
 import BackgroundPaperSvg from './svg/BackgroundPaper';
 import CloseButtonSvg from './svg/CloseButton';
 
-const allLevels = [1,2,3,2,1,3,2,1,-1,-1,-1,-1,-1,-1,-1] as const;
-
 export default function LevelsModal() {
   const {showLevels, setShowLevels} = useData();
+  const allLevels = useMemo(() => loadAllLevelData(), [showLevels]);
 
   if (!showLevels) return null;
   function handleClose() {
