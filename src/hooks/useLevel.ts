@@ -30,13 +30,13 @@ type Level = {
 
 export const levels: Level[] = [
   {
-    title: 'Sinus Funksjon Intro',
+    title: 'Velkommen til Aftermath',
     descriptions: [
-      {type: 'text', content: 'Trig functions like sine and cosine have periodic graphs which we called Sinusoidal Graph, or Sine wave.'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:932/format:webp/0*qtpAmBFyFAV_40YH.png'},
-      {type: 'text', content: 'Every period of sine wave is a whole unit circle:'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
-      {type: 'lottieAnimation', content: 'lottie/sine-loader.json'},
+      {type: 'text', content: 'Det er plassert mynter rundt omkring på spillbrettet. Målet ditt er å lage sinusfunksjoner som samler inn alle myntene på færrest mulig forsøk.'},
+      {type: 'image', content: 'infomodal/space.gif'},
+      {type: 'text', content: 'Trykk på mellomrom (Space) for å skyte, og trykk på krysset øverst til venstre for å lukke denne boksen'},
+      {type: 'text', content: ''},
+      {type: 'text', content: 'Lykke til!'},
     ],
     showPowerBar: false,
     cellSize: 100,
@@ -58,13 +58,12 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'What is Amplitude?',
+    title: 'Amplitude',
     descriptions: [
-      {type: 'text', content: 'Trig functions like sine and cosine have periodic graphs which we called Sinusoidal Graph, or Sine wave.'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:932/format:webp/0*qtpAmBFyFAV_40YH.png'},
-      {type: 'text', content: 'Every period of sine wave is a whole unit circle:'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
-      {type: 'lottieAnimation', content: 'lottie/sine-loader.json'},
+      {type: 'text', content: 'Det gikk bra!'},
+      {type: 'text', content: 'Nå skal vi se på amplitude. Amplitude er avstanden mellom topp- og bunnpunktene til sinusfunksjonen, altså hvor høy funksjonen er. Denne verdien kan du endre ved å trykke på pilene som vist under.'},
+      {type: 'image', content: 'infomodal/amplitude.gif'},
+      {type: 'text', content: 'Prøv å treffe alle myntene med ett skudd for å få full poengsum.'},
     ],
     showPowerBar: false,
     cellSize: 100,
@@ -86,8 +85,12 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Amplitude',
-    descriptions: [],
+    title: 'Amplitude og enhetssirkel',
+    descriptions: [
+      {type: 'text', content: 'Du er sikkert kjent med enhetssirkelen og hvordan den kan brukes til å finne sinus og cosinus av vinkler.'},
+      {type: 'image', content: 'infomodal/amplitude-unitcircle.gif'},
+      {type: 'text', content: 'Amplituden til en sinusfunksjon kan du tenke på som radius til enhetssirkelen.'},
+    ],
     showPowerBar: false,
     cellSize: 100,
     origoPosition: {

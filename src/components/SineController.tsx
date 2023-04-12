@@ -1,5 +1,5 @@
 import useData from '../hooks/useData';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useTheme from '../hooks/useTheme';
 import FunctionInputPicker from './FunctionInputPicker';
 import SineFunctionIndicator from './SineFunctionIndicator';
@@ -45,6 +45,8 @@ export default function SineController() {
     duration: 2,
   });
 
+  const [disabledControls, setDisabledControls] = useState(true);
+
   useEffect(() => {
     if (level === 1) {
       startPositionAnimation();
@@ -52,7 +54,11 @@ export default function SineController() {
   }, [level]);
 
   useEffect(() => {
-    if (!levelInfo) return;
+    if (showTutorial) setDisabledControls(false);
+  }, [showTutorial]);
+
+  useEffect(() => {
+    if (!levelInfo || disabledControls) return;
     //Listen for keypresses and fire the sine wave
     const handleKeyDown = (ev: KeyboardEvent) => {
       if (isFiring || showTutorial || displayScore) return;

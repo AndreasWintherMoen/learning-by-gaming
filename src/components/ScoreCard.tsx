@@ -6,7 +6,7 @@ import useData from "../hooks/useData";
 import useLevel from '../hooks/useLevel';
 
 export default function ScoreCard() {
-  const {displayScore, nextLevel, resetLevel, setDisplayScore, currentScore, level: levelIndex} = useData();
+  const {displayScore, nextLevel, resetLevel, setDisplayScore, setShowTutorial, currentScore, level: levelIndex} = useData();
   const level = useLevel(levelIndex);
   if (!level) return null;
   const {starScores} = level;
@@ -56,6 +56,7 @@ export default function ScoreCard() {
               onClick={() => {
                 setDisplayScore(false);
                 nextLevel();
+                setShowTutorial(true);
               }}
             />
           </div>

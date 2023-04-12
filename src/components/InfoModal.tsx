@@ -75,7 +75,7 @@ export default function InfoModal() {
           <div style={{display:'flex', alignItems: 'center', flexDirection: 'column', gap: 20}}>
             {data.descriptions.map((description, index) => {
               if (description.type === 'text') {
-                return <p key={index} style={{textAlign:'left', width:'90%'}}>{description.content}</p>
+                return <p key={index} style={{textAlign:'left', width:'90%', fontSize: '1.5rem'}}>{description.content}</p>
               }
               else if (description.type === 'image') {
                 return <img key={index} src={description.content} alt={'illustration'} style={{width: '70%', height: "auto", marginBottom: 40}}/>
