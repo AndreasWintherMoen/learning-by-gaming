@@ -18,9 +18,10 @@ export default function ScoreCard() {
 
   if (!displayScore) return null;
 
-  function playSound(delayInMilliseconds: number) {
+  function playSound(index: number) {
+    const delayInMilliseconds = index * 300;
     setTimeout(() => {
-      sound.play('score', {
+      sound.play(`score-${index + 1}`, {
         volume: 0.4,
       });
     }, delayInMilliseconds);
@@ -29,8 +30,7 @@ export default function ScoreCard() {
   for (let i = 0; i < starScores.length; i++) {
     console.log('playing sound', i);
     if (currentScore >= starScores[i]) {
-
-      playSound(i*300);
+      playSound(i);
     }
   }
 

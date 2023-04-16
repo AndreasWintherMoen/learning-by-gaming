@@ -24,8 +24,16 @@ sound.add('bomb-hit', {
   url: 'sounds/explosion.mp3',
   preload: true,
 });
-sound.add('score', {
-  url: 'sounds/star-score.mp3',
+sound.add('score-1', {
+  url: 'sounds/star-score-1.mp3',
+  preload: true,
+});
+sound.add('score-2', {
+  url: 'sounds/star-score-2.mp3',
+  preload: true,
+});
+sound.add('score-3', {
+  url: 'sounds/star-score-3.mp3',
   preload: true,
 });
 
