@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import useData from "../hooks/useData";
 import { loadAllLevelData } from '../utils/dataStorage';
 import BackgroundPaperSvg from './svg/BackgroundPaper';
@@ -11,6 +11,18 @@ export default function LevelsModal() {
   const allLevels = useMemo(loadAllLevelData, [showLevels]);
   const collectedStars = useMemo(() => allLevels.reduce<number>((acc, level) => acc + levelScoreToNumber(level), 0), [allLevels]);
   const maxStars = useMemo(() => allLevels.length * 3, [allLevels]);
+
+  useEffect(() => {
+    const handleKeyDown = (ev: KeyboardEvent) => {
+      if (ev.key === 'Escape') {
+        setShowLevels(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   if (!showLevels) return null;
 
