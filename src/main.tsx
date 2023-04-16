@@ -24,6 +24,10 @@ sound.add('bomb-hit', {
   url: 'sounds/explosion.mp3',
   preload: true,
 });
+sound.add('score', {
+  url: 'sounds/star-score.mp3',
+  preload: true,
+});
 
 await new FontFaceObserver('Handdrawn').load();
 await new FontFaceObserver('Sofija').load();
