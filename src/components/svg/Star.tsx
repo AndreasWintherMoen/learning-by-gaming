@@ -1,11 +1,34 @@
+import {sound} from "@pixi/sound";
+import { useEffect, useState } from 'react';
+
 interface StarProps {
   selected: boolean;
   size: number;
   style?: React.CSSProperties;
   className?: string;
   score?: number;
+  index: number;
 }
-export default function Star({ className, selected, size, style, score }: StarProps) {
+
+
+function playSound(delayInMilliseconds: number) {
+  setTimeout(() => {
+    sound.play('score', {
+      volume: 0.4,
+    });
+  }, delayInMilliseconds);
+}
+
+export default function Star({ className, selected, size, style, score, index }: StarProps) {
+  const [hasPlayedSound, setHasPlayedSound] = useState(false);
+
+  useEffect(() => {
+    if (selected && !hasPlayedSound) {
+      playSound(index * 300);
+      setHasPlayedSound(true);
+    }
+  }, []);
+
   return (
     <div className={`star ${className}`} style={{...style}}>
       <svg height={size} width={size} viewBox="0 0 112 118" fill="none" xmlns="http://www.w3.org/2000/svg">
