@@ -4,7 +4,6 @@ import AMButton from "./AFButton";
 import ReplayIcon from "./svg/ReplayIcon";
 import useData from "../hooks/useData";
 import useLevel from '../hooks/useLevel';
-import {sound} from "@pixi/sound";
 
 export default function ScoreCard() {
   console.log('rendering ScoreCard');
@@ -17,22 +16,6 @@ export default function ScoreCard() {
   const height = 588;
 
   if (!displayScore) return null;
-
-  function playSound(delayInMilliseconds: number) {
-    setTimeout(() => {
-      sound.play('score', {
-        volume: 0.4,
-      });
-    }, delayInMilliseconds);
-  }
-  //loop through all elements in starScores array and play sound if currentScore is greater than or equal to the score
-  for (let i = 0; i < starScores.length; i++) {
-    console.log('playing sound', i);
-    if (currentScore >= starScores[i]) {
-
-      playSound(i*300);
-    }
-  }
 
   return (
   <div className={'modal'}>
@@ -54,9 +37,9 @@ export default function ScoreCard() {
       <div style={{ justifyContent:'space-between', display: 'flex', flexDirection: 'column', height: '100%' }}>
         <p style={{ fontSize: 70, fontFamily: 'Sofija', textAlign:'center' }}>Din Score: {Math.round(currentScore)}</p>
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10}}>
-          <Star className={'star1'} selected={currentScore >= score1} size={100} score={score1}/>
-          <Star className={'star2'} selected={currentScore >= score2} size={100} score={score2}/>
-          <Star className={'star3'} selected={currentScore >= score3} size={100} score={score3}/>
+          <Star className={'star1'} selected={currentScore >= score1} size={100} score={score1} index={0}/>
+          <Star className={'star2'} selected={currentScore >= score2} size={100} score={score2} index={1}/>
+          <Star className={'star3'} selected={currentScore >= score3} size={100} score={score3} index={2}/>
         </div>
         <div style={{display:'flex', gap: 32}}>
           <AMButton
