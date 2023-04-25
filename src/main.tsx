@@ -31,6 +31,7 @@ sound.add('score', {
 
 await new FontFaceObserver('Handdrawn').load();
 await new FontFaceObserver('Sofija').load();
+await new FontFaceObserver('Infomodal').load();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
