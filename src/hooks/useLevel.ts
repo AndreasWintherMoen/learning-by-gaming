@@ -110,8 +110,11 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Vertical Shift',
-    descriptions: [],
+    title: 'Vertikal forskyvning',
+    descriptions: [
+      { type: "text", content: "Akkurat som med ikke-trigonometriske funksjoner, kan vi også forskyve trigonometriske funksjoner opp og ned. Dette kalles ofte vertikal forskyvning."},
+      { type: "image", content: "infomodal/vertical-shift.gif" },
+    ],
     showPowerBar: false,
     cellSize: 100,
     origoPosition: {
@@ -131,13 +134,11 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Vertical Shift & Amplitude',
+    title: 'Mer om enhetssirkelen',
     descriptions: [
-      {type: 'text', content: 'Trig functions like sine and cosine have periodic graphs which we called Sinusoidal Graph, or Sine wave.'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:932/format:webp/0*qtpAmBFyFAV_40YH.png'},
-      {type: 'text', content: 'Every period of sine wave is a whole unit circle:'},
-      {type: 'image', content: 'https://miro.medium.com/v2/resize:fit:800/0*JSIcq8SNHMnUTkv2.gif'},
-      {type: 'lottieAnimation', content: 'lottie/sine-loader.json'},
+      {type: 'text', content: "Sinus av en vinkel er også definert som forholdet mellom motstående katet og hypotenusen i en rettvinklet trekant."},
+      {type: 'image', content: "infomodal/sinus-katet-hypotenus.gif"},
+      {type: 'text', content: "I en enhetssirkel er hypotenusen alltid lik 1 (det er derfor vi kaller den ENHETSsirkel), og dermed er sinus lik lengden til motstående katet."},
     ],
     showPowerBar: false,
     cellSize: 100,
