@@ -20,12 +20,16 @@ type Level = {
   };
   bombPositions: number[][];
   coinPositions: number[][];
+  sinPositions?: number[][];
+  cosPositions?: number[][];
+  tanPositions?: number[][];
   title: string;
   descriptions: IDescriptionPart[];
   starScores: [number, number, number];
   maxAmplitude: number;
   maxVerticalShift: number;
   maxAngularFrequency: number;
+  highAccuracy?: boolean;
 }
 
 export const levels: Level[] = [
@@ -204,7 +208,7 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Level 8',
+    title: 'Cosinus!',
     descriptions: [],
     showPowerBar: true,
     cellSize: 100,
@@ -216,8 +220,9 @@ export const levels: Level[] = [
     coinPositions: [
       [Math.PI * 0.5, 0],
       [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
+      [3.14 * 2, 0],
     ],
+    cosPositions: [[3.14 * 1.5, 2]],
     starScores: [10, 200, 280],
     maxAmplitude: 3,
     maxVerticalShift: 3,
@@ -232,12 +237,14 @@ export const levels: Level[] = [
       y: 0,
       x: 2,
     },
-    bombPositions: [[3.14 * 2, 1]],
+    bombPositions: [],
     coinPositions: [
-      [Math.PI * 0.5, 0],
-      [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
+      // [Math.PI * 0.5, 0],
+      [3.14 * 0.75, 1],
+      [3.14, 0],
+      [3.14 * 1.25, -1],
     ],
+    cosPositions: [[Math.PI * 0.5, 0]],
     starScores: [10, 200, 280],
     maxAmplitude: 3,
     maxVerticalShift: 3,
@@ -264,27 +271,67 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Level 11',
+    title: 'Level 11', // Solution: 1cos(2x)+2
     descriptions: [],
     showPowerBar: true,
-    cellSize: 100,
+    cellSize: 50,
     origoPosition: {
       y: 0,
       x: 2,
     },
-    bombPositions: [[3.14 * 2, 1]],
+    bombPositions: [
+      [Math.PI* 2, -6],
+      [Math.PI* 2, -5.5],
+      [Math.PI* 2, -5],
+      [Math.PI* 2, -4.5],
+      [Math.PI* 2, -4],
+      [Math.PI* 2, -2],
+      [Math.PI* 2, -1.5],
+      [Math.PI* 2, -1],
+      [Math.PI* 2, -0.5],
+      [Math.PI* 2, 0],
+      [Math.PI* 2, 0.5],
+      [Math.PI* 2, 1],
+      [Math.PI* 2, 1.5],
+      [Math.PI* 2, 2],
+      [Math.PI* 2, 2.5],
+      [Math.PI* 2, 3],
+      [Math.PI* 2, 3.5],
+      [Math.PI* 2, 4],
+      [4.1588 + Math.PI * 4, 0],
+      [5.7296 + Math.PI * 4, 0],
+      [11 + Math.PI * 2, -2],
+      [11 + Math.PI * 2.5, -2],
+    ],
     coinPositions: [
-      [Math.PI * 0.5, 0],
-      [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
+      [Math.PI * 0.5, -1],
+      [Math.PI * 1.5, -1],
+      [4.1588 + Math.PI * 2, 0],
+      [5.7296 + Math.PI * 2, 0],
+      [7.3004 + Math.PI * 2, 0],
+      [11, -2],
+      [11 + Math.PI * 0.5, -2],
+      [11 + Math.PI * 1, -2],
     ],
     starScores: [10, 200, 280],
+    cosPositions: [
+      [Math.PI * 1, -2],
+      [Math.PI * 1, -1.5],
+      [Math.PI * 1, -1],
+      [Math.PI * 1, -0.5],
+      [Math.PI * 1, 0],
+      [Math.PI * 1, 0.5],
+      [Math.PI * 1, 1],
+      [Math.PI * 1, 1.5],
+      [Math.PI * 1, 2],
+    ],
+    tanPositions: [[Math.PI * 3, -3]],
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
   },
   {
-    title: 'Level 12',
+    title: 'Arcsin', // Solution: 2.0 arcsin(0.1x) - 1.0
     descriptions: [],
     showPowerBar: true,
     cellSize: 100,
@@ -292,17 +339,43 @@ export const levels: Level[] = [
       y: 0,
       x: 2,
     },
-    bombPositions: [[3.14 * 2, 1]],
+    bombPositions: [],
     coinPositions: [
-      [Math.PI * 0.5, 0],
-      [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
+      [0.1 * 10, -0.1 * 2 + 1],
+      [0.2 * 10, -0.201 * 2 + 1],
+      [0.3 * 10, -0.304 * 2 + 1],
+      [0.4 * 10, -0.412 * 2 + 1],
+      [0.5 * 10, -0.524 * 2 + 1],
+      [0.6 * 10, -0.644 * 2 + 1],
+      [0.7 * 10, -0.775 * 2 + 1],
+      [0.8 * 10, -0.927 * 2 + 1],
+      [0.9 * 10, -1.112 * 2 + 1],
+      [0.98 * 10, -1.37 * 2 + 1],
+    ],
+    sinPositions: [
+      // [0.845 * 10, -1],
+    ],
+    cosPositions: [
     ],
     starScores: [10, 200, 280],
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
+    highAccuracy: true,
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
   {
     title: 'Level 13',
     descriptions: [],

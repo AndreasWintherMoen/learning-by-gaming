@@ -21,6 +21,7 @@ const initialState = {
   currentScore: 0,
   totalScore: 0,
   selectedFunction: 'sin',
+  functionPickups: [],
   showTutorial: false,
 } as Data;
 
@@ -40,7 +41,25 @@ function generateNewCoins(levelIndex: number) {
     isCollected: false,
   } as Coin));
 
-  return [...coins, ...bombs];
+  const sins = level.sinPositions?.map(([x, y]) => ({
+    type: 'sin',
+    position: [x, y],
+    isCollected: false,
+  } as Coin)) || [];
+
+  const coss = level.cosPositions?.map(([x, y]) => ({
+    type: 'cos',
+    position: [x, y],
+    isCollected: false,
+  } as Coin)) || [];
+
+  const tans = level.tanPositions?.map(([x, y]) => ({
+    type: 'tan',
+    position: [x, y],
+    isCollected: false,
+  } as Coin)) || [];
+
+  return [...coins, ...bombs, ...sins, ...coss, ...tans];
 }
 
 
@@ -57,6 +76,7 @@ export const gameSlice = createSlice({
       state.coins = generateNewCoins(state.level);
       state.coinsCollectedThisShot = 0;
       state.currentScore = 0;
+      state.functionPickups = [];
     },
     nextLevel: (state) => {
       state.level = state.level + 1;
@@ -68,6 +88,7 @@ export const gameSlice = createSlice({
       state.coins = generateNewCoins(state.level);
       state.coinsCollectedThisShot = 0;
       state.currentScore = 0;
+      state.functionPickups = [];
     },
     resetLevel: (state) => {
       state.numAttempts = 0;
@@ -77,6 +98,7 @@ export const gameSlice = createSlice({
       state.coins = generateNewCoins(state.level);
       state.coinsCollectedThisShot = 0;
       state.currentScore = 0;
+      state.functionPickups = [];
     },
     setAmplitude: (state, action) => {
       state.amplitude = action.payload;
@@ -95,6 +117,7 @@ export const gameSlice = createSlice({
       state.isCharging = false;
       if (!!action.payload) {
         state.numAttempts += 1;
+        state.functionPickups = [];
       } else {
         state.chargePower = 0;
       }
@@ -115,7 +138,6 @@ export const gameSlice = createSlice({
       }
     },
     setShowTutorial: (state, action) => {
-      console.log('setShowTutorial', action.payload);
       state.showTutorial = action.payload;
     },
     setDisplayScore: (state, action) => {
@@ -135,6 +157,13 @@ export const gameSlice = createSlice({
         console.log('Invalid function selected', action.payload);
       }
       state.selectedFunction = action.payload;
+    },
+    setFunctionPickups: (state, action) => {
+      const { func } = action.payload;
+      if (func !== 'sin' && func !== 'cos' && func !== 'arcsin' && func !== 'arccos') {
+        console.log('Invalid function selected', action.payload);
+      }
+      state.functionPickups = [...state.functionPickups, action.payload];
     },
     setShowLevels: (state, action) => {
       if (typeof action.payload != "boolean") return;
@@ -161,6 +190,7 @@ export const {
   setCurrentScore,
   setCoinsCollectedThisShot,
   setSelectedFunction,
+  setFunctionPickups,
   setShowLevels
 } = gameSlice.actions;
 

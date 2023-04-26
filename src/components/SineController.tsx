@@ -68,15 +68,7 @@ export default function SineController() {
         } else {
           fire();
         }
-      } else if (ev.key === 'ArrowUp') {
-        setVerticalShift(verticalShift + 0.1);
-      } else if (ev.key === 'ArrowDown') {
-        setVerticalShift(verticalShift - 0.1);
-      } else if (ev.key === 'ArrowLeft') {
-        setPhaseShift(phaseShift - 0.1);
-      } else if (ev.key === 'ArrowRight') {
-        setPhaseShift(phaseShift + 0.1);
-      }
+      } 
     };
     const handleKeyUp = (ev: KeyboardEvent) => {
       if (isFiring || showTutorial || displayScore) return;
@@ -183,6 +175,7 @@ export default function SineController() {
               variable={amplitude}
               onClick={handleFunctionParameterChange('amplitude')}
               color={theme.color.green}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
             />
         </>)}
         <p>{`${selectedFunction}(`}</p>
@@ -195,6 +188,7 @@ export default function SineController() {
               variable={angularFrequency}
               onClick={handleFunctionParameterChange('angular-frequency')}
               color={theme.color.brown}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
             />
           </>)
         }
@@ -208,6 +202,7 @@ export default function SineController() {
               variable={phaseShift}
               onClick={handleFunctionParameterChange('phase-shift')}
               color={theme.color.purple}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
             />
           </>) : <p>x</p>}
         {level >= levelIntroduced['verticalShift'] ? (
@@ -220,6 +215,7 @@ export default function SineController() {
               variable={verticalShift}
               onClick={handleFunctionParameterChange('vertical-shift')}
               color={theme.color.pink}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
           />
           </>
         ) : <p>)</p>}

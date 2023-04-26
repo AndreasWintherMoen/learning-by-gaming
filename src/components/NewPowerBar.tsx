@@ -55,7 +55,7 @@ function NewPowerBar() {
   if (level === 0 || !levelInfo?.showPowerBar) return null;
 
   return (
-    <div style={{ position: 'absolute', bottom: '50%', left: 20, height: HEIGHT/2, width: 1 }}>
+    <div style={{ position: 'absolute', bottom: '50%', left: -50, height: HEIGHT/2, width: 1 }}>
       <svg width="102" height={HEIGHT} viewBox="0 0 102 257" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M5 5L98 4L88.5 129.5L87.5 255H9.5L5 5Z" fill="#E2E2E2"/>
         <g clipPath="url(#clip0_229_2394)">

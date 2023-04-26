@@ -18,8 +18,9 @@ import {
   setCoinsCollectedThisShot,
   setSelectedFunction,
   setShowLevels,
+  setFunctionPickups,
 } from '../redux/gameSlice';
-import {Coin, SupportedFunctions} from '../types';
+import {Coin, SupportedFuncWithXPos, SupportedFunctions} from '../types';
 
 export type DataContext = {
   selectedFunction: SupportedFunctions;
@@ -55,7 +56,9 @@ export type DataContext = {
   setShowTutorial: (showTutorial: boolean) => void;
   collectCoin: (index: number) => void;
   collectBomb: (index: number) => void;
-  setSelectedFunction: (selectedFunction: string) => void;
+  setSelectedFunction: (selectedFunction: SupportedFunctions) => void;
+  functionPickups: SupportedFuncWithXPos[];
+  pickupFunction: (selectedFunction: SupportedFunctions, x: number) => void;
   showLevels: boolean;
   setShowLevels: (showLevels: boolean) => void;
 };
@@ -150,8 +153,15 @@ export default function useData(): DataContext {
     dispatch(setCurrentScore(newScore));
   }
 
-  function dispatchSetSelectedFunction(selectedFunction: string) {
+  function dispatchSetSelectedFunction(selectedFunction: SupportedFunctions) {
     dispatch(setSelectedFunction(selectedFunction));
+  }
+
+  function pickupFunction(selectedFunction: SupportedFunctions, x: number) {
+    dispatch(setFunctionPickups({
+      func: selectedFunction,
+      x,
+    }))
   }
 
   function dispatchSetShowLevels(showLevels: boolean) {
@@ -169,6 +179,7 @@ export default function useData(): DataContext {
     setAngularFrequency: dispatchAngularFrequency,
     setPhaseShift: dispatchPhaseShift,
     setSelectedFunction: dispatchSetSelectedFunction,
+    pickupFunction,
     setShowLevels: dispatchSetShowLevels,
     fire,
     stopFire,

@@ -6,7 +6,6 @@ import useData from "../hooks/useData";
 import useLevel from '../hooks/useLevel';
 
 export default function ScoreCard() {
-  console.log('rendering ScoreCard');
   const {displayScore, nextLevel, resetLevel, setDisplayScore, setShowTutorial, currentScore, level: levelIndex} = useData();
   const level = useLevel(levelIndex);
   if (!level) return null;
