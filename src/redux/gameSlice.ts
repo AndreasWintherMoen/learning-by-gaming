@@ -168,6 +168,14 @@ export const gameSlice = createSlice({
     setShowLevels: (state, action) => {
       if (typeof action.payload != "boolean") return;
       state.showLevels = action.payload;
+    },
+    resetSineController: (state) => {
+      console.log('resetting sine from redux - this should work');
+      state.amplitude = 1;
+      state.angularFrequency = 1;
+      state.verticalShift = 0;
+      state.phaseShift = 0;
+      state.selectedFunction = 'sin';
     }
   }
 });
@@ -191,7 +199,8 @@ export const {
   setCoinsCollectedThisShot,
   setSelectedFunction,
   setFunctionPickups,
-  setShowLevels
+  setShowLevels,
+  resetSineController
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

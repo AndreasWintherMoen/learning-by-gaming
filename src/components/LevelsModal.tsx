@@ -7,7 +7,7 @@ import { LevelScore } from '../types';
 import levelScoreToNumber from '../utils/levelScoreToNumber';
 
 export default function LevelsModal() {
-  const {showLevels, setShowLevels, setLevel} = useData();
+  const {showLevels, setShowLevels, setLevel, resetSineController} = useData();
   const allLevels = useMemo(loadAllLevelData, [showLevels]);
   const collectedStars = useMemo(() => allLevels.reduce<number>((acc, level) => acc + levelScoreToNumber(level), 0), [allLevels]);
   const maxStars = useMemo(() => allLevels.length * 3, [allLevels]);
@@ -31,6 +31,8 @@ export default function LevelsModal() {
   }
 
   function handleLevelSelect(level: number) {
+    console.log('resetting sine first thing');
+    resetSineController();
     setLevel(level + 1);
     handleClose();
   }

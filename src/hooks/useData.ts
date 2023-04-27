@@ -18,7 +18,7 @@ import {
   setCoinsCollectedThisShot,
   setSelectedFunction,
   setShowLevels,
-  setFunctionPickups,
+  setFunctionPickups, resetSineController,
 } from '../redux/gameSlice';
 import {Coin, SupportedFuncWithXPos, SupportedFunctions} from '../types';
 
@@ -61,6 +61,7 @@ export type DataContext = {
   pickupFunction: (selectedFunction: SupportedFunctions, x: number) => void;
   showLevels: boolean;
   setShowLevels: (showLevels: boolean) => void;
+  resetSineController: () => void;
 };
 
 // TODO: Move this somewhere else (either to Coin.value or to a separate file of constants)
@@ -134,10 +135,10 @@ export default function useData(): DataContext {
     coins[index] = { ...coins[index], isCollected: true };
     dispatch(setCoins(coins));
 
-    const chargeScoreMultiplier = (data.chargePower + 1) / 2; // 0.5 to 1 depending on charge power
+    //const chargeScoreMultiplier = (data.chargePower + 1) / 2; // 0.5 to 1 depending on charge power
     const coinsCollectedMultiplier = 1 + data.coinsCollectedThisShot * 0.1; // 1 + 0.1 per coin collected
     const shotMultiplier = 1 / ((data.numAttempts - 1) * 0.2 + 1); // 1st shot: 1, 2nd shot: 0.83, 3rd shot: 0.71, 4th shot: 0.63, etc.
-    const levelScore = SCORE_PER_COIN * chargeScoreMultiplier * coinsCollectedMultiplier * shotMultiplier;
+    const levelScore = SCORE_PER_COIN * coinsCollectedMultiplier * shotMultiplier;
     dispatch(setCurrentScore(data.currentScore + levelScore));
 
     dispatch(setCoinsCollectedThisShot(data.coinsCollectedThisShot + 1));
@@ -149,7 +150,7 @@ export default function useData(): DataContext {
     const finalIndex = index + bombsIndex;
     coins[finalIndex] = { ...coins[finalIndex], isCollected: true };
     dispatch(setCoins(coins));
-    const newScore = data.currentScore - SCORE_LOST_PER_BOMB;
+    const newScore = data.currentScore/2;
     dispatch(setCurrentScore(newScore));
   }
 
@@ -168,8 +169,13 @@ export default function useData(): DataContext {
     dispatch(setShowLevels(showLevels));
   }
 
+  function disptachResetSineController() {
+    dispatch(resetSineController());
+  }
+
   return {
     ...data,
+    resetSineController: disptachResetSineController,
     setDisplayScore: dispatchSetDisplayScore,
     setLevel: dispatchSetLevel,
     nextLevel: dispatchNextLevel,
