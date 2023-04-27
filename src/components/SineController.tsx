@@ -101,6 +101,7 @@ export default function SineController() {
           setAngularFrequency(value);
           break;
         case 'phase-shift':
+          if (levelInfo && levelInfo.maxPhaseShift && Math.abs(value) > levelInfo.maxPhaseShift) break;
           setPhaseShift(value);
           break;
         case 'vertical-shift':
@@ -199,7 +200,7 @@ export default function SineController() {
             <p>x</p>
             <FunctionInputPicker
               trigType={'phaseShift'}
-              max={3}
+              max={levelInfo.maxPhaseShift || 3}
               isFiring={isFiring}
               variable={phaseShift}
               onClick={handleFunctionParameterChange('phase-shift')}

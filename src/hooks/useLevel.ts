@@ -29,6 +29,7 @@ type Level = {
   maxAmplitude: number;
   maxVerticalShift: number;
   maxAngularFrequency: number;
+  maxPhaseShift?: number;
   highAccuracy?: boolean;
 }
 
@@ -411,7 +412,7 @@ export const levels: Level[] = [
     sinPositions: [
       [Math.PI * 1 + 1, 0],
     ],
-    starScores: [100, 130, 165],
+    starScores: [100, 135, 165],
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
@@ -427,26 +428,35 @@ export const levels: Level[] = [
       { type: "text", content: "Klarer du se at funksjonen sin(x+2π)=sin(x) ? 🤔" },
     ],
     showPowerBar: true,
-    cellSize: 100,
+    cellSize: 80,
     origoPosition: {
       y: 0,
       x: 3,
     },
     bombPositions: [
       [Math.PI * 0, 0],
+      [0.5, 0],
+      [1, 0],
     ],
     coinPositions: [
-      [Math.PI * 0.5 + 0.5, 0],
-      [Math.PI * 1 + 0.5, 0],
+      [Math.PI -1, -0.5],
       [Math.PI * 1.5 + 0.5, 0],
-      [Math.PI * 2 + 0.5, 0],
+      [Math.PI * 3 - 1, 0],
     ],
-    starScores: [10, 200, 280],
+    cosPositions: [
+      [0, -1],
+      [7, 0.3784]
+    ],
+    sinPositions: [
+      [3, -1],
+    ],
+    starScores: [100, 135, 165],
     maxAmplitude: 3,
-    maxVerticalShift: 3,
+    maxVerticalShift: 2,
     maxAngularFrequency: 3,
+    maxPhaseShift: 1,
   },
-  
+
 
 
 
