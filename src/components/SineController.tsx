@@ -177,7 +177,7 @@ export default function SineController() {
               variable={amplitude}
               onClick={handleFunctionParameterChange('amplitude')}
               color={theme.color.green}
-              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.1}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
             />
         </>)}
         <p>{`${selectedFunction}(`}</p>
