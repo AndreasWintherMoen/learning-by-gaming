@@ -286,7 +286,7 @@ export const levels: Level[] = [
       x: 2,
     },
     bombPositions: [
-      // [Math.PI * 2, 0]
+      [Math.PI * 0.5, 1]
     ],
     coinPositions: [
       [Math.PI * 1, 1],
