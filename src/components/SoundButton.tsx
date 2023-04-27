@@ -14,7 +14,7 @@ export default function SoundButton() {
 
   if (isBackgroundSound) {
     return (
-    <div className={"easeIn button"} style={{ position: 'absolute', bottom: 5, right: 20, height: 110, width: 110 }} onClick={handleSound}>
+    <div className={"easeIn button expand-button"} style={{ position: 'absolute', bottom: 5, right: 20, height: 110, width: 110 }} onClick={handleSound}>
       <svg viewBox="0 0 143 143" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_136_783)">
           <path d="M128.744 63.7382C132.223 95.8968 104.392 123.139 71.2097 121.544C40.8368 120.614 13.0061 95.5444 13.0061 63.4724C21.837 10.4506 47.9283 2.87597 71.2097 5.40086C103.502 5.40086 128.744 31.6661 128.744 63.7382Z" fill="#E2E2E2"/>
@@ -44,7 +44,7 @@ export default function SoundButton() {
     )}
 
   return (
-    <div className={"easeIn button"} style={{ position: 'absolute', bottom: 5, right: 20, height: 110, width: 110 }} onClick={handleSound}>
+    <div className={"easeIn button expand-button"} style={{ position: 'absolute', bottom: 5, right: 20, height: 110, width: 110 }} onClick={handleSound}>
       <svg viewBox="0 0 143 143" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_136_786)">
           <path d="M128.744 63.7382C132.223 95.8968 104.392 123.139 71.2097 121.544C40.8368 120.614 13.0061 95.5444 13.0061 63.4724C21.837 10.4506 47.9283 2.87597 71.2097 5.40086C103.502 5.40086 128.744 31.6661 128.744 63.7382Z" fill="#E2E2E2"/>

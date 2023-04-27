@@ -96,7 +96,7 @@ button:focus-visible {
   position: fixed;
   top: 0;
   left: 0;
-  backgroundColor: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   transition: all 2s ease-out
 }
 .modalInfoContainer {
@@ -158,6 +158,18 @@ button:focus-visible {
 }
 .dropshadowM {
   box-shadow: 0 2px 4px rgb(0 0 0 / 0.2);
+}
+.color-button{
+}
+.color-button:hover{
+  background-color: #535bf2;
+}
+.expand-button {
+  transition: transform 0.3s ease;
+}
+
+.expand-button:hover {
+  transform: scale(1.1);
 }
 
 @keyframes fadeIn {

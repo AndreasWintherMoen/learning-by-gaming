@@ -51,7 +51,7 @@ export default function InfoModal() {
           <BackgroundPaperSvg />
         </div>
         {/* Close Button */}
-        <div style={{position: 'absolute', top: 20, left: 35, height: 50, display:'flex', flexDirection: 'row'}}>
+        <div className={'expand-button'} style={{position: 'absolute', top: 20, left: 35, height: 50, display:'flex', flexDirection: 'row'}}>
           <div className={'button'} onClick={() => setShowTutorial(false)} style={{width: 50, height: 50}}>
             <CloseButtonSvg />
           </div>
@@ -60,10 +60,10 @@ export default function InfoModal() {
           // The styling is a bit messy here, but it works :D
         }
         <div style={{zIndex: 1001, position: 'absolute', bottom: 20, left: 0, height: 50, width:'100%', display:'flex', flexDirection: 'row', justifyContent: levelLookupIndex > 0 && selectedLevel < level ? 'space-between': selectedLevel < level ? 'flex-end':'flex-start', paddingLeft: 75, paddingRight: 60}}>
-          { levelLookupIndex > 0 && (<div className={'button'} onClick={() => handleOffset(-1)} style={{width: 50, height: 50}}>
+          { levelLookupIndex > 0 && (<div className={'button expand-button'} onClick={() => handleOffset(-1)} style={{width: 50, height: 50}}>
             <LeftNavArrowSvg />
           </div>)}
-          { selectedLevel < level && (<div className={'button'} onClick={() => handleOffset(1)} style={{width: 50, height: 50}}>
+          { selectedLevel < level && (<div className={'button expand-button'} onClick={() => handleOffset(1)} style={{width: 50, height: 50}}>
             <RightNavArrowSvg />
           </div>)}
         </div>
