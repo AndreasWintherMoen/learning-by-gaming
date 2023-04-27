@@ -118,6 +118,8 @@ export const levels: Level[] = [
     descriptions: [
       { type: "text", content: "Akkurat som med ikke-trigonometriske funksjoner, kan vi også forskyve trigonometriske funksjoner opp og ned. Dette kalles ofte vertikal forskyvning."},
       { type: "image", content: "infomodal/vertical-shift.gif" },
+      { type: "text", content: "" },
+      { type: "text", content: "Forresten! Du kan når som helst trykke R for å restarte nivået du er på." },
     ],
     showPowerBar: false,
     cellSize: 100,
@@ -192,7 +194,7 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Pass på bombene!',
+    title: 'Se opp for bombene!',
     descriptions: [
       { type: "text", content: "Okay, nå blir det litt vanskeligere! I stedet for å trykke på mellomrom må du nå holde inne mellomrom for å lade opp sinuskurven." },
       { type: "image", content: "infomodal/powerbar.gif" },
@@ -269,7 +271,7 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Sammenligning mellom sinus og cosinus',
+    title: 'Sinus vs Cosinus',
     descriptions: [
       { type: "text", content: "Ettersom sinus og cosinus er kontinuerlige, kan man lage en cosinus-funksjon ved å faseforskyve sinus." },
       { type: "image", content: "infomodal/sin-cos-comparison.png"},
@@ -299,13 +301,107 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
+    title: 'Frekvens',
+    descriptions: [
+      { type: "text", content: "Den generelle sinus-formelen er vist under" },
+      { type: "image", content: "infomodal/sin-formula.png" },
+      { type: "text", content: "I mange sammenhenger kalles tallet k for frekvensen til funksjonen. Vi kommer tilbake til frekvensen i neste oppgave."},
+      { type: "text", content: "I Aftermath kan du justere frekvensen i funksjonsboksen som vist under." },
+      { type: "image", content: "infomodal/angular-frequency.gif" },
+    ],
+    showPowerBar: true,
+    cellSize: 100,
+    origoPosition: {
+      y: 0,
+      x: 2,
+    },
+    bombPositions: [
+      [Math.PI * 0.25, 0],
+      [Math.PI * 0.75, 0],
+      [Math.PI * 1.25, 0],
+      [Math.PI * 1.75, 0],
+      [Math.PI * 2.25, 0],
+      [Math.PI * 2.75, 0],
+    ],
+    coinPositions: [
+      [Math.PI * 1, 0],
+      [Math.PI * 2, 0],
+      [Math.PI * 3, 0],
+      [Math.PI * 0.5, 0],
+      [Math.PI * 1.5, 0],
+      [Math.PI * 2.5, 0],
+      [Math.PI * 0.25, -1],
+      [Math.PI * 1.25, -1],
+      [Math.PI * 2.25, -1],
+      [Math.PI * 0.75, 1],
+      [Math.PI * 1.75, 1],
+      [Math.PI * 2.75, 1],
+    ],
+    starScores: [10, 200, 280],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+  {
+    title: 'Mer om frekvens',
+    descriptions: [
+      { type: "text", content: "Frekvensen brukes ofte til å regne ut perioden (p) til funksjonen."},
+      { type: "image", content: "infomodal/period-formula.png" },
+      { type: "text", content: "Perioden er avstanden i x-retning fra et punkt på grafen til neste punkt der grafen er i samme svingetilstand." },
+      { type: "image", content: "infomodal/period.png" },
+    ],
+    showPowerBar: true,
+    cellSize: 100,
+    origoPosition: {
+      y: 0,
+      x: 2,
+    },
+    bombPositions: [
+      [Math.PI * 7 / 3, 0],
+      [Math.PI * 7 / 3, -1],
+      [Math.PI * 7 / 3, 1],
+    ],
+    coinPositions: [
+      [Math.PI * 0.5 / 3, 0],
+      [Math.PI * 1.5 / 3, 0],
+      [Math.PI * 2.5 / 3, 0],
+      [Math.PI * 3.5 / 3, 0],
+      [Math.PI * 4.5 / 3, 0],
+      [Math.PI * 2 / 3, -1],
+      [Math.PI * 4 / 3, -1],
+      [Math.PI * 1 / 3, 1],
+      [Math.PI * 3 / 3, 1],
+      [Math.PI * 5 / 3, 1],
+    ],
+    starScores: [10, 200, 280],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {
     title: 'Level 11', // Solution: 1cos(2x)+2
     descriptions: [],
     showPowerBar: true,
     cellSize: 50,
     origoPosition: {
       y: 0,
-      x: 2,
+      x: 3,
     },
     bombPositions: [
       [Math.PI* 2, -6],
@@ -390,119 +486,6 @@ export const levels: Level[] = [
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
     highAccuracy: true,
-  },
-
-
-
-
-
-
-
-
-
-
-
-
-
-  {
-    title: 'Level 13',
-    descriptions: [],
-    showPowerBar: true,
-    cellSize: 100,
-    origoPosition: {
-      y: 0,
-      x: 2,
-    },
-    bombPositions: [[3.14 * 2, 1]],
-    coinPositions: [
-      [Math.PI * 0.5, 0],
-      [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
-    ],
-    starScores: [10, 200, 280],
-    maxAmplitude: 3,
-    maxVerticalShift: 3,
-    maxAngularFrequency: 3,
-  },
-  {
-    title: 'Level 14',
-    descriptions: [],
-    showPowerBar: true,
-    cellSize: 100,
-    origoPosition: {
-      y: 0,
-      x: 2,
-    },
-    bombPositions: [[3.14 * 2, 1]],
-    coinPositions: [
-      [Math.PI * 0.5, 0],
-      [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
-    ],
-    starScores: [10, 200, 280],
-    maxAmplitude: 3,
-    maxVerticalShift: 3,
-    maxAngularFrequency: 3,
-  },
-  {
-    title: 'Level 15',
-    descriptions: [],
-    showPowerBar: true,
-    cellSize: 100,
-    origoPosition: {
-      y: 0,
-      x: 2,
-    },
-    bombPositions: [[3.14 * 2, 1]],
-    coinPositions: [
-      [Math.PI * 0.5, 0],
-      [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
-    ],
-    starScores: [10, 200, 280],
-    maxAmplitude: 3,
-    maxVerticalShift: 3,
-    maxAngularFrequency: 3,
-  },
-  {
-    title: 'Level 16',
-    descriptions: [],
-    showPowerBar: true,
-    cellSize: 100,
-    origoPosition: {
-      y: 0,
-      x: 2,
-    },
-    bombPositions: [[3.14 * 2, 1]],
-    coinPositions: [
-      [Math.PI * 0.5, 0],
-      [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
-    ],
-    starScores: [10, 200, 280],
-    maxAmplitude: 3,
-    maxVerticalShift: 3,
-    maxAngularFrequency: 3,
-  },
-  {
-    title: 'Level 17',
-    descriptions: [],
-    showPowerBar: true,
-    cellSize: 100,
-    origoPosition: {
-      y: 0,
-      x: 2,
-    },
-    bombPositions: [[3.14 * 2, 1]],
-    coinPositions: [
-      [Math.PI * 0.5, 0],
-      [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
-    ],
-    starScores: [10, 200, 280],
-    maxAmplitude: 3,
-    maxVerticalShift: 3,
-    maxAngularFrequency: 3,
   },
 ]
 

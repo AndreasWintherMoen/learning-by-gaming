@@ -11,9 +11,9 @@ export const levelIntroduced = {
   'amplitude': 2,
   'verticalShift': 4,
   'cos': 9,
+  'angularFrequency': 11,
 
   'phaseShift': 99,
-  'angularFrequency': 99,
   'arcsin': 99,
   'arccos': 99,
 }

@@ -21,10 +21,11 @@ export default function FunctionInputPicker({ variable, onClick, color, isFiring
 
 
   function formatTrigVariable() {
-    if (variable < 0 || ['amplitude', 'angularFrequency'].includes(trigType)) {
-      return accuracy > 0.4 ? `${variable}` : `${variable.toFixed(1)}`;
+    const roundedVariable = Math.round(variable * 10) / 10;
+    if (roundedVariable < 0 || ['amplitude', 'angularFrequency'].includes(trigType)) {
+      return roundedVariable % 1 != 0 ? `${roundedVariable.toFixed(1)}` : `${roundedVariable}`;
     }
-    return accuracy > 0.4 ? `+${variable}` : `+${variable.toFixed(1)}`;
+    return roundedVariable % 1 != 0 ? `+${roundedVariable.toFixed(1)}` : `+${roundedVariable}`;
   }
 
   return (
