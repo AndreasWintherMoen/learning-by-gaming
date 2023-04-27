@@ -62,7 +62,7 @@ export default function LevelsModal() {
           {/* Description */}
           <div style={{display:'flex', flexWrap:'wrap', alignSelf:'center'}}>
             {allLevels.map((score, index) => (
-              <LevelCard level={index} score={score} onClick={handleLevelSelect} />
+              <LevelCard key={score.toString() + index.toString()} level={index} score={score} onClick={handleLevelSelect} />
             ))}
           </div>
         </div>

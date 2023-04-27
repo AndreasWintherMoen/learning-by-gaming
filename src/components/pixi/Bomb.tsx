@@ -21,7 +21,6 @@ export default function Bomb({x, y, xCord, yCord, show, bullet, onHit}: Props): 
 
   const [showCord, setShowCord] = useState(true);
 
-  console.log('bomb exploded', explosionFinished)
   useEffect(() => {
     if (!bullet || !show || !ref.current) return;
     if (bullet.intersects(ref.current.getBounds())) {

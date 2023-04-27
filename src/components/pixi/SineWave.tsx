@@ -4,6 +4,7 @@ import {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useState,
 } from 'react';
 import useData from '../../hooks/useData';
@@ -24,7 +25,8 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       stopFire,
       chargePower,
       level,
-      selectedFunction
+      selectedFunction,
+      functionPickups,
     } = useData();
     const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
     const startX = origoPosition.x * cellSize - phaseShift * cellSize;
@@ -70,9 +72,8 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         g.lineStyle(4, 0x000000, 1);
         g.moveTo(startX, startY);
 
-        const startI = Math.floor(timer * adjustedChargePower * cellSize * 5);
+        const startI = Math.floor(timer * adjustedChargePower * cellSize * 2); // CHANGE THIS TO CHANGE SPEED
         const stopI = Math.min(startI, targetDistance - adjustedOrigoX)
-        const func = getFunction(selectedFunction);
         let lastPoint = { x: startX, y: startY };
         const paintAccuracyMultiplier = (Math.abs(amplitude) > 2 || Math.abs(angularFrequency) > 2) ? 0.5 : 1;
         const yConstant = startY - verticalShift * cellSize;
@@ -85,6 +86,19 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
           g.lineStyle(4, 0x000000, opacity);
           const x = startX + i;
           if (x < startX) continue;
+          let currentFunction = selectedFunction;
+          functionPickups.forEach((pickup) => {
+            if (pickup.x < x) {
+              currentFunction = pickup.func;
+            }
+          })
+          const func = getFunction(currentFunction);
+          // if (currentFunction === 'tan') {
+          //   console.log('');
+          //   console.log(x);
+          //   console.log((angularFrequency * i) / cellSize);
+          //   console.log(func((angularFrequency * i) / cellSize));
+          // }
           const y = yConstant - amplitude * func((angularFrequency * i) / cellSize) * cellSize;
           drawPoint(x, y);
           lastPoint = { x, y };

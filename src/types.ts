@@ -1,7 +1,14 @@
 import { Graphics } from '@pixi/react';
 import { ComponentProps } from 'react';
 
-export type CoinType = 'coin' | 'sin' | 'cos' | 'divide' | 'multiply' | 'plus' | 'minus' | 'bomb';
+export type SupportedFunctions = 'sin' | 'cos' | 'tan' | 'arcsin' | 'arccos' | 'arctan';
+
+export type SupportedFuncWithXPos = {
+  x: number;
+  func: SupportedFunctions;
+}
+
+export type CoinType = 'coin' | 'bomb' | SupportedFunctions;
 export type TrigParams = 'amplitude' | 'angularFrequency' | 'phaseShift' | 'verticalShift';
 export type Coin = {
   type: CoinType;
@@ -12,8 +19,6 @@ export type Coin = {
 export type LevelScore = "locked" | "not played" | 0 | 1 | 2 | 3;
 
 export type Draw = Exclude<ComponentProps<typeof Graphics>['draw'], undefined>;
-
-export type SupportedFunctions = 'sin' | 'cos' | 'arcsin' | 'arccos';
 
 export type Data = {
   displayScore: boolean;
@@ -33,6 +38,7 @@ export type Data = {
   currentScore: number;
   totalScore: number;
   selectedFunction: SupportedFunctions;
+  functionPickups: SupportedFuncWithXPos[];
   showLevels: boolean;
 };
 
