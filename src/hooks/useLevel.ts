@@ -456,13 +456,6 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
     maxPhaseShift: 1,
   },
-
-
-
-
-
-
-
   {
     title: 'Tangens',
     descriptions: [
@@ -478,6 +471,11 @@ export const levels: Level[] = [
       x: 2,
     },
     bombPositions: [
+      [2, -2],
+      [3, -1],
+      [4, 0],
+
+      [Math.PI * 2.75, 1],
     ],
     coinPositions: [
       [Math.PI * 0.25, -1],
@@ -493,14 +491,11 @@ export const levels: Level[] = [
       [Math.PI * 2.352, -2],
       [Math.PI * 2.25, -1],
     ],
-    starScores: [10, 200, 280],
+    starScores: [500, 650, 930],
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
   },
-
-
-
   {
     title: 'Tangens og uendelig',
     descriptions: [
