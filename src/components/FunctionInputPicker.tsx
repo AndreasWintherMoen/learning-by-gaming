@@ -22,9 +22,9 @@ export default function FunctionInputPicker({ variable, onClick, color, isFiring
 
   function formatTrigVariable() {
     if (variable < 0 || ['amplitude', 'angularFrequency'].includes(trigType)) {
-      return `${variable.toFixed(1)}`;
+      return accuracy > 0.4 ? `${variable}` : `${variable.toFixed(1)}`;
     }
-    return `+${variable.toFixed(1)}`;
+    return accuracy > 0.4 ? `+${variable}` : `+${variable.toFixed(1)}`;
   }
 
   return (

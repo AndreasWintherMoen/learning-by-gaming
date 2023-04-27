@@ -39,8 +39,6 @@ export default function Pickup({
     }
   }, [bullet, ref]);
 
-  console.log(pickupType, xCord, yCord);
-
   return (
     <>
       <Sprite width={30} height={30} x={x} y={y} anchor={0.5} image={`${pickupType}.png`} ref={ref} />

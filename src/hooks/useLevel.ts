@@ -165,8 +165,12 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Neagtive Vertical Shift',
-    descriptions: [],
+    title: 'Kahoot!',
+    descriptions: [
+      { type: "text", content: "Visste du at Aftermath er laget i samarbeid med Alf Inge Wang, som også veiledet utviklerne av Kahoot?" },
+      { type: "image", content: "infomodal/Kahoot-Logo.png" },
+      { type: "text", content: "Målet vårt er å modernisere matematikkundervisning på tilsvarende måte som Kahoot har modernisert undervisning generelt." },
+    ],
     showPowerBar: false,
     cellSize: 100,
     origoPosition: {
@@ -189,7 +193,11 @@ export const levels: Level[] = [
   },
   {
     title: 'Pass på bombene!',
-    descriptions: [],
+    descriptions: [
+      { type: "text", content: "Okay, nå blir det litt vanskeligere! I stedet for å trykke på mellomrom må du nå holde inne mellomrom for å lade opp sinuskurven." },
+      { type: "image", content: "infomodal/powerbar.gif" },
+      { type: "text", content: "Pass på at du ikke skyter for hardt!" },
+    ],
     showPowerBar: true,
     cellSize: 100,
     origoPosition: {
@@ -208,8 +216,13 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Cosinus!',
-    descriptions: [],
+    title: 'Cosinus',
+    descriptions: [
+      { type: "text", content: "Husker du fra tidligere at Sinus av en vinkel er forholdet mellom motstående katet og hypotenusen i en rettvinklet trekant?" },
+      { type: "text", content: "Hint: Du kan gå tilbake til tidligere lærekort ved å trykke på pilen nederst til venstre" },
+      { type: "text", content: "Cosinus er tilsvarende definert som forholdet mellom hosliggende katet og hypotenusen." },
+      { type: "image", content: "infomodal/cos-katet-hypotenus.gif" },
+    ],
     showPowerBar: true,
     cellSize: 100,
     origoPosition: {
@@ -229,8 +242,13 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Level 9',
-    descriptions: [],
+    title: 'Mer cosinus',
+    descriptions: [
+      { type: "text", content: "Du kan også bytte mellom sinus og cosinus i funksjonsbyggeren." },
+      { type: "image", content: "infomodal/cos-toggle.gif" },
+      { type: "text", content: "Hvorfor 'hopper' startpunktet opp når vi bytter til cosinus?" },
+      { type: "text", content: "Tenk på enhetssirkelen! Husk at sin(0)=0 og cos(0)=1" },
+    ],
     showPowerBar: true,
     cellSize: 100,
     origoPosition: {
@@ -239,31 +257,41 @@ export const levels: Level[] = [
     },
     bombPositions: [],
     coinPositions: [
-      // [Math.PI * 0.5, 0],
-      [3.14 * 0.75, 1],
-      [3.14, 0],
-      [3.14 * 1.25, -1],
+      [Math.PI * 0.5, 0],
+      [Math.PI * 1, 1],
+      [Math.PI * 1.5, 0],
+      [Math.PI * 2, -1],
+      [Math.PI * 2.5, 0],
     ],
-    cosPositions: [[Math.PI * 0.5, 0]],
     starScores: [10, 200, 280],
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
   },
   {
-    title: 'Level 10',
-    descriptions: [],
+    title: 'Sammenligning mellom sinus og cosinus',
+    descriptions: [
+      { type: "text", content: "Ettersom sinus og cosinus er kontinuerlige, kan man lage en cosinus-funksjon ved å faseforskyve sinus." },
+      { type: "image", content: "infomodal/sin-cos-comparison.png"},
+      { type: "text", content: "I Aftermath kan du plukke opp sinus/cosinus-mynter og endre funksjonen underveis. Men hvis du treffer samme funksjon som du allerede har, så vil du fortsette med samme funksjon." },
+      { type: "image", content: "infomodal/sin-cos-coins.gif" },
+      { type: "text", content: "For eksempel, hvis du skyter en cosinus-funksjon og treffer en cosinus-mynt, er det akkurat som om mynten ikke var der!" },
+    ],
     showPowerBar: true,
     cellSize: 100,
     origoPosition: {
       y: 0,
       x: 2,
     },
-    bombPositions: [[3.14 * 2, 1]],
+    bombPositions: [
+      // [Math.PI * 2, 0]
+    ],
     coinPositions: [
+      [Math.PI * 1, 1],
+      [Math.PI * 3, 1],
+    ],
+    cosPositions: [
       [Math.PI * 0.5, 0],
-      [3.14 * 1, 1],
-      [3.14 * 1.5, 2],
     ],
     starScores: [10, 200, 280],
     maxAmplitude: 3,
