@@ -224,6 +224,8 @@ export const levels: Level[] = [
       { type: "text", content: "Hint: Du kan gå tilbake til tidligere lærekort ved å trykke på pilen nederst til venstre" },
       { type: "text", content: "Cosinus er tilsvarende definert som forholdet mellom hosliggende katet og hypotenusen." },
       { type: "image", content: "infomodal/cos-katet-hypotenus.gif" },
+      { type: "text", content: "Noen av nivåene i Aftermath har cosinus-mynter. Hvis du treffer en slik mynt med en sinus-funksjon blir den omgjort til en cosinus-funksjon fra og med den x-verdien." },
+      { type: "image", content: "infomodal/cos-coin.gif" },
     ],
     showPowerBar: true,
     cellSize: 100,
@@ -231,7 +233,7 @@ export const levels: Level[] = [
       y: 0,
       x: 2,
     },
-    bombPositions: [[3.14 * 2, 1]],
+    bombPositions: [],
     coinPositions: [
       [Math.PI * 0.5, 0],
       [3.14 * 1, 1],
