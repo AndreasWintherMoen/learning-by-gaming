@@ -25,7 +25,6 @@ export default function Canvas() {
   const [isChangingLevel, setIsChangingLevel] = useState(false);
 
   const onHitCoin = (index: number) => {
-    console.log('onHitCoin', index);
     sound.play('hit-coin');
     collectCoin(index);
   };

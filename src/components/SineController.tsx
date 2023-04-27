@@ -12,8 +12,9 @@ export const levelIntroduced = {
   'verticalShift': 4,
   'cos': 9,
   'angularFrequency': 11,
+  'phaseShift': 13,
+  'tan': 15,
 
-  'phaseShift': 99,
   'arcsin': 99,
   'arccos': 99,
 }
@@ -176,7 +177,7 @@ export default function SineController() {
               variable={amplitude}
               onClick={handleFunctionParameterChange('amplitude')}
               color={theme.color.green}
-              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.1}
             />
         </>)}
         <p>{`${selectedFunction}(`}</p>
@@ -195,7 +196,7 @@ export default function SineController() {
         }
         {level >= levelIntroduced['phaseShift'] ? (
           <>
-            <p>(x</p>
+            <p>x</p>
             <FunctionInputPicker
               trigType={'phaseShift'}
               max={3}
@@ -208,7 +209,7 @@ export default function SineController() {
           </>) : <p>x</p>}
         {level >= levelIntroduced['verticalShift'] ? (
           <>
-            <p>))</p>
+            <p>)</p>
             <FunctionInputPicker
               trigType={'verticalShift'}
               max={levelInfo.maxVerticalShift}

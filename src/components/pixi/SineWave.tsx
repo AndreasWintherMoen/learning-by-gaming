@@ -29,7 +29,8 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       functionPickups,
     } = useData();
     const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
-    const startX = origoPosition.x * cellSize - phaseShift * cellSize;
+    const realPhaseShift = -phaseShift / angularFrequency;
+    const startX = origoPosition.x * cellSize + realPhaseShift * cellSize;
     const startY = origoPosition.y * cellSize;
     const sineLength = cellSize * 3.14 * 1; // one half sine wave period
 
@@ -72,7 +73,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         g.lineStyle(4, 0x000000, 1);
         g.moveTo(startX, startY);
 
-        const startI = Math.floor(timer * adjustedChargePower * cellSize * cellSize / 20); // CHANGE THIS TO CHANGE SPEED
+        const startI = Math.floor(timer * adjustedChargePower * cellSize * cellSize / 20 * (selectedFunction === 'tan' ? 0.5 : 1)); // CHANGE THIS TO CHANGE SPEED
         const stopI = Math.min(startI, targetDistance - adjustedOrigoX)
         let lastPoint = { x: startX, y: startY };
         const paintAccuracyMultiplier = (Math.abs(amplitude) > 2 || Math.abs(angularFrequency) > 2) ? 0.5 : 1;

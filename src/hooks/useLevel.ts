@@ -380,6 +380,153 @@ export const levels: Level[] = [
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
   },
+  {
+    title: 'Faseforskyvning',
+    descriptions: [
+      { type: "text", content: "Husker du den generelle sinus-formelen fra tidligere?"},
+      { type: "image", content: "infomodal/sin-formula.png" },
+      { type: "text", content: "Den siste variabelen vi ikke har beskrevet er φ. Dette tallet sier noe om faseforskyvningen til funksjonen. Faseforskyvning er hvor mye grafen er forskjøvet i x-retning, og er gitt ved" },
+      { type: "image", content: "infomodal/phaseshift.png" },
+      { type: "text", content: "I Aftermath kan du justere φ for å flytte startspunktet til funksjonen." },
+      { type: "image", content: "infomodal/phaseshift.gif" },
+      { type: "text", content: "Klarer du å se hvorfor en negativ φ flytter startpunktet til høyre? 🤔" },
+    ],
+    showPowerBar: true,
+    cellSize: 100,
+    origoPosition: {
+      y: 0,
+      x: 3,
+    },
+    bombPositions: [
+      [Math.PI * 0, 0],
+    ],
+    coinPositions: [
+      [Math.PI * 1 + 1, 0],
+      [Math.PI * 2 + 1, 0],
+    ],
+    starScores: [10, 200, 280],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+  {
+    title: 'Definisjonsområde',
+    descriptions: [
+      { type: "text", content: "Definisjonsområdet til en generell sinus- eller cosinus-funksjon er 〈-∞,∞〉" },
+      { type: "text", content: "Kort forklart betyr det at funksjonen er definert for alle mulige verdier av x, helt fra negativ uendelig til positiv uendelig. Men i Aftermath har vi satt funksjonene til å starte på x=0. Vi har altså avgrenset definisjonsområdet til [0, ∞〉. Vi har gjort dette for å gjøre spillet mer spennende. "},
+      { type: "image", content: "infomodal/phaseshift.gif" },
+      { type: "text", content: "Nå har du også fått mulighet til å justere faseforskyvning gjennom k og φ. Når du faseforskyver en funksjon i Aftermath, så endrer du definisjonsområdet. I en vanlig trigonometrisk funksjon vil derimot ikke definisjonsområdet endre seg. En funksjon med definisjonsområdet 〈-∞,∞〉 vil fortsatt ha definisjonsområdet〈-∞,∞〉 etter en faseforskyvning." },
+      { type: "image", content: "infomodal/phaseshift2.png" },
+      { type: "text", content: "Klarer du se at funksjonen sin(x+2π)=sin(x) ? 🤔" },
+    ],
+    showPowerBar: true,
+    cellSize: 100,
+    origoPosition: {
+      y: 0,
+      x: 3,
+    },
+    bombPositions: [
+      [Math.PI * 0, 0],
+    ],
+    coinPositions: [
+      [Math.PI * 0.5 + 0.5, 0],
+      [Math.PI * 1 + 0.5, 0],
+      [Math.PI * 1.5 + 0.5, 0],
+      [Math.PI * 2 + 0.5, 0],
+    ],
+    starScores: [10, 200, 280],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+  
+
+
+
+
+
+
+  {
+    title: 'Tangens',
+    descriptions: [
+      { type: "text", content: "Tidligere har vi definert sinus som forholdet mellom motstående katet og hypotenus, og vi har definert cosinus som forholdet mellom hosliggende katet og hypotenus. Vi har også tangens, som er definert som forholdet mellom moststående katet og hosliggende katet." },
+      { type: "image", content: "infomodal/tan-katet-katet.gif" },
+      { type: "text", content: "Som du kanskje husker fra tidligere oppgaver, så gjør enhetssirkelen at vi kan forenkle sinus til lengden av motstående katet og cosinus til lengden av hosliggende katet. Vi kan derfor beskrive tangens som" },
+      { type: "image", content: "infomodal/tan-formula.png" },
+    ],
+    showPowerBar: true,
+    cellSize: 100,
+    origoPosition: {
+      y: 0,
+      x: 2,
+    },
+    bombPositions: [
+    ],
+    coinPositions: [
+      [Math.PI * 0.25, -1],
+      [Math.PI * 0.352, -2],
+      [Math.PI * 0.648, 2],
+      [Math.PI * 0.75, 1],
+      [Math.PI, 0],
+      [Math.PI * 1.25, -1],
+      [Math.PI * 1.352, -2],
+      [Math.PI * 1.648, 2],
+      [Math.PI * 1.75, 1],
+      [Math.PI * 2, 0],
+      [Math.PI * 2.352, -2],
+      [Math.PI * 2.25, -1],
+    ],
+    starScores: [10, 200, 280],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+
+
+
+  {
+    title: 'Tangens og uendelig',
+    descriptions: [
+      { type: "text", content: "Du så kanskje at tangens-funksjonen har en litt annen form enn sinus og cosinus?" },
+      { type: "image", content: "infomodal/tans.png" },
+      { type: "text", content: "For å regne ut tangens deler vi som sagt sin(x) på cos(x). Som vi har sett tidligere, så kan cos(x) være lik 0 (den er faktisk lik 0 for uendelig mange verdier av x). Og hvis vi prøver å dele noe på 0, så får vi et udefinert svar. Derfor pleier vi å si at tan(x) kun er definert for verdier av x som ikke gir cos(x)=0" },
+      { type: "image", content: "infomodal/tan-infinity.png" },
+    ],
+    showPowerBar: true,
+    cellSize: 100,
+    origoPosition: {
+      y: 0,
+      x: 2,
+    },
+    bombPositions: [
+    ],
+    coinPositions: [
+      [Math.PI * 0.25, -1],
+      [Math.PI * 0.75, 1],
+      [Math.PI, 0],
+      [Math.PI * 1.25, -1],
+      [Math.PI * 1.75, 1],
+      [Math.PI * 2, 0],
+      [Math.PI * 2.25, -1],
+    ],
+    starScores: [10, 200, 280],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
