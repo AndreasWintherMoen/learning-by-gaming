@@ -34,6 +34,7 @@ export type Data = {
   isBackgroundSound: boolean;
   showTutorial: boolean;
   coins: Coin[];
+  coinIndexJustCollected: number;
   coinsCollectedThisShot: number;
   currentScore: number;
   totalScore: number;

@@ -17,6 +17,7 @@ const initialState = {
   isBackgroundSound: true,
   showLevels: false,
   coins: [],
+  coinIndexJustCollected: -1,
   coinsCollectedThisShot: 0,
   currentScore: 0,
   totalScore: 0,
@@ -59,7 +60,7 @@ function generateNewCoins(levelIndex: number) {
     isCollected: false,
   } as Coin)) || [];
 
-  return [...coins, ...bombs, ...sins, ...coss, ...tans];
+  return [...coins, ...bombs, ...sins, ...coss, ...tans].sort((a, b) => a.position[0] - b.position[0]);
 }
 
 
@@ -77,6 +78,7 @@ export const gameSlice = createSlice({
       state.coinsCollectedThisShot = 0;
       state.currentScore = 0;
       state.functionPickups = [];
+      state.coinIndexJustCollected = -1;
     },
     nextLevel: (state) => {
       state.level = state.level + 1;
@@ -89,6 +91,7 @@ export const gameSlice = createSlice({
       state.coinsCollectedThisShot = 0;
       state.currentScore = 0;
       state.functionPickups = [];
+      state.coinIndexJustCollected = -1;
     },
     resetLevel: (state) => {
       state.numAttempts = 0;
@@ -99,6 +102,7 @@ export const gameSlice = createSlice({
       state.coinsCollectedThisShot = 0;
       state.currentScore = 0;
       state.functionPickups = [];
+      state.coinIndexJustCollected = -1;
     },
     setAmplitude: (state, action) => {
       state.amplitude = action.payload;
@@ -114,6 +118,7 @@ export const gameSlice = createSlice({
     },
     setIsFiring: (state, action) => {
       state.isFiring = action.payload;
+      state.coinIndexJustCollected = -1;
       state.isCharging = false;
       if (!!action.payload) {
         state.numAttempts += 1;
@@ -130,7 +135,6 @@ export const gameSlice = createSlice({
     },
     setIsBackgroundSound: (state, action) => {
       state.isBackgroundSound = action.payload;
-      console.log('state.isBackgroundSound', state.isBackgroundSound);
       if (state.isBackgroundSound) {
         sound.volume('intro-music', 0.1);
       } else {
@@ -170,12 +174,14 @@ export const gameSlice = createSlice({
       state.showLevels = action.payload;
     },
     resetSineController: (state) => {
-      console.log('resetting sine from redux - this should work');
       state.amplitude = 1;
       state.angularFrequency = 1;
       state.verticalShift = 0;
       state.phaseShift = 0;
       state.selectedFunction = 'sin';
+    },
+    setCoinIndexJustCollected: (state, action) => {
+      state.coinIndexJustCollected = action.payload;
     }
   }
 });
@@ -195,6 +201,7 @@ export const {
   setIsBackgroundSound,
   setShowTutorial,
   setCoins,
+  setCoinIndexJustCollected,
   setCurrentScore,
   setCoinsCollectedThisShot,
   setSelectedFunction,

@@ -18,7 +18,7 @@ import {
   setCoinsCollectedThisShot,
   setSelectedFunction,
   setShowLevels,
-  setFunctionPickups, resetSineController,
+  setFunctionPickups, resetSineController, setCoinIndexJustCollected,
 } from '../redux/gameSlice';
 import {Coin, SupportedFuncWithXPos, SupportedFunctions} from '../types';
 
@@ -40,6 +40,7 @@ export type DataContext = {
   resetLevel: () => void;
   showTutorial: boolean;
   coins: Coin[];
+  coinIndexJustCollected: number;
   coinsCollectedThisShot: number;
   currentScore: number;
   totalScore: number;
@@ -62,6 +63,7 @@ export type DataContext = {
   showLevels: boolean;
   setShowLevels: (showLevels: boolean) => void;
   resetSineController: () => void;
+  setCoinIndexJustColled: (index: number) => void;
 };
 
 // TODO: Move this somewhere else (either to Coin.value or to a separate file of constants)
@@ -173,6 +175,10 @@ export default function useData(): DataContext {
     dispatch(resetSineController());
   }
 
+  function dispatchSetCoinIndexJustCollected(index: number) {
+    dispatch(setCoinIndexJustCollected(index));
+  }
+
   return {
     ...data,
     resetSineController: disptachResetSineController,
@@ -194,6 +200,7 @@ export default function useData(): DataContext {
     toggleBackgroundSound,
     setShowTutorial: dispatchSetTutorial,
     collectCoin,
-    collectBomb
+    collectBomb,
+    setCoinIndexJustColled: dispatchSetCoinIndexJustCollected,
   };
 }
