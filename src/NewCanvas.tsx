@@ -11,20 +11,20 @@ import useCanvasSize from './hooks/useCanvasSize';
 import LevelText from './components/pixi/LevelText';
 import {sound} from '@pixi/sound';
 import delay from './utils/delay';
-import PowerBar from './components/pixi/PowerBar';
 import Bomb from "./components/pixi/Bomb";
 import StartCoin from "./components/pixi/StartCoin";
 import BackgroundItems from "./components/pixi/BackgroundItems";
+import { saveLevelData } from './utils/dataStorage';
+import Pickup from './components/pixi/Pickup';
 
 export default function Canvas() {
-  const { level: levelIndex, setDisplayScore, setAmplitude, amplitude, coins, collectCoin, stopFire, collectBomb} = useData();
+  const { level: levelIndex, setDisplayScore, setAmplitude, amplitude, coins, collectCoin, stopFire, collectBomb, currentScore} = useData();
   const { origoPosition } = useCanvasSize();
   const level = useLevel(levelIndex);
   const [bulletRect, setBulletRect] = useState<Rectangle | null>(null);
   const [isChangingLevel, setIsChangingLevel] = useState(false);
 
   const onHitCoin = (index: number) => {
-    console.log('onHitCoin', index);
     sound.play('hit-coin');
     collectCoin(index);
   };
@@ -32,6 +32,7 @@ export default function Canvas() {
   useEffect(() => {
     async function changeLevel() {
       setIsChangingLevel(true);
+      await saveLevelData(levelIndex, currentScore);
       await delay(2000);
       setDisplayScore(true);
       setIsChangingLevel(false);
@@ -47,11 +48,7 @@ export default function Canvas() {
   }, [coins]);
 
   const onHitBomb = async (index: number) => {
-    console.log('onHitBomb', index);
     sound.play('bomb-hit');
-    // Subtract points
-    //TODO: Do this
-
     // Stop the sine wave
     stopFire();
     // Animate explosion
@@ -64,6 +61,9 @@ export default function Canvas() {
 
   const coinCoins = coins.filter((coin) => coin.type === 'coin');
   const bombCoins = coins.filter((coin) => coin.type === 'bomb');
+  const sinCoins  = coins.filter((coin) => coin.type === 'sin');
+  const cosCoins  = coins.filter((coin) => coin.type === 'cos');
+  const tanCoins  = coins.filter((coin) => coin.type === 'tan');
 
   return (
     <>
@@ -72,11 +72,10 @@ export default function Canvas() {
       {levelIndex > 0 && <Axes />}
       {levelIndex > 0 && <SineWave ref={handleBulletChange} />}
       {levelIndex > 0 && <LevelText />}
-      {level?.showPowerBar && <PowerBar />}
       {level &&
         coinCoins.map((coin) => coin.position).map(([x, y], i) => (
           <Coin
-            key={i}
+            key={i.toString() + 'coin'}
             x={(origoPosition.x + x) * level.cellSize}
             y={(origoPosition.y + y) * level.cellSize}
             xCord={x}
@@ -89,7 +88,7 @@ export default function Canvas() {
       {level &&
         bombCoins.map((coin) => coin.position).map(([x, y], i) => (
           <Bomb
-            key={i}
+            key={i.toString() + 'bomb'}
             x={(origoPosition.x + x) * level.cellSize}
             y={(origoPosition.y + y) * level.cellSize}
             xCord={x}
@@ -98,6 +97,42 @@ export default function Canvas() {
             bullet={bulletRect}
             onHit={() => onHitBomb(i)}
           />
+        ))}
+      {level &&
+        sinCoins.map((coin) => coin.position).map(([x, y], i) => (
+          <Pickup
+            key={i.toString() + 'sin'}
+            x={(origoPosition.x + x) * level.cellSize}
+            y={(origoPosition.y + y) * level.cellSize}
+            xCord={x}
+            yCord={y}
+            bullet={bulletRect}
+            pickupType='sin'
+           />
+        ))}
+      {level &&
+        cosCoins.map((coin) => coin.position).map(([x, y], i) => (
+          <Pickup
+            key={i.toString() + 'cos'}
+            x={(origoPosition.x + x) * level.cellSize}
+            y={(origoPosition.y + y) * level.cellSize}
+            xCord={x}
+            yCord={y}
+            bullet={bulletRect}
+            pickupType='cos'
+           />
+        ))}
+      {level &&
+        tanCoins.map((coin) => coin.position).map(([x, y], i) => (
+          <Pickup
+            key={i.toString() + 'tan'}
+            x={(origoPosition.x + x) * level.cellSize}
+            y={(origoPosition.y + y) * level.cellSize}
+            xCord={x}
+            yCord={y}
+            bullet={bulletRect}
+            pickupType='tan'
+           />
         ))}
       <StartCoin />
       <Frontpage />

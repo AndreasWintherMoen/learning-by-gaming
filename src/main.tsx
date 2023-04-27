@@ -10,7 +10,7 @@ sound.add('button-click', {
   preload: true,
 });
 sound.add('intro-music', {
-  url: 'sounds/intro-music.mp3',
+  url: 'sounds/intro-music-2.mp3',
   preload: true,
   loop: true,
   volume: 1,
@@ -24,9 +24,14 @@ sound.add('bomb-hit', {
   url: 'sounds/explosion.mp3',
   preload: true,
 });
+sound.add('score', {
+  url: 'sounds/star-score.mp3',
+  preload: true,
+});
 
 await new FontFaceObserver('Handdrawn').load();
 await new FontFaceObserver('Sofija').load();
+await new FontFaceObserver('Infomodal').load();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

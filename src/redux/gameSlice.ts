@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Coin, Data} from '../types';
 import {sound} from '@pixi/sound';
-import { levels } from '../hooks/useLevel';
+import {levels} from '../hooks/useLevel';
 
 const initialState = {
   displayScore: false,
@@ -15,12 +15,14 @@ const initialState = {
   isCharging: false,
   chargePower: 0,
   isBackgroundSound: true,
-  showTutorial: false,
+  showLevels: false,
   coins: [],
   coinsCollectedThisShot: 0,
   currentScore: 0,
   totalScore: 0,
   selectedFunction: 'sin',
+  functionPickups: [],
+  showTutorial: false,
 } as Data;
 
 function generateNewCoins(levelIndex: number) {
@@ -39,7 +41,25 @@ function generateNewCoins(levelIndex: number) {
     isCollected: false,
   } as Coin));
 
-  return [...coins, ...bombs];
+  const sins = level.sinPositions?.map(([x, y]) => ({
+    type: 'sin',
+    position: [x, y],
+    isCollected: false,
+  } as Coin)) || [];
+
+  const coss = level.cosPositions?.map(([x, y]) => ({
+    type: 'cos',
+    position: [x, y],
+    isCollected: false,
+  } as Coin)) || [];
+
+  const tans = level.tanPositions?.map(([x, y]) => ({
+    type: 'tan',
+    position: [x, y],
+    isCollected: false,
+  } as Coin)) || [];
+
+  return [...coins, ...bombs, ...sins, ...coss, ...tans];
 }
 
 
@@ -47,16 +67,28 @@ export const gameSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    nextLevel: (state) => {
-      state.level = state.level + 1;
+    setLevel: (state, action) => {
+      state.level = action.payload;
       state.numAttempts = 0;
       state.chargePower = 0;
       state.isCharging = false;
       state.isFiring = false;
       state.coins = generateNewCoins(state.level);
       state.coinsCollectedThisShot = 0;
-      state.totalScore += state.currentScore;
       state.currentScore = 0;
+      state.functionPickups = [];
+    },
+    nextLevel: (state) => {
+      state.level = state.level + 1;
+      state.totalScore += state.currentScore;
+      state.numAttempts = 0;
+      state.chargePower = 0;
+      state.isCharging = false;
+      state.isFiring = false;
+      state.coins = generateNewCoins(state.level);
+      state.coinsCollectedThisShot = 0;
+      state.currentScore = 0;
+      state.functionPickups = [];
     },
     resetLevel: (state) => {
       state.numAttempts = 0;
@@ -66,6 +98,7 @@ export const gameSlice = createSlice({
       state.coins = generateNewCoins(state.level);
       state.coinsCollectedThisShot = 0;
       state.currentScore = 0;
+      state.functionPickups = [];
     },
     setAmplitude: (state, action) => {
       state.amplitude = action.payload;
@@ -84,6 +117,7 @@ export const gameSlice = createSlice({
       state.isCharging = false;
       if (!!action.payload) {
         state.numAttempts += 1;
+        state.functionPickups = [];
       } else {
         state.chargePower = 0;
       }
@@ -104,7 +138,6 @@ export const gameSlice = createSlice({
       }
     },
     setShowTutorial: (state, action) => {
-      console.log('setShowTutorial', action.payload);
       state.showTutorial = action.payload;
     },
     setDisplayScore: (state, action) => {
@@ -124,12 +157,32 @@ export const gameSlice = createSlice({
         console.log('Invalid function selected', action.payload);
       }
       state.selectedFunction = action.payload;
+    },
+    setFunctionPickups: (state, action) => {
+      const { func } = action.payload;
+      if (func !== 'sin' && func !== 'cos' && func !== 'arcsin' && func !== 'arccos') {
+        console.log('Invalid function selected', action.payload);
+      }
+      state.functionPickups = [...state.functionPickups, action.payload];
+    },
+    setShowLevels: (state, action) => {
+      if (typeof action.payload != "boolean") return;
+      state.showLevels = action.payload;
+    },
+    resetSineController: (state) => {
+      console.log('resetting sine from redux - this should work');
+      state.amplitude = 1;
+      state.angularFrequency = 1;
+      state.verticalShift = 0;
+      state.phaseShift = 0;
+      state.selectedFunction = 'sin';
     }
   }
 });
 
 export const {
   setDisplayScore,
+  setLevel,
   nextLevel,
   resetLevel,
   setAmplitude,
@@ -145,6 +198,9 @@ export const {
   setCurrentScore,
   setCoinsCollectedThisShot,
   setSelectedFunction,
+  setFunctionPickups,
+  setShowLevels,
+  resetSineController
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

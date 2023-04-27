@@ -5,11 +5,12 @@ import useCanvasSize from "../../hooks/useCanvasSize";
 import getFunction from "../../utils/getFunction";
 
 export default function StartCoin() {
-  const {selectedFunction, verticalShift, phaseShift, amplitude} = useData();
+  const {selectedFunction, verticalShift, phaseShift, amplitude, angularFrequency} = useData();
   const {origoPosition, cellSize} = useCanvasSize();
   const func = getFunction(selectedFunction);
 
-  const xStart = (origoPosition.x - phaseShift) * cellSize;
+  const realPhaseShift = -phaseShift / angularFrequency;
+  const xStart = (origoPosition.x + realPhaseShift) * cellSize;
   const yStart = (origoPosition.y - verticalShift - func(0) * amplitude) * cellSize;
 
   return (

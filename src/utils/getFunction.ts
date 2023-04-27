@@ -6,6 +6,8 @@ export default function getFunction(functionName: SupportedFunctions) {
       return Math.sin;
     case 'cos':
       return Math.cos;
+    case 'tan':
+      return Math.tan;
     case 'arcsin':
       return Math.asin;
     case 'arccos':

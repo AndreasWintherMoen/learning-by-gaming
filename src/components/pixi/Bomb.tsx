@@ -1,7 +1,9 @@
-import {useEffect, useRef, useState} from 'react';
-import {Sprite, Text} from '@pixi/react';
+import React, {useEffect, useRef, useState} from 'react';
+import {AnimatedSprite, Container, Sprite, Text} from '@pixi/react';
 import { Rectangle, Sprite as PixiSprite } from 'pixi.js';
 import {TextStyle} from "@pixi/text";
+import bombSpritesheet from "../../utils/bombSpritesheet";
+
 
 type Props = {
   x: number;
@@ -13,18 +15,12 @@ type Props = {
   onHit: () => void;
 };
 
-export default function Bomb({
-  x,
-  y,
-  xCord,
-  yCord,
-  show,
-  bullet,
-  onHit,
-}: Props): JSX.Element {
+export default function Bomb({x, y, xCord, yCord, show, bullet, onHit}: Props): JSX.Element {
+  const [explosionFinished, setExplosionFinished] = useState(false);
   const ref = useRef<PixiSprite | null>(null);
 
   const [showCord, setShowCord] = useState(true);
+
   useEffect(() => {
     if (!bullet || !show || !ref.current) return;
     if (bullet.intersects(ref.current.getBounds())) {
@@ -32,7 +28,27 @@ export default function Bomb({
     }
   }, [bullet, onHit, ref]);
 
-  if (!show) return <></>;
+  useEffect(() => {
+    setExplosionFinished(false);
+  }, [show]);
+
+  if(!show && explosionFinished) return <></>;
+
+  if (!show) return (
+    <Container position={[x, y]} width={125} height={125} ref={ref}>
+      <AnimatedSprite
+        height={1}
+        width={1}
+        anchor={0.5}
+        textures={bombSpritesheet}
+        isPlaying={true}
+        initialFrame={0}
+        animationSpeed={0.2}
+        loop={false}
+        onComplete={() => setExplosionFinished(true)}
+      />
+    </Container>
+  );
 
   return (
     <>

@@ -1,5 +1,5 @@
 import useData from '../hooks/useData';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useTheme from '../hooks/useTheme';
 import FunctionInputPicker from './FunctionInputPicker';
 import SineFunctionIndicator from './SineFunctionIndicator';
@@ -8,13 +8,15 @@ import useLevel from '../hooks/useLevel';
 import FunctionSelctor from "./FunctionSelctor";
 
 export const levelIntroduced = {
-  'amplitude': 1,
-  'verticalShift': 1,
-  'angularFrequency': 1,
-  'phaseShift': 1,
-  'cos': 1,
-  'arcsin': 6,
-  'arccos': 7,
+  'amplitude': 2,
+  'verticalShift': 4,
+  'cos': 9,
+  'angularFrequency': 11,
+  'phaseShift': 13,
+  'tan': 15,
+
+  'arcsin': 99,
+  'arccos': 99,
 }
 
 export default function SineController() {
@@ -45,6 +47,8 @@ export default function SineController() {
     duration: 2,
   });
 
+  const [disabledControls, setDisabledControls] = useState(true);
+
   useEffect(() => {
     if (level === 1) {
       startPositionAnimation();
@@ -52,24 +56,21 @@ export default function SineController() {
   }, [level]);
 
   useEffect(() => {
+    if (showTutorial) setDisabledControls(false);
+  }, [showTutorial]);
+
+  useEffect(() => {
+    if (!levelInfo || disabledControls) return;
     //Listen for keypresses and fire the sine wave
     const handleKeyDown = (ev: KeyboardEvent) => {
       if (isFiring || showTutorial || displayScore) return;
       if (ev.key === 'Enter' || ev.key === ' ') {
-        if (levelInfo?.showPowerBar) {
+        if (levelInfo.showPowerBar) {
           startCharge();
         } else {
           fire();
         }
-      } else if (ev.key === 'ArrowUp') {
-        setVerticalShift(verticalShift + 0.1);
-      } else if (ev.key === 'ArrowDown') {
-        setVerticalShift(verticalShift - 0.1);
-      } else if (ev.key === 'ArrowLeft') {
-        setPhaseShift(phaseShift - 0.1);
-      } else if (ev.key === 'ArrowRight') {
-        setPhaseShift(phaseShift + 0.1);
-      }
+      } 
     };
     const handleKeyUp = (ev: KeyboardEvent) => {
       if (isFiring || showTutorial || displayScore) return;
@@ -83,7 +84,7 @@ export default function SineController() {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
-  }, [isFiring, phaseShift, showTutorial, displayScore]);
+  }, [isFiring, phaseShift, showTutorial, displayScore, levelInfo]);
 
   function handleFunctionParameterChange(
     parameter: 'amplitude' | 'angular-frequency' | 'phase-shift' | 'vertical-shift',
@@ -176,6 +177,7 @@ export default function SineController() {
               variable={amplitude}
               onClick={handleFunctionParameterChange('amplitude')}
               color={theme.color.green}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
             />
         </>)}
         <p>{`${selectedFunction}(`}</p>
@@ -188,12 +190,13 @@ export default function SineController() {
               variable={angularFrequency}
               onClick={handleFunctionParameterChange('angular-frequency')}
               color={theme.color.brown}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
             />
           </>)
         }
         {level >= levelIntroduced['phaseShift'] ? (
           <>
-            <p>(x</p>
+            <p>x</p>
             <FunctionInputPicker
               trigType={'phaseShift'}
               max={3}
@@ -201,11 +204,12 @@ export default function SineController() {
               variable={phaseShift}
               onClick={handleFunctionParameterChange('phase-shift')}
               color={theme.color.purple}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
             />
           </>) : <p>x</p>}
         {level >= levelIntroduced['verticalShift'] ? (
           <>
-            <p>))</p>
+            <p>)</p>
             <FunctionInputPicker
               trigType={'verticalShift'}
               max={levelInfo.maxVerticalShift}
@@ -213,6 +217,7 @@ export default function SineController() {
               variable={verticalShift}
               onClick={handleFunctionParameterChange('vertical-shift')}
               color={theme.color.pink}
+              accuracy={levelInfo?.highAccuracy ? 0.1 : 0.5}
           />
           </>
         ) : <p>)</p>}

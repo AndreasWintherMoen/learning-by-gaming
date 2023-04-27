@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import {
+  setLevel,
   nextLevel,
   resetLevel,
   setAmplitude,
@@ -10,9 +11,16 @@ import {
   setIsCharging,
   setChargePower,
   setPhaseShift,
-  setVerticalShift, setShowTutorial, setCoins, setCurrentScore, setCoinsCollectedThisShot, setSelectedFunction,
+  setVerticalShift,
+  setShowTutorial,
+  setCoins,
+  setCurrentScore,
+  setCoinsCollectedThisShot,
+  setSelectedFunction,
+  setShowLevels,
+  setFunctionPickups, resetSineController,
 } from '../redux/gameSlice';
-import {Coin, SupportedFunctions} from '../types';
+import {Coin, SupportedFuncWithXPos, SupportedFunctions} from '../types';
 
 export type DataContext = {
   selectedFunction: SupportedFunctions;
@@ -27,6 +35,7 @@ export type DataContext = {
   isCharging: boolean;
   chargePower: number;
   isBackgroundSound: boolean;
+  setLevel: (level: number) => void;
   nextLevel: () => void;
   resetLevel: () => void;
   showTutorial: boolean;
@@ -47,7 +56,12 @@ export type DataContext = {
   setShowTutorial: (showTutorial: boolean) => void;
   collectCoin: (index: number) => void;
   collectBomb: (index: number) => void;
-  setSelectedFunction: (selectedFunction: string) => void;
+  setSelectedFunction: (selectedFunction: SupportedFunctions) => void;
+  functionPickups: SupportedFuncWithXPos[];
+  pickupFunction: (selectedFunction: SupportedFunctions, x: number) => void;
+  showLevels: boolean;
+  setShowLevels: (showLevels: boolean) => void;
+  resetSineController: () => void;
 };
 
 // TODO: Move this somewhere else (either to Coin.value or to a separate file of constants)
@@ -61,6 +75,11 @@ export default function useData(): DataContext {
   function dispatchSetDisplayScore(displayScore: boolean) {
     dispatch(setDisplayScore(displayScore));
   }
+
+  function dispatchSetLevel(level: number) {
+    dispatch(setLevel(level));
+  }
+
   function dispatchNextLevel() {
     dispatch(nextLevel());
   }
@@ -86,6 +105,7 @@ export default function useData(): DataContext {
   }
 
   function fire() {
+    dispatch(setCoinsCollectedThisShot(0));
     dispatch(setIsFiring(true));
     dispatch(setIsCharging(false));
   }
@@ -115,10 +135,10 @@ export default function useData(): DataContext {
     coins[index] = { ...coins[index], isCollected: true };
     dispatch(setCoins(coins));
 
-    const chargeScoreMultiplier = (data.chargePower + 1) / 2; // 0.5 to 1 depending on charge power
+    // const chargeScoreMultiplier = (data.chargePower + 1) / 2; // 0.5 to 1 depending on charge power
     const coinsCollectedMultiplier = 1 + data.coinsCollectedThisShot * 0.1; // 1 + 0.1 per coin collected
-    console.log(coinsCollectedMultiplier);
-    const levelScore = SCORE_PER_COIN * chargeScoreMultiplier * coinsCollectedMultiplier;
+    const shotMultiplier = 1 / ((data.numAttempts - 1) * 0.2 + 1); // 1st shot: 1, 2nd shot: 0.83, 3rd shot: 0.71, 4th shot: 0.63, etc.
+    const levelScore = SCORE_PER_COIN * coinsCollectedMultiplier * shotMultiplier / 2;
     dispatch(setCurrentScore(data.currentScore + levelScore));
 
     dispatch(setCoinsCollectedThisShot(data.coinsCollectedThisShot + 1));
@@ -130,17 +150,34 @@ export default function useData(): DataContext {
     const finalIndex = index + bombsIndex;
     coins[finalIndex] = { ...coins[finalIndex], isCollected: true };
     dispatch(setCoins(coins));
-    const newScore = data.currentScore - SCORE_LOST_PER_BOMB;
+    const newScore = data.currentScore/2;
     dispatch(setCurrentScore(newScore));
   }
 
-  function dispatchSetSelectedFunction(selectedFunction: string) {
+  function dispatchSetSelectedFunction(selectedFunction: SupportedFunctions) {
     dispatch(setSelectedFunction(selectedFunction));
+  }
+
+  function pickupFunction(selectedFunction: SupportedFunctions, x: number) {
+    dispatch(setFunctionPickups({
+      func: selectedFunction,
+      x,
+    }))
+  }
+
+  function dispatchSetShowLevels(showLevels: boolean) {
+    dispatch(setShowLevels(showLevels));
+  }
+
+  function disptachResetSineController() {
+    dispatch(resetSineController());
   }
 
   return {
     ...data,
+    resetSineController: disptachResetSineController,
     setDisplayScore: dispatchSetDisplayScore,
+    setLevel: dispatchSetLevel,
     nextLevel: dispatchNextLevel,
     resetLevel: dispatchResetLevel,
     setVerticalShift: dispatchVerticalShift,
@@ -148,6 +185,8 @@ export default function useData(): DataContext {
     setAngularFrequency: dispatchAngularFrequency,
     setPhaseShift: dispatchPhaseShift,
     setSelectedFunction: dispatchSetSelectedFunction,
+    pickupFunction,
+    setShowLevels: dispatchSetShowLevels,
     fire,
     stopFire,
     startCharge,

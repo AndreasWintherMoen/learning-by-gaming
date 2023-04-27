@@ -11,7 +11,7 @@ const animationDuration = 1.6;
 export default function Frontpage() {
   const { pixelWidth, pixelHeight } = useCanvasSize();
 
-  const { nextLevel, level } = useData();
+  const { nextLevel, level, setShowTutorial } = useData();
 
   const [topPos, startTopPosAnimation] = useTween({
     func: 'easeInOutCubic',
@@ -57,6 +57,9 @@ export default function Frontpage() {
     sound.play('button-click');
     startAllAnimations();
     nextLevel();
+    setTimeout(() => {
+      setShowTutorial(true);
+    }, 1500);
   };
 
 
