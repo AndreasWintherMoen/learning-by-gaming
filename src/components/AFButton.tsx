@@ -16,7 +16,7 @@ export default function AMButton({ title, onClick, style, size, icon, color, fon
   const buttonFontSize = fontSize || 32
 
   return (
-    <div onClick={onClick} style={{...style, cursor: 'pointer', width: width, height: height, display: 'flex', alignItems: 'center', justifyContent:'center', gap: 16}}>
+    <div className={'expand-button'} onClick={onClick} style={{...style, cursor: 'pointer', width: width, height: height, display: 'flex', alignItems: 'center', justifyContent:'center', gap: 16}}>
       <div style={{position: 'absolute'}}>
         <svg width="246" height="101" viewBox="0 0 246 101" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_170_1534)">
