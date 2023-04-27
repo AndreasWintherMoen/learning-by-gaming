@@ -59,11 +59,12 @@ export default function Canvas() {
     setBulletRect(rect);
   }, []);
 
-  const coinCoins = coins.filter((coin) => coin.type === 'coin');
-  const bombCoins = coins.filter((coin) => coin.type === 'bomb');
-  const sinCoins  = coins.filter((coin) => coin.type === 'sin');
-  const cosCoins  = coins.filter((coin) => coin.type === 'cos');
-  const tanCoins  = coins.filter((coin) => coin.type === 'tan');
+  const newCoins = coins.map((coin, index) => ({...coin, index}));
+  const coinCoins = newCoins.filter((coin) => coin.type === 'coin');
+  const bombCoins = newCoins.filter((coin) => coin.type === 'bomb');
+  const sinCoins  = newCoins.filter((coin) => coin.type === 'sin');
+  const cosCoins  = newCoins.filter((coin) => coin.type === 'cos');
+  const tanCoins  = newCoins.filter((coin) => coin.type === 'tan');
 
   return (
     <>
@@ -73,65 +74,70 @@ export default function Canvas() {
       {levelIndex > 0 && <SineWave ref={handleBulletChange} />}
       {levelIndex > 0 && <LevelText />}
       {level &&
-        coinCoins.map((coin) => coin.position).map(([x, y], i) => (
+        coinCoins.map((coin, i) => (
           <Coin
             key={i.toString() + 'coin'}
-            x={(origoPosition.x + x) * level.cellSize}
-            y={(origoPosition.y + y) * level.cellSize}
-            xCord={x}
-            yCord={y}
+            x={(origoPosition.x + coin.position[0]) * level.cellSize}
+            y={(origoPosition.y + coin.position[1]) * level.cellSize}
+            xCord={coin.position[0]}
+            yCord={coin.position[1]}
             show={!coinCoins[i].isCollected}
             bullet={bulletRect}
-            onHit={() => onHitCoin(i)}
+            onHit={() => onHitCoin(coin.index)}
+            myIndex={coin.index}
           />
         ))}
       {level &&
-        bombCoins.map((coin) => coin.position).map(([x, y], i) => (
+        bombCoins.map((coin, i) => (
           <Bomb
             key={i.toString() + 'bomb'}
-            x={(origoPosition.x + x) * level.cellSize}
-            y={(origoPosition.y + y) * level.cellSize}
-            xCord={x}
-            yCord={y}
-            show={!bombCoins[i].isCollected}
+            x={(origoPosition.x + coin.position[0]) * level.cellSize}
+            y={(origoPosition.y + coin.position[1]) * level.cellSize}
+            xCord={coin.position[0]}
+            yCord={coin.position[1]}
+            show={!(bombCoins[coin.index]?.isCollected)}
             bullet={bulletRect}
-            onHit={() => onHitBomb(i)}
+            onHit={() => onHitBomb(coin.index)}
+            myIndex={coin.index}
           />
         ))}
       {level &&
-        sinCoins.map((coin) => coin.position).map(([x, y], i) => (
+        sinCoins.map((coin, i) => (
           <Pickup
             key={i.toString() + 'sin'}
-            x={(origoPosition.x + x) * level.cellSize}
-            y={(origoPosition.y + y) * level.cellSize}
-            xCord={x}
-            yCord={y}
+            x={(origoPosition.x + coin.position[0]) * level.cellSize}
+            y={(origoPosition.y + coin.position[1]) * level.cellSize}
+            xCord={coin.position[0]}
+            yCord={coin.position[1]}
             bullet={bulletRect}
             pickupType='sin'
+            myIndex={coin.index}
            />
         ))}
       {level &&
-        cosCoins.map((coin) => coin.position).map(([x, y], i) => (
+        cosCoins.map((coin, i) => (
           <Pickup
             key={i.toString() + 'cos'}
-            x={(origoPosition.x + x) * level.cellSize}
-            y={(origoPosition.y + y) * level.cellSize}
-            xCord={x}
-            yCord={y}
+            x={(origoPosition.x + coin.position[0]) * level.cellSize}
+            y={(origoPosition.y + coin.position[1]) * level.cellSize}
+            xCord={coin.position[0]}
+            yCord={coin.position[1]}
             bullet={bulletRect}
             pickupType='cos'
+            myIndex={coin.index}
            />
         ))}
       {level &&
-        tanCoins.map((coin) => coin.position).map(([x, y], i) => (
+        tanCoins.map((coin, i) => (
           <Pickup
             key={i.toString() + 'tan'}
-            x={(origoPosition.x + x) * level.cellSize}
-            y={(origoPosition.y + y) * level.cellSize}
-            xCord={x}
-            yCord={y}
+            x={(origoPosition.x + coin.position[0]) * level.cellSize}
+            y={(origoPosition.y + coin.position[1]) * level.cellSize}
+            xCord={coin.position[0]}
+            yCord={coin.position[1]}
             bullet={bulletRect}
             pickupType='tan'
+            myIndex={coin.index}
            />
         ))}
       <StartCoin />

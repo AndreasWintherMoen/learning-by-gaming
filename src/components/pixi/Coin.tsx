@@ -13,6 +13,7 @@ type Props = {
   show: boolean;
   bullet: Rectangle | null;
   onHit: () => void;
+  myIndex: number;
 };
 
 export default function Coin({
@@ -23,34 +24,40 @@ export default function Coin({
   show,
   bullet,
   onHit,
+  myIndex,
 }: Props): JSX.Element {
   const ref = useRef<PixiSprite | null>(null);
   const [showCord, setShowCord] = useState(true);
 
+  const { coinIndexJustCollected } = useData();
+
   const [spriteAlpha, setSpriteAlpha] = useState(1);
   const [fadeOutInterval, setFadeOutInterval] = useState<NodeJS.Timer>();
+  const [hasPickedUp, setHasPickedUp] = useState(false);
 
   // this is a hack to force a re-render
   const [foo, setFoo] = useState({ bar: 'baz'});
 
-  const [shouldDie, setShouldDie] = useState(false);
-
   function fadeOutSprite() {
-    // const interval = setInterval(() => setSpriteAlpha((spriteAlpha) => spriteAlpha - 0.15), 100);
-    // if(fadeOutInterval) clearInterval(fadeOutInterval);
-    // setFadeOutInterval(interval);
+    const interval = setInterval(() => setSpriteAlpha((spriteAlpha) => spriteAlpha - 0.15), 100);
+    if(fadeOutInterval) clearInterval(fadeOutInterval);
+    setFadeOutInterval(interval);
   }
 
   useEffect(() => {
     clearInterval(fadeOutInterval);
     setSpriteAlpha(1);
+    setHasPickedUp(false);
     setFoo({ ...foo });
   }, [show]);
 
   useEffect(() => {
+    if (myIndex !== coinIndexJustCollected) return;
     if (!bullet || !show || !ref.current) return;
-    if (bullet.intersects(ref.current.getBounds())) {
+    if (hasPickedUp) return;
+    if (bullet.left > ref.current.x -30) {
       onHit();
+      setHasPickedUp(true);
       setTimeout(fadeOutSprite, 1000);
     }
   }, [bullet, onHit, ref]);

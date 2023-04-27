@@ -4,6 +4,7 @@ import getFunction, { getInverseFunction } from './getFunction';
 export type Params = {
   point: [number, number];
   func: SupportedFunctions;
+  domain: [number, number];
   amplitude: number;
   angularFrequency: number;
   phaseShift: number;
@@ -24,9 +25,10 @@ export default function trigFunctionIntersectsPoint(params: Params): boolean {
   return false;
 }
 
-function intersectsAtX({ point, func, amplitude, angularFrequency, phaseShift, verticalShift, cellSize}: Params) {
+function intersectsAtX({ point, domain, func, amplitude, angularFrequency, phaseShift, verticalShift, cellSize}: Params) {
   // evaluate the function at the given x value and check if y is within 0.1 of the point
   const pointX = point[0];
+  if (domain[0] - coinSize / (cellSize * 2) > pointX || domain[1] + coinSize / (cellSize * 2) < pointX) return false;
   const pointY = (-1) * point[1];
   const trigFunction = getFunction(func);
   const y = amplitude * trigFunction(angularFrequency * pointX + phaseShift) + verticalShift;

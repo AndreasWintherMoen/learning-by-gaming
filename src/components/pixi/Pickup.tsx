@@ -12,6 +12,7 @@ type Props = {
   yCord: number;
   bullet: Rectangle | null;
   pickupType: SupportedFunctions;
+  myIndex: number;
 };
 
 export default function Pickup({
@@ -21,19 +22,22 @@ export default function Pickup({
   yCord,
   bullet,
   pickupType,
+  myIndex,
 }: Props): JSX.Element {
   const ref = useRef<PixiSprite | null>(null);
   const { pickupFunction, isFiring } = useData();
   const [hasPickedUp, setHasPickedUp] = useState(false);
+  const { coinIndexJustCollected } = useData();
 
   useEffect(() => {
     setHasPickedUp(false);
   }, [isFiring]);
 
   useEffect(() => {
+    if (myIndex !== coinIndexJustCollected) return;
     if (!bullet || !ref.current) return;
     if (hasPickedUp) return;
-    if (bullet.intersects(ref.current.getBounds())) {
+    if (bullet.left > ref.current.x -30) {
       pickupFunction(pickupType, x);
       setHasPickedUp(true);
     }

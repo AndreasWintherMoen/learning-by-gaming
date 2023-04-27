@@ -29,6 +29,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       selectedFunction,
       coins,
       functionPickups,
+      setCoinIndexJustColled,
     } = useData();
     const { origoPosition, cellSize, pixelWidth } = useCanvasSize();
     const realPhaseShift = -phaseShift / angularFrequency;
@@ -52,23 +53,45 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
       setTimer(newTimer);
     });
 
-    useEffect(() => {
-      if (!isFiring || !levelInfo) return;
+    const [indexForStuffThatsGoingToHappen, setIndexForStuffThatsGoingToHappen] = useState(0);
+
+    const stuffThatsGoingToHappen = useMemo(() => {
+      if (!isFiring || !levelInfo) return [];
       setTimer(0);
-      const coinCoins = coins.filter((coin) => coin.type === 'coin');
-      coinCoins.forEach((coin) => {
+      setIndexForStuffThatsGoingToHappen(0);
+      const startX = realPhaseShift;
+      let currentDomain: [number, number] = [startX, 100];
+      let currentFunc = (selectedFunction);
+      const newCoins = [...coins];
+      return newCoins.map((coin, index) => {
         const params = {
-          point: coin.position, 
-          func: 'sin', 
+          point: coin.position,
+          domain: currentDomain,
+          func: currentFunc, 
           amplitude, 
           angularFrequency, 
           phaseShift, 
           verticalShift,
           cellSize: levelInfo.cellSize,
         } as const;
-        console.log(trigFunctionIntersectsPoint(params));
-      });
-      const bombCoins = coins.filter((coin) => coin.type === 'bomb');
+        const isGoingToHit = trigFunctionIntersectsPoint(params);
+        if (isGoingToHit) {
+          currentDomain = [coin.position[0], 100];
+          if (coin.type === 'sin') currentFunc = 'sin';
+          else if (coin.type === 'cos') currentFunc = 'cos';
+          else if (coin.type === 'tan') currentFunc = 'tan';
+          else if (coin.type === 'arcsin') currentFunc = 'arcsin';
+          else if (coin.type === 'arccos') currentFunc = 'arccos';
+          else if (coin.type === 'arctan') currentFunc = 'arctan';
+        }
+        return {
+          x: coin.position[0],
+          action: coin.type,
+          isGoingToHit,
+          index,
+        }
+      })
+      .filter((coin) => coin.isGoingToHit);
     }, [isFiring]);
 
     const drawSineWave = useCallback<Draw>(
@@ -90,7 +113,7 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
         g.lineStyle(4, 0x000000, 1);
         g.moveTo(startX, startY);
 
-        const startI = Math.floor(timer * adjustedChargePower * cellSize * cellSize / 20 * (selectedFunction === 'tan' ? 0.5 : 1) * 10); // CHANGE THIS TO CHANGE SPEED
+        const startI = Math.floor(timer * adjustedChargePower * cellSize * cellSize / 20 * (selectedFunction === 'tan' ? 0.5 : 1)); // CHANGE THIS TO CHANGE SPEED
         const stopI = Math.min(startI, targetDistance - adjustedOrigoX)
         let lastPoint = { x: startX, y: startY };
         const paintAccuracyMultiplier = (Math.abs(amplitude) > 2 || Math.abs(angularFrequency) > 2) ? 0.5 : 1;
@@ -111,17 +134,18 @@ const SineWave = forwardRef<Rectangle | undefined, {}>(
             }
           })
           const func = getFunction(currentFunction);
-          // if (currentFunction === 'tan') {
-          //   console.log('');
-          //   console.log(x);
-          //   console.log((angularFrequency * i) / cellSize);
-          //   console.log(func((angularFrequency * i) / cellSize));
-          // }
           const y = yConstant - amplitude * func((angularFrequency * i) / cellSize) * cellSize;
           drawPoint(x, y);
           lastPoint = { x, y };
         }
         if (lastPoint.x !== startX || lastPoint.y !== startY) {
+          if (indexForStuffThatsGoingToHappen < stuffThatsGoingToHappen.length) {
+            const currentStuff = stuffThatsGoingToHappen[indexForStuffThatsGoingToHappen];
+            if (lastPoint.x > currentStuff.x * cellSize + adjustedOrigoX) {
+              setIndexForStuffThatsGoingToHappen(indexForStuffThatsGoingToHappen + 1);
+              setCoinIndexJustColled(currentStuff.index);
+            }
+          }
           setBulletCollider(new Rectangle(lastPoint.x, lastPoint.y, 1, 1));
         }
         // TODO: Adjust this with phase shift
