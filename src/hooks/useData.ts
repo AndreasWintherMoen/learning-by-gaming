@@ -135,10 +135,10 @@ export default function useData(): DataContext {
     coins[index] = { ...coins[index], isCollected: true };
     dispatch(setCoins(coins));
 
-    //const chargeScoreMultiplier = (data.chargePower + 1) / 2; // 0.5 to 1 depending on charge power
+    // const chargeScoreMultiplier = (data.chargePower + 1) / 2; // 0.5 to 1 depending on charge power
     const coinsCollectedMultiplier = 1 + data.coinsCollectedThisShot * 0.1; // 1 + 0.1 per coin collected
     const shotMultiplier = 1 / ((data.numAttempts - 1) * 0.2 + 1); // 1st shot: 1, 2nd shot: 0.83, 3rd shot: 0.71, 4th shot: 0.63, etc.
-    const levelScore = SCORE_PER_COIN * coinsCollectedMultiplier * shotMultiplier;
+    const levelScore = SCORE_PER_COIN * coinsCollectedMultiplier * shotMultiplier / 2;
     dispatch(setCurrentScore(data.currentScore + levelScore));
 
     dispatch(setCoinsCollectedThisShot(data.coinsCollectedThisShot + 1));
