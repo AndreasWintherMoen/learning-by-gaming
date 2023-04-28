@@ -14,7 +14,7 @@ interface StarProps {
 function playSound(delayInMilliseconds: number) {
   setTimeout(() => {
     sound.play('score', {
-      volume: 0.4,
+      volume: 0.2,
     });
   }, delayInMilliseconds);
 }

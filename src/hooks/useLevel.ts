@@ -92,7 +92,7 @@ export const levels: Level[] = [
   {
     title: 'Amplitude og enhetssirkel',
     descriptions: [
-      {type: 'text', content: 'Du er sikkert kjent med enhetssirkelen og hvordan den kan brukes til å finne sinus og cosinus av vinkler.'},
+      {type: 'text', content: 'Hvis du er kjent med enhetssirkelen vet du kanskje den kan brukes til å finne sinus og cosinus av vinkler?'},
       {type: 'image', content: 'infomodal/amplitude-unitcircle.gif'},
       {type: 'text', content: 'Amplituden til en sinusfunksjon kan du tenke på som radius til enhetssirkelen.'},
     ],
@@ -109,7 +109,7 @@ export const levels: Level[] = [
       [3.14 * 2.5, 0],
       [3.14 * 3, 0],
     ],
-    starScores: [160, 200, 220],
+    starScores: [160, 190, 220],
     maxAmplitude: 3,
     maxVerticalShift: 5,
     maxAngularFrequency: 3,
@@ -247,7 +247,7 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Mer cosinus',
+    title: 'Mer om cosinus',
     descriptions: [
       { type: "text", content: "Du kan også bytte mellom sinus og cosinus i funksjonsbyggeren." },
       { type: "image", content: "infomodal/cos-toggle.gif" },
@@ -276,7 +276,7 @@ export const levels: Level[] = [
   {
     title: 'Sinus vs Cosinus',
     descriptions: [
-      { type: "text", content: "Ettersom sinus og cosinus er kontinuerlige, kan man lage en cosinus-funksjon ved å faseforskyve sinus." },
+      { type: "text", content: "Ettersom sinus og cosinus er kontinuerlige og uendelige, kan man lage en cosinus-funksjon ved å faseforskyve sinus." },
       { type: "image", content: "infomodal/sin-cos-comparison.png"},
       { type: "text", content: "I Aftermath kan du plukke opp sinus/cosinus-mynter og endre funksjonen underveis. Men hvis du treffer samme funksjon som du allerede har, så vil du fortsette med samme funksjon." },
       { type: "image", content: "infomodal/sin-cos-coins.gif" },
@@ -311,6 +311,7 @@ export const levels: Level[] = [
     descriptions: [
       { type: "text", content: "Den generelle sinus-formelen er vist under" },
       { type: "image", content: "infomodal/sin-formula.png" },
+      { type: "text", content: "Amplituden (A) og vertikal forskyvning (d) har vi allerede beskrevet. Nå skal vi se på k."},
       { type: "text", content: "I mange sammenhenger kalles tallet k for frekvensen til funksjonen. Vi kommer tilbake til frekvensen i neste oppgave."},
       { type: "text", content: "I Aftermath kan du justere frekvensen i funksjonsboksen som vist under." },
       { type: "image", content: "infomodal/angular-frequency.gif" },
@@ -389,7 +390,7 @@ export const levels: Level[] = [
     descriptions: [
       { type: "text", content: "Husker du den generelle sinus-formelen fra tidligere?"},
       { type: "image", content: "infomodal/sin-formula.png" },
-      { type: "text", content: "Den siste variabelen vi ikke har beskrevet er φ. Dette tallet sier noe om faseforskyvningen til funksjonen. Faseforskyvning er hvor mye grafen er forskjøvet i x-retning, og er gitt ved" },
+      { type: "text", content: "Den siste variabelen vi ikke har beskrevet er φ (den greske bokstaven phi). Dette tallet sier noe om faseforskyvningen til funksjonen. Faseforskyvning er hvor mye grafen er forskjøvet i x-retning, og er gitt ved" },
       { type: "image", content: "infomodal/phaseshift.png" },
       { type: "text", content: "I Aftermath kan du justere φ for å flytte startspunktet til funksjonen." },
       { type: "image", content: "infomodal/phaseshift.gif" },
@@ -461,7 +462,7 @@ export const levels: Level[] = [
     descriptions: [
       { type: "text", content: "I tillegg til sinus og cosinus har vi også tangens. Vi kommer tilbake til definisjonen i neste oppgave, men under ser du funksjonen grafisk." },
       { type: "image", content: "infomodal/tans.png" },
-      { type: "text", content: "Som du kan se, har tangens en litt annen form enn sinus og cosinus. Verdimengden til sinus og cosinus, altså de mulige y-verdiene, er [-1,1]. Tangens går derimot helt fra -∞ til +∞." },
+      { type: "text", content: "Som du kan se, har tangens en litt annen form enn sinus og cosinus. Verdimengden til sin(x) og cos(x), altså de mulige y-verdiene, er [-1,1]. Tangens går derimot helt fra -∞ til +∞." },
     ],
     showPowerBar: true,
     cellSize: 100,
@@ -538,9 +539,9 @@ export const levels: Level[] = [
 
 
   {
-    title: '',
+    title: 'Kos deg!',
     descriptions: [
-      { type: "text", content: "" },
+      { type: "text", content: "Nå er det ikke mer pensum, så du kan fokusere kun på å fullføre alle nivåene! Og du har bare 4 nivåer igjen... Klarer du alle?" },
       // { type: "image", content: "infomodal/tan-katet-katet.gif" },
     ],
     showPowerBar: true,
@@ -576,9 +577,9 @@ export const levels: Level[] = [
 
 
   {
-    title: '', // 2sin(x-1)+1
+    title: 'Har du lært noe?', // 2sin(x-1)+1
     descriptions: [
-      { type: "text", content: "" },
+      { type: "text", content: "... Eller har du bare hoppet over informasjonen og gått rett til oppgavene?" },
       // { type: "image", content: "infomodal/tan-katet-katet.gif" },
     ],
     showPowerBar: true,
@@ -613,7 +614,7 @@ export const levels: Level[] = [
   {
     title: '', // 2sin(x-1)+1
     descriptions: [
-      { type: "text", content: "" },
+      { type: "text", content: "Det begynner å bli vanskelig nå..." },
       // { type: "image", content: "infomodal/tan-katet-katet.gif" },
     ],
     showPowerBar: true,
