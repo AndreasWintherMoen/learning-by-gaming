@@ -45,7 +45,7 @@ function intersectsAtY({ point, func, amplitude, angularFrequency, phaseShift, v
     return Math.abs(pointX - verticalShift) < threshold;
   }
   const trigFunction = getInverseFunction(func);
-  const trigElement = trigFunction((verticalShift - pointY) / amplitude);
+  const trigElement = func === 'tan' ? trigFunction(pointY, (verticalShift - pointY) / amplitude) : trigFunction((verticalShift - pointY) / amplitude, 0);
   if (isNaN(trigElement)) {
     return false;
   }

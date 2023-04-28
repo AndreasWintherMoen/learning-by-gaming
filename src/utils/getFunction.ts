@@ -23,6 +23,8 @@ export function getInverseFunction(functionName: SupportedFunctions) {
       return Math.asin;
     case 'cos':
       return Math.acos;
+    case 'tan':
+      return Math.atan2;
     case 'arcsin':
       return Math.sin;
     case 'arccos':

@@ -37,7 +37,6 @@ export default function Bomb({x, y, xCord, yCord, show, bullet, onHit, myIndex}:
 
   useEffect(() => {
     if (numAttempts === 0) {
-      console.log("reset bomb");
       setHasPickedUp(false);
       setExplosionFinished(false);
     }

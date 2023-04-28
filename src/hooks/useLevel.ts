@@ -120,7 +120,7 @@ export const levels: Level[] = [
       { type: "text", content: "Akkurat som med ikke-trigonometriske funksjoner, kan vi også forskyve trigonometriske funksjoner opp og ned. Dette kalles ofte vertikal forskyvning."},
       { type: "image", content: "infomodal/vertical-shift.gif" },
       { type: "text", content: "" },
-      { type: "text", content: "Forresten! Du kan når som helst trykke R for å restarte nivået du er på." },
+      { type: "text", content: "Forresten! Du kan trykke på stjernesymbolet nede til venstre for å gå tilbake til tidligere nivåer. Klarer du å få 3 stjerner på alle?" },
     ],
     showPowerBar: false,
     cellSize: 100,
@@ -418,7 +418,7 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Definisjonsområde',
+    title: 'Definisjonsmengder',
     descriptions: [
       { type: "text", content: "Definisjonsområdet til en generell sinus- eller cosinus-funksjon er 〈-∞,∞〉" },
       { type: "text", content: "Kort forklart betyr det at funksjonen er definert for alle mulige verdier av x, helt fra negativ uendelig til positiv uendelig. Men i Aftermath har vi satt funksjonene til å starte på x=0. Vi har altså avgrenset definisjonsområdet til [0, ∞〉. Vi har gjort dette for å gjøre spillet mer spennende. "},
@@ -459,10 +459,9 @@ export const levels: Level[] = [
   {
     title: 'Tangens',
     descriptions: [
-      { type: "text", content: "Tidligere har vi definert sinus som forholdet mellom motstående katet og hypotenus, og vi har definert cosinus som forholdet mellom hosliggende katet og hypotenus. Vi har også tangens, som er definert som forholdet mellom moststående katet og hosliggende katet." },
-      { type: "image", content: "infomodal/tan-katet-katet.gif" },
-      { type: "text", content: "Som du kanskje husker fra tidligere oppgaver, så gjør enhetssirkelen at vi kan forenkle sinus til lengden av motstående katet og cosinus til lengden av hosliggende katet. Vi kan derfor beskrive tangens som" },
-      { type: "image", content: "infomodal/tan-formula.png" },
+      { type: "text", content: "I tillegg til sinus og cosinus har vi også tangens. Vi kommer tilbake til definisjonen i neste oppgave, men under ser du funksjonen grafisk." },
+      { type: "image", content: "infomodal/tans.png" },
+      { type: "text", content: "Som du kan se, har tangens en litt annen form enn sinus og cosinus. Verdimengden til sinus og cosinus, altså de mulige y-verdiene, er [-1,1]. Tangens går derimot helt fra -∞ til +∞." },
     ],
     showPowerBar: true,
     cellSize: 100,
@@ -499,9 +498,11 @@ export const levels: Level[] = [
   {
     title: 'Tangens og uendelig',
     descriptions: [
-      { type: "text", content: "Du så kanskje at tangens-funksjonen har en litt annen form enn sinus og cosinus?" },
-      { type: "image", content: "infomodal/tans.png" },
-      { type: "text", content: "For å regne ut tangens deler vi som sagt sin(x) på cos(x). Som vi har sett tidligere, så kan cos(x) være lik 0 (den er faktisk lik 0 for uendelig mange verdier av x). Og hvis vi prøver å dele noe på 0, så får vi et udefinert svar. Derfor pleier vi å si at tan(x) kun er definert for verdier av x som ikke gir cos(x)=0" },
+      { type: "text", content: "Tidligere har vi definert sinus som forholdet mellom motstående katet og hypotenus, og vi har definert cosinus som forholdet mellom hosliggende katet og hypotenus. Tilsvarende er tangens definert som forholdet mellom moststående katet og hosliggende katet." },
+      { type: "image", content: "infomodal/tan-katet-katet.gif" },
+      { type: "text", content: "Som du kanskje husker fra tidligere oppgaver, så gjør enhetssirkelen at vi kan forenkle sinus til lengden av motstående katet og cosinus til lengden av hosliggende katet. Vi kan derfor beskrive tangens som" },
+      { type: "image", content: "infomodal/tan-formula.png" },
+      { type: "text", content: "Men som vi så i forrige oppgave, så går tan(x) til ∞. Det er fordi cos(x) kan være lik 0 (den er faktisk lik 0 for uendelig mange verdier av x), og hvis vi prøver å dele noe på 0 så får vi et udefinert svar. Derfor pleier vi å si at tan(x) kun er definert for verdier av x som ikke gir cos(x)=0" },
       { type: "image", content: "infomodal/tan-infinity.png" },
     ],
     showPowerBar: true,
@@ -511,17 +512,24 @@ export const levels: Level[] = [
       x: 2,
     },
     bombPositions: [
+      [0, 0],
+      [Math.PI * 1 - 1, -2],
     ],
     coinPositions: [
-      [Math.PI * 0.25, -1],
-      [Math.PI * 0.75, 1],
-      [Math.PI, 0],
-      [Math.PI * 1.25, -1],
-      [Math.PI * 1.75, 1],
-      [Math.PI * 2, 0],
-      [Math.PI * 2.25, -1],
+      [Math.PI * 0.5 - 1, -2],
+      [Math.PI * 1 - 1, 0],
+      [Math.PI * 2 - 1, 0],
+      [Math.PI * 3 - 1, 0],
+      [6, -1.743],
+      [7.6, 2.164],
     ],
-    starScores: [10, 200, 280],
+    tanPositions: [
+      [Math.PI * 1.5 - 1, 2],
+    ],
+    cosPositions: [
+      [Math.PI * 1 - 1, 2],
+    ],
+    starScores: [200, 300, 375],
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
@@ -529,35 +537,122 @@ export const levels: Level[] = [
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  {
+    title: '',
+    descriptions: [
+      { type: "text", content: "" },
+      // { type: "image", content: "infomodal/tan-katet-katet.gif" },
+    ],
+    showPowerBar: true,
+    cellSize: 100,
+    origoPosition: {
+      y: 0,
+      x: 6,
+    },
+    bombPositions: [
+      [3.3, -0.2],
+      [3.1, -0.5],
+      [3.5, 0],
+      [3.3, 0.2],
+      [3.1, 0.5],
+      [-2, 0],
+    ],
+    coinPositions: [
+      [Math.PI * 1 - 3, 2],
+      [2, 0.716],
+      [1.3, 1.4],
+    ],
+    tanPositions: [
+      [-1, -1]
+    ],
+    cosPositions: [
+      [-0.906, 1.5],
+    ],
+    starScores: [80, 120, 165],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
 
 
   {
-    title: 'Level 11', // Solution: 1cos(2x)+2
-    descriptions: [],
+    title: '', // 2sin(x-1)+1
+    descriptions: [
+      { type: "text", content: "" },
+      // { type: "image", content: "infomodal/tan-katet-katet.gif" },
+    ],
+    showPowerBar: true,
+    cellSize: 80,
+    origoPosition: {
+      y: 0,
+      x: 3,
+    },
+    bombPositions: [
+      [3.3, -0.2],
+    ],
+    coinPositions: [
+      [Math.PI * 0.5 + 1, -3],
+      [5, -3.316],
+      [6.2, 2.771],
+      [7.22, -2.996],
+      [10.5, 0.994],
+    ],
+    tanPositions: [
+      [Math.PI + 1, -1]
+    ],
+    cosPositions: [
+      [6.82, 0],
+    ],
+    starScores: [160, 220, 300],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+
+
+  {
+    title: '', // 2sin(x-1)+1
+    descriptions: [
+      { type: "text", content: "" },
+      // { type: "image", content: "infomodal/tan-katet-katet.gif" },
+    ],
+    showPowerBar: true,
+    cellSize: 80,
+    origoPosition: {
+      y: 0,
+      x: 3,
+    },
+    bombPositions: [
+      [8, 1.01],
+      [-1, 1],
+    ],
+    coinPositions: [
+      [0.8, 0.97],
+      [1.32, -1.903],
+      [4.7, 3],
+      [3.2, 2.059],
+      [4, 2.757],
+      [5.7, 2.551],
+    ],
+    tanPositions: [
+      [1.35 + 1, -2.455],
+      [-1, -1],
+    ],
+    sinPositions: [
+      [1.35, -2.455],
+    ],
+    starScores: [200, 300, 375],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+
+
+  {
+    title: 'The End...', // Solution: 1cos(2x)+2
+    descriptions: [
+      { type: "text", content: "Klar for siste nivå...?" },
+    ],
     showPowerBar: true,
     cellSize: 50,
     origoPosition: {
@@ -598,7 +693,7 @@ export const levels: Level[] = [
       [11 + Math.PI * 0.5, -2],
       [11 + Math.PI * 1, -2],
     ],
-    starScores: [10, 200, 280],
+    starScores: [200, 400, 540],
     cosPositions: [
       [Math.PI * 1, -2],
       [Math.PI * 1, -1.5],
@@ -614,39 +709,6 @@ export const levels: Level[] = [
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
-  },
-  {
-    title: 'Arcsin', // Solution: 2.0 arcsin(0.1x) - 1.0
-    descriptions: [],
-    showPowerBar: true,
-    cellSize: 100,
-    origoPosition: {
-      y: 0,
-      x: 2,
-    },
-    bombPositions: [],
-    coinPositions: [
-      [0.1 * 10, -0.1 * 2 + 1],
-      [0.2 * 10, -0.201 * 2 + 1],
-      [0.3 * 10, -0.304 * 2 + 1],
-      [0.4 * 10, -0.412 * 2 + 1],
-      [0.5 * 10, -0.524 * 2 + 1],
-      [0.6 * 10, -0.644 * 2 + 1],
-      [0.7 * 10, -0.775 * 2 + 1],
-      [0.8 * 10, -0.927 * 2 + 1],
-      [0.9 * 10, -1.112 * 2 + 1],
-      [0.98 * 10, -1.37 * 2 + 1],
-    ],
-    sinPositions: [
-      // [0.845 * 10, -1],
-    ],
-    cosPositions: [
-    ],
-    starScores: [10, 200, 280],
-    maxAmplitude: 3,
-    maxVerticalShift: 3,
-    maxAngularFrequency: 3,
-    highAccuracy: true,
   },
 ]
 

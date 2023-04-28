@@ -148,9 +148,9 @@ export default function useData(): DataContext {
 
   function collectBomb(index: number) {
     const coins = [...data.coins];
-    const bombsIndex = coins.findIndex((coin) => coin.type === 'bomb');
-    const finalIndex = index + bombsIndex;
-    coins[finalIndex] = { ...coins[finalIndex], isCollected: true };
+    // const bombsIndex = coins.findIndex((coin) => coin.type === 'bomb');
+    // const finalIndex = index + bombsIndex;
+    coins[index] = { ...coins[index], isCollected: true };
     dispatch(setCoins(coins));
     const newScore = data.currentScore/2;
     dispatch(setCurrentScore(newScore));

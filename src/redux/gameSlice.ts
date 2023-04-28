@@ -157,16 +157,9 @@ export const gameSlice = createSlice({
       state.currentScore = action.payload;
     },
     setSelectedFunction: (state, action) => {
-      if (action.payload !== 'sin' && action.payload !== 'cos' && action.payload !== 'arcsin' && action.payload !== 'arccos') {
-        console.log('Invalid function selected', action.payload);
-      }
       state.selectedFunction = action.payload;
     },
     setFunctionPickups: (state, action) => {
-      const { func } = action.payload;
-      if (func !== 'sin' && func !== 'cos' && func !== 'arcsin' && func !== 'arccos') {
-        console.log('Invalid function selected', action.payload);
-      }
       state.functionPickups = [...state.functionPickups, action.payload];
     },
     setShowLevels: (state, action) => {

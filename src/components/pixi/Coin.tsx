@@ -56,6 +56,7 @@ export default function Coin({
     if (!bullet || !show || !ref.current) return;
     if (hasPickedUp) return;
     if (bullet.left > ref.current.x -30) {
+      console.log('onhit', myIndex);
       onHit();
       setHasPickedUp(true);
       setTimeout(fadeOutSprite, 1000);
