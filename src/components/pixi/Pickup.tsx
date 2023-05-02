@@ -8,8 +8,7 @@ import useData from '../../hooks/useData';
 type Props = {
   x: number;
   y: number;
-  xCord: number;
-  yCord: number;
+  text: string;
   bullet: Rectangle | null;
   pickupType: SupportedFunctions;
   myIndex: number;
@@ -18,8 +17,7 @@ type Props = {
 export default function Pickup({
   x,
   y,
-  xCord,
-  yCord,
+  text,
   bullet,
   pickupType,
   myIndex,
@@ -47,7 +45,7 @@ export default function Pickup({
     <>
       <Sprite width={30} height={30} x={x} y={y} anchor={0.5} image={`${pickupType}.png`} ref={ref} />
       <Text
-        text={`(${xCord.toFixed(1)}, ${(-yCord).toFixed(1)})`}
+        text={text}
         anchor={0.5}
         x={x}
         y={y+30}

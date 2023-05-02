@@ -79,8 +79,7 @@ export default function Canvas() {
             key={i.toString() + 'coin'}
             x={(origoPosition.x + coin.position[0]) * level.cellSize}
             y={(origoPosition.y + coin.position[1]) * level.cellSize}
-            xCord={coin.position[0]}
-            yCord={coin.position[1]}
+            text={coin.text}
             show={!coinCoins[i].isCollected}
             bullet={bulletRect}
             onHit={() => onHitCoin(coin.index)}
@@ -93,8 +92,7 @@ export default function Canvas() {
             key={i.toString() + 'bomb'}
             x={(origoPosition.x + coin.position[0]) * level.cellSize}
             y={(origoPosition.y + coin.position[1]) * level.cellSize}
-            xCord={coin.position[0]}
-            yCord={coin.position[1]}
+            text={coin.text}
             show={!(bombCoins[coin.index]?.isCollected)}
             bullet={bulletRect}
             onHit={() => onHitBomb(coin.index)}
@@ -107,8 +105,7 @@ export default function Canvas() {
             key={i.toString() + 'sin'}
             x={(origoPosition.x + coin.position[0]) * level.cellSize}
             y={(origoPosition.y + coin.position[1]) * level.cellSize}
-            xCord={coin.position[0]}
-            yCord={coin.position[1]}
+            text={coin.text}
             bullet={bulletRect}
             pickupType='sin'
             myIndex={coin.index}
@@ -120,8 +117,7 @@ export default function Canvas() {
             key={i.toString() + 'cos'}
             x={(origoPosition.x + coin.position[0]) * level.cellSize}
             y={(origoPosition.y + coin.position[1]) * level.cellSize}
-            xCord={coin.position[0]}
-            yCord={coin.position[1]}
+            text={coin.text}
             bullet={bulletRect}
             pickupType='cos'
             myIndex={coin.index}
@@ -133,8 +129,7 @@ export default function Canvas() {
             key={i.toString() + 'tan'}
             x={(origoPosition.x + coin.position[0]) * level.cellSize}
             y={(origoPosition.y + coin.position[1]) * level.cellSize}
-            xCord={coin.position[0]}
-            yCord={coin.position[1]}
+            text={coin.text}
             bullet={bulletRect}
             pickupType='tan'
             myIndex={coin.index}

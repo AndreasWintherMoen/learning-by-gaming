@@ -30,34 +30,39 @@ function generateNewCoins(levelIndex: number) {
   const level = levels[levelIndex-1];
   if(!level) return [];
 
-  const coins = level.coinPositions.map(([x, y]) => ({
+  const coins = level.coinPositions.map((coin) => ({
     type: 'coin',
-    position: [x, y],
+    position: coin.coordinates,
     isCollected: false,
+    text: coin.text,
   } as Coin));
 
-  const bombs = level.bombPositions.map(([x, y]) => ({
+  const bombs = level.bombPositions.map((coin) => ({
     type: 'bomb',
-    position: [x, y],
+    position: coin.coordinates,
     isCollected: false,
+    text: coin.text,
   } as Coin));
 
-  const sins = level.sinPositions?.map(([x, y]) => ({
+  const sins = level.sinPositions?.map((coin) => ({
     type: 'sin',
-    position: [x, y],
+    position: coin.coordinates,
     isCollected: false,
+    text: coin.text,
   } as Coin)) || [];
 
-  const coss = level.cosPositions?.map(([x, y]) => ({
+  const coss = level.cosPositions?.map((coin) => ({
     type: 'cos',
-    position: [x, y],
+    position: coin.coordinates,
     isCollected: false,
+    text: coin.text,
   } as Coin)) || [];
 
-  const tans = level.tanPositions?.map(([x, y]) => ({
+  const tans = level.tanPositions?.map((coin) => ({
     type: 'tan',
-    position: [x, y],
+    position: coin.coordinates,
     isCollected: false,
+    text: coin.text,
   } as Coin)) || [];
 
   return [...coins, ...bombs, ...sins, ...coss, ...tans].sort((a, b) => a.position[0] - b.position[0]);

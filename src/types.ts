@@ -14,6 +14,7 @@ export type Coin = {
   type: CoinType;
   position: [number, number];
   isCollected: boolean;
+  text: string;
 }
 
 export type LevelScore = "locked" | "not played" | 0 | 1 | 2 | 3;

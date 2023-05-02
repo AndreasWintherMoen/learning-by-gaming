@@ -8,8 +8,7 @@ import useData from '../../hooks/useData';
 type Props = {
   x: number;
   y: number;
-  xCord: number;
-  yCord: number;
+  text: string,
   show: boolean;
   bullet: Rectangle | null;
   onHit: () => void;
@@ -19,8 +18,7 @@ type Props = {
 export default function Coin({
   x,
   y,
-  xCord,
-  yCord,
+  text,
   show,
   bullet,
   onHit,
@@ -79,14 +77,14 @@ export default function Coin({
       {showCord && (
         <Text
           alpha={spriteAlpha}
-          text={`(${xCord.toFixed(1)}, ${(-yCord).toFixed(1)})`}
+          text={text}
           anchor={0.5}
           x={x}
           y={y+30}
           style={new TextStyle({
-            fill: 0x6D6F6E,
-            fontSize: 12,
-            fontFamily: 'Handdrawn'
+            fill: 0x909090,
+            fontSize: 18,
+            fontFamily: 'Infomodal',
           })
           }
         />)}
