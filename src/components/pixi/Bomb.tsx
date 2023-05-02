@@ -88,9 +88,9 @@ export default function Bomb({x, y, text, show, bullet, onHit, myIndex}: Props):
           x={x}
           y={y+30}
           style={new TextStyle({
-            fill: 0x6D6F6E,
-            fontSize: 12,
-            fontFamily: 'Handdrawn'
+            fill: 0x909090,
+            fontSize: 18,
+            fontFamily: 'Infomodal',
           })
           }
         />)}

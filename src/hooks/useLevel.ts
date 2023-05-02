@@ -450,8 +450,8 @@ export const levels: Level[] = [
       x: 2,
     },
     bombPositions: [
-      { coordinates: [Math.PI * 7 / 3, 1], text: '(7/3π, 0)' },
-      { coordinates: [Math.PI * 7 / 3, 1], text: '(7/3π, -1)' },
+      { coordinates: [Math.PI * 7 / 3, 0], text: '(7/3π, 0)' },
+      { coordinates: [Math.PI * 7 / 3, -1], text: '(7/3π, -1)' },
       { coordinates: [Math.PI * 7 / 3, 1], text: '(7/3π, 1)' },
     ],
     coinPositions: [
