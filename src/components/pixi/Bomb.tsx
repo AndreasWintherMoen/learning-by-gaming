@@ -9,15 +9,14 @@ import useData from '../../hooks/useData';
 type Props = {
   x: number;
   y: number;
-  xCord: number;
-  yCord: number;
+  text: string;
   show: boolean;
   bullet: Rectangle | null;
   onHit: () => void;
   myIndex: number;
 };
 
-export default function Bomb({x, y, xCord, yCord, show, bullet, onHit, myIndex}: Props): JSX.Element {
+export default function Bomb({x, y, text, show, bullet, onHit, myIndex}: Props): JSX.Element {
   const [explosionFinished, setExplosionFinished] = useState(false);
   const ref = useRef<PixiSprite | null>(null);
   const [hasPickedUp, setHasPickedUp] = useState(false);
@@ -84,14 +83,14 @@ export default function Bomb({x, y, xCord, yCord, show, bullet, onHit, myIndex}:
       />
       {showCord && (
         <Text
-          text={`(${xCord.toFixed(1)}, ${yCord.toFixed(1)})`}
+          text={text}
           anchor={0.5}
           x={x}
           y={y+30}
           style={new TextStyle({
-            fill: 0x6D6F6E,
-            fontSize: 12,
-            fontFamily: 'Handdrawn'
+            fill: 0x909090,
+            fontSize: 18,
+            fontFamily: 'Infomodal',
           })
           }
         />)}
