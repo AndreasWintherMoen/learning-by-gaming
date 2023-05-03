@@ -9,11 +9,11 @@ import FunctionSelctor from "./FunctionSelctor";
 
 export const levelIntroduced = {
   'amplitude': 2,
-  'verticalShift': 5,
+  'verticalShift': 6,
   'cos': 12,
   'angularFrequency': 14,
-  'phaseShift': 16,
-  'tan': 18,
+  'phaseShift': 17,
+  'tan': 20,
   'arcsin': 99,
   'arccos': 99,
 }

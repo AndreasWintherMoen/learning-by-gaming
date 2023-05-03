@@ -8,6 +8,7 @@ import useLevel from '../hooks/useLevel';
 export default function ScoreCard() {
   const {displayScore, nextLevel, resetLevel, setDisplayScore, setShowTutorial, currentScore, level: levelIndex} = useData();
   const level = useLevel(levelIndex);
+  const nextLevelData = useLevel(levelIndex + 1);
   if (!level) return null;
   const {starScores} = level;
   const [score1, score2, score3] = starScores;
@@ -51,7 +52,7 @@ export default function ScoreCard() {
             icon={<ReplayIcon size={43}/>}
           />
           {
-            levelIndex >= 20 ? (
+            levelIndex >= 25 ? (
               <SurveyButton />
             ) : (
               <AMButton
@@ -60,7 +61,9 @@ export default function ScoreCard() {
                 onClick={() => {
                   setDisplayScore(false);
                   nextLevel();
-                  setShowTutorial(true);
+                  if (nextLevelData?.title !== ''){
+                    setShowTutorial(true);
+                  }
                 }}
               />
             )
