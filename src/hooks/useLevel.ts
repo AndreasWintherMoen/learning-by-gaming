@@ -531,7 +531,7 @@ export const levels: Level[] = [
       { coordinates: [Math.PI * 3 - 1, 0], text: '(3π-1, 0)' },
     ],
     cosPositions: [
-      { coordinates: [Math.PI * 2.5 - 1, -0.35], text: '(2.5π-1, -0.35)' },
+      { coordinates: [Math.PI * 2.5 - 1, 0.35], text: '(2.5π-1, -0.35)' },
     ],
     sinPositions: [
       { coordinates: [Math.PI, -1], text: '(π, -1)' },
