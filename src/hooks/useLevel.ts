@@ -33,6 +33,14 @@ type Level = {
   highAccuracy?: boolean;
 }
 
+function solution17(x:number) {
+  return 3 * Math.sin(x+1);
+}
+
+function solution18(x:number) {
+  return 2 * Math.sin(2*x+1);
+}
+
 export const levels: Level[] = [
   {
     title: 'Velkommen til Aftermath',
@@ -66,7 +74,7 @@ export const levels: Level[] = [
     title: 'Amplitude',
     descriptions: [
       {type: 'text', content: 'Det gikk bra!'},
-      {type: 'text', content: 'Nå skal vi se på amplitude. Amplitude er avstanden fra en funksjonens toppunkt eller bunnpunkt til likevektstilstanden (midten).'},
+      {type: 'text', content: 'Nå skal vi se på amplitude. Amplitude er avstanden fra funksjonens toppunkt eller bunnpunkt til likevektslinja (midten).'},
       {type: 'image', content: 'infomodal/amplitude.png'},
       {type: 'text', content: 'Denne verdien kan du endre ved å trykke på pilene som vist under.'},
       {type: 'image', content: 'infomodal/amplitude.gif'},
@@ -118,8 +126,39 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
+    title: 'Negativ Amplitude',
+    descriptions: [
+      {type: 'text', content: 'Når vi setter amplituden (A) til et negativt tall i en enkel sinusfunksjon gitt ved:'},
+      {type: 'text', content: 'A * sin(x)'},
+      {type: 'text', content: 'vil den gå nedover fra fra origo.'},
+      {type: 'image', content: 'infomodal/negative-amplitude.gif'},
+      {type: 'text', content: 'Klarer du å se hvorfor det blir sånn?'},
+    ],
+    showPowerBar: false,
+    cellSize: 100,
+    origoPosition: {
+      y: 0,
+      x: 2,
+    },
+    bombPositions: [],
+    coinPositions: [
+      [Math.PI * 0.5, 1.5],
+      [3.14 * 1, 0],
+      [3.14 * 1.5, -1.5],
+      [3.14 * 2, 0],
+      [3.14 * 2.5, 1.5],
+      [3.14 * 3, 0],
+    ],
+    starScores: [260, 300, 375],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+  {
     title: '',
-    descriptions: [],
+    descriptions: [
+      {type: 'text', content: 'Trykk på knappene nederst for å se tidligere hjelpekort.'},
+    ],
     showPowerBar: false,
     cellSize: 100,
     origoPosition: {
@@ -146,6 +185,7 @@ export const levels: Level[] = [
       { type: "text", content: "Denne verdien kan du endre ved å trykke på pilene som vist under."},
       { type: "image", content: "infomodal/vertical-shift.gif" },
       { type: "text", content: "Forresten! Du kan trykke på stjernesymbolet nede til venstre for å gå tilbake til tidligere nivåer. Klarer du å få 3 stjerner på alle?" },
+      { type: "image", content: "infomodal/prev-levels.png" },
     ],
     showPowerBar: false,
     cellSize: 100,
@@ -221,7 +261,9 @@ export const levels: Level[] = [
   },
   {
     title: '',
-    descriptions: [],
+    descriptions: [
+      {type: 'text', content: 'Trykk på knappene nederst for å se tidligere hjelpekort.'},
+    ],
     showPowerBar: false,
     cellSize: 100,
     origoPosition: {
@@ -243,32 +285,6 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
-    title: 'Negativ Amplitude',
-    descriptions: [
-      {type: 'text', content: 'Når vi setter en amplitude til et negativt tall vil den starte å gå nedover fra fra origo.'},
-      {type: 'image', content: 'infomodal/negative-amplitude.gif'},
-    ],
-    showPowerBar: false,
-    cellSize: 100,
-    origoPosition: {
-      y: 0,
-      x: 2,
-    },
-    bombPositions: [],
-    coinPositions: [
-      [Math.PI * 0.5, 2],
-      [3.14 * 1, 0.5],
-      [3.14 * 1.5, -1],
-      [3.14 * 2, 0.5],
-      [3.14 * 2.5, 2],
-      [3.14 * 3, 0.5],
-    ],
-    starScores: [260, 300, 375],
-    maxAmplitude: 3,
-    maxVerticalShift: 3,
-    maxAngularFrequency: 3,
-  },
-  {
     title: 'Se opp for bombene!',
     descriptions: [
       { type: "text", content: "Okay, nå blir det litt vanskeligere! I stedet for å trykke på mellomrom må du nå holde inne mellomrom for å lade opp sinuskurven." },
@@ -282,12 +298,12 @@ export const levels: Level[] = [
       x: 2,
     },
     bombPositions: [
-      [3.14 * 2.5, 2],
+      [3.14 * 2.5, -1],
     ],
     coinPositions: [
-      [Math.PI * 0.5, 2],
+      [Math.PI * 0.5, -1],
       [3.14 * 1, 0.5],
-      [3.14 * 1.5, -1],
+      [3.14 * 1.5, 2],
       [3.14 * 2, 0.5],
     ],
     starScores: [150, 200, 230],
@@ -298,6 +314,8 @@ export const levels: Level[] = [
   {
     title: 'Cosinus',
     descriptions: [
+      { type: "text", content: "Vi skal nå se nærmere på Cosinus. Forskjellen mellom Sinus og Cosinus er hvor de starter i forhold til en sirkel og hvordan de beskriver bølgeformene."},
+      {type: 'image', content: "infomodal/enhetsirkel-sin-vs-cos.gif"},
       { type: "text", content: "Gitt en enkel cosinus og sinus funksjon kan vi grovt forklart si at cosinus starter i et topppunkt eller bunnpunkt, mens sinus starter i midten fra origo. Altså er sin(0)=0 og cos(0)=1" },
       { type: "image", content: "infomodal/cos-vs-sin.png" },
       { type: "text", content: "Noen av nivåene i Aftermath har cosinus-mynter. Hvis du treffer en slik mynt med en sinus-funksjon blir den omgjort til en cosinus-funksjon fra og med den x-verdien." },
@@ -309,7 +327,7 @@ export const levels: Level[] = [
       y: 0,
       x: 2,
     },
-    bombPositions: [],
+    bombPositions: [[3.14 * 2.5, 1],],
     coinPositions: [
       [Math.PI * 0.5, 0],
       [3.14 * 1, 1],
@@ -347,7 +365,7 @@ export const levels: Level[] = [
       [Math.PI * 2, -1],
       [Math.PI * 2.5, 0],
     ],
-    starScores: [100, 200, 300],
+    starScores: [100, 230, 300],
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
@@ -355,7 +373,7 @@ export const levels: Level[] = [
   {
     title: 'Sinus vs Cosinus',
     descriptions: [
-      { type: "text", content: "Ettersom sinus og cosinus er kontinuerlige og uendelige, kan man lage en cosinus-funksjon ved å faseforskyve sinus." },
+      { type: "text", content: "Ettersom sinus og cosinus er kontinuerlige og uendelige, kan man lage en cosinus-funksjon ved å faseforskyve sinus. Dette kommer vi tilbake til senere." },
       { type: "image", content: "infomodal/sin-cos-comparison.png"},
       { type: "text", content: "I Aftermath kan du plukke opp sinus/cosinus-mynter og endre funksjonen underveis. Men hvis du treffer samme funksjon som du allerede har, så vil du fortsette med samme funksjon." },
       { type: "image", content: "infomodal/sin-cos-coins.gif" },
@@ -376,11 +394,11 @@ export const levels: Level[] = [
       [Math.PI * 3, 1],
     ],
     cosPositions: [
-      [Math.PI * 0.5, 0],
+      [Math.PI * 0.5, -0.5],
       [Math.PI * 0.5, -1],
       [Math.PI * 2, 1],
     ],
-    starScores: [50, 70, 90],
+    starScores: [60, 90, 100],
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
@@ -465,13 +483,41 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
   {
+    title: '',
+    descriptions: [
+      {type: 'text', content: 'Trykk på knappene nederst for å se tidligere hjelpekort.'},
+    ],
+    showPowerBar: true,
+    cellSize: 100,
+    origoPosition: {
+      y: 0,
+      x: 2,
+    },
+    bombPositions: [
+      [Math.PI - 1 , -2.5*Math.sin(0.5*Math.PI)],
+      [Math.PI*2 - 0.5, -2.5*Math.sin(0.5*Math.PI*2)],
+      [Math.PI*2.5 - 0.5, -2.5*Math.sin(0.5*Math.PI*2.5)],
+    ],
+    coinPositions: [
+      [Math.PI , -2.5*Math.sin(0.5*Math.PI)],
+      [Math.PI*2 , -2.5*Math.sin(0.5*Math.PI*2)],
+      [Math.PI*2.5 , -2.5*Math.sin(0.5*Math.PI*2.5)],
+    ],
+    starScores: [50, 100, 165],
+    maxAmplitude: 3,
+    maxVerticalShift: 3,
+    maxAngularFrequency: 3,
+  },
+  {
     title: 'Faseforskyvning',
     descriptions: [
       { type: "text", content: "Husker du den generelle sinus-formelen fra tidligere?"},
-      { type: "image", content: "infomodal/sin-formula.png" },
-      { type: "text", content: "Den siste variabelen vi ikke har beskrevet er φ (den greske bokstaven phi). Dette tallet sier noe om faseforskyvningen til funksjonen. Faseforskyvning er hvor mye grafen er forskjøvet i x-retning, og er gitt ved" },
-      { type: "image", content: "infomodal/phaseshift.png" },
-      { type: "text", content: "I Aftermath kan du justere φ for å flytte startspunktet til funksjonen." },
+      { type: "image", content: "infomodal/sin-formula-new.png" },
+      { type: "text", content: "Den siste variabelen vi ikke har beskrevet er φ, (den greske bokstaven phi). Dette tallet sier noe om faseforskyvningen til funksjonen. Faseforskyvning er hvor mye grafen er forskjøvet i x-retning." },
+      { type: "image", content: "infomodal/phase-shift-illustration.png" },
+      { type: "text", content: "Hvor mye grafen skifter i x retning er gitt ved fomrelen:" },
+      { type: "image", content: "infomodal/phase-shift-formula.png" },
+      { type: "text", content: "I Aftermath kan du justere φ for å flytte startspunktet til funksjonen. Men husk formelen over, K vil også påvirke faseforskyvningen." },
       { type: "image", content: "infomodal/phaseshift.gif" },
       { type: "text", content: "Klarer du å se hvorfor en negativ φ flytter startpunktet til høyre? 🤔" },
     ],
@@ -500,12 +546,82 @@ export const levels: Level[] = [
   {
     title: 'Definisjonsmengder',
     descriptions: [
-      { type: "text", content: "Definisjonsområdet til en generell sinus- eller cosinus-funksjon er 〈-∞,∞〉" },
-      { type: "text", content: "Kort forklart betyr det at funksjonen er definert for alle mulige verdier av x, helt fra negativ uendelig til positiv uendelig. Men i Aftermath har vi satt funksjonene til å starte på x=0. Vi har altså avgrenset definisjonsområdet til [0, ∞〉. Vi har gjort dette for å gjøre spillet mer spennende. "},
-      { type: "image", content: "infomodal/phaseshift.gif" },
-      { type: "text", content: "Nå har du også fått mulighet til å justere faseforskyvning gjennom k og φ. Når du faseforskyver en funksjon i Aftermath, så endrer du definisjonsområdet. I en vanlig trigonometrisk funksjon vil derimot ikke definisjonsområdet endre seg. En funksjon med definisjonsområdet 〈-∞,∞〉 vil fortsatt ha definisjonsområdet〈-∞,∞〉 etter en faseforskyvning." },
-      { type: "image", content: "infomodal/phaseshift2.png" },
-      { type: "text", content: "Klarer du se at funksjonen sin(x+2π)=sin(x) ? 🤔" },
+      { type: "text", content: "Definisjonsområdet til en generell sinus- eller cosinus-funksjon er 〈-∞,∞〉." },
+      { type: "text", content: "Kort forklart betyr det at funksjonen er definert for alle mulige verdier av x, helt fra negativ uendelig til positiv uendelig. Men i Aftermath har vi satt funksjonene til å starte på x=0. Vi har altså avgrenset definisjonsområdet til funksjonen til [0, ∞〉."},
+      { type: "image", content: "infomodal/definisjonsområde.png" },
+      { type: "text", content: "Nå har du også fått mulighet til å justere faseforskyvning gjennom k og φ. Når du faseforskyver en funksjon i Aftermath, så endrer du definisjonsområdet. "},
+      { type: "image", content: "infomodal/nytt-definisjonsområde.png" },
+      { type: "text", content: "I en vanlig trigonometrisk funksjon vil derimot ikke definisjonsområdet endre seg. En funksjon med definisjonsområdet 〈-∞,∞〉 vil fortsatt ha definisjonsområdet〈-∞,∞〉 etter en faseforskyvning." },
+    ],
+    showPowerBar: true,
+    cellSize: 80,
+    origoPosition: {
+      y: 0,
+      x: 3,
+    },
+    bombPositions: [
+      [Math.PI * 0, 0],
+      [0.5, 0],
+      [1, 0],
+      [Math.PI * 2.3 -1, - solution17(Math.PI * 2.3 -1)],
+    ],
+    coinPositions: [
+      [Math.PI * 0.5 - 1, -3],
+      [Math.PI * 1 -1, 0],
+      [Math.PI * 1.5 -1, 3],
+      [Math.PI * 2 -1, 0],
+    ],
+    cosPositions: [
+      [Math.PI * 0.5 + 0.5, -1],
+      [7, 0.3784]
+    ],
+    sinPositions: [
+      [1.5, - solution17(1.5)],
+      [Math.PI * 1.25 -1, .63],
+    ],
+    starScores: [100, 135, 165],
+    maxAmplitude: 3,
+    maxVerticalShift: 2,
+    maxAngularFrequency: 3,
+    maxPhaseShift: 1,
+  },
+  {
+    title: '',
+    descriptions: [
+      {type: 'text', content: 'Trykk på knappene nederst for å se tidligere hjelpekort.'},
+    ],
+    showPowerBar: true,
+    cellSize: 80,
+    origoPosition: {
+      y: 0,
+      x: 3,
+    },
+    bombPositions: [
+      [2, -1.75],
+    ],
+    coinPositions: [
+      [Math.PI * 0.5 - 1, -solution18(Math.PI * 0.5 - 1)],
+      [Math.PI * 1 -1, -solution18(Math.PI * 1 -1)],
+      [Math.PI * 8/6 -1, -solution18(Math.PI * 8/6 -1)],
+      [Math.PI * 9/6 -1, -solution18(Math.PI * 9/6 -1)],
+      [Math.PI * 10/6 -1, -solution18(Math.PI * 10/6 -1)],
+      [Math.PI * 1.75 -1, -solution18(Math.PI * 1.75 -1)],
+      [Math.PI * 2 -1, -solution18(Math.PI * 2 -1)],
+    ],
+    cosPositions: [],
+    sinPositions: [
+      [Math.PI * 0.75 - 1, -solution18(Math.PI * 0.75 - 1)],
+    ],
+    starScores: [150, 250, 455],
+    maxAmplitude: 3,
+    maxVerticalShift: 2,
+    maxAngularFrequency: 3,
+    maxPhaseShift: 1,
+  },
+  {
+    title: '',
+    descriptions: [
+      {type: 'text', content: 'Trykk på knappene nederst for å se tidligere hjelpekort.'},
     ],
     showPowerBar: true,
     cellSize: 80,
@@ -570,7 +686,7 @@ export const levels: Level[] = [
       [Math.PI * 2.352, -2],
       [Math.PI * 2.25, -1],
     ],
-    starScores: [500, 650, 930],
+    starScores: [450, 650, 930],
     maxAmplitude: 3,
     maxVerticalShift: 3,
     maxAngularFrequency: 3,
@@ -654,40 +770,6 @@ export const levels: Level[] = [
     maxAngularFrequency: 3,
   },
 
-
-  {
-    title: 'Har du lært noe?', // 2sin(x-1)+1
-    descriptions: [
-      { type: "text", content: "... Eller har du bare hoppet over informasjonen og gått rett til oppgavene?" },
-      // { type: "image", content: "infomodal/tan-katet-katet.gif" },
-    ],
-    showPowerBar: true,
-    cellSize: 80,
-    origoPosition: {
-      y: 0,
-      x: 3,
-    },
-    bombPositions: [
-      [3.3, -0.2],
-    ],
-    coinPositions: [
-      [Math.PI * 0.5 + 1, -3],
-      [5, -3.316],
-      [6.2, 2.771],
-      [7.22, -2.996],
-      [10.5, 0.994],
-    ],
-    tanPositions: [
-      [Math.PI + 1, -1]
-    ],
-    cosPositions: [
-      [6.82, 0],
-    ],
-    starScores: [160, 220, 300],
-    maxAmplitude: 3,
-    maxVerticalShift: 3,
-    maxAngularFrequency: 3,
-  },
 
 
   {

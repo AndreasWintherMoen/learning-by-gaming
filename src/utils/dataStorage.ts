@@ -15,7 +15,7 @@ export function saveLevelData(level: number, score: number): void {
 
 export function getLevelData(level: number): LevelScore {
   const data = loadAllLevelData();
-  return data[level];
+  return data[level] as LevelScore;
 }
 
 export function loadAllLevelData(): LevelScore[] {
