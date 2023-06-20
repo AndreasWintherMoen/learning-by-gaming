@@ -10,7 +10,7 @@ sound.add('button-click', {
   preload: true,
 });
 sound.add('intro-music', {
-  url: 'sounds/intro-music-2.mp3',
+  url: 'sounds/star-score.mp3',
   preload: true,
   loop: true,
   volume: 1,
